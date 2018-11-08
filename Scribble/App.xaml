@@ -54,9 +54,9 @@
                 <Views:TimelineView/>
             </DataTemplate>
 
-            <!--<DataTemplate DataType="{x:Type Models:TimelineModel}">
+            <DataTemplate DataType="{x:Type Models:TimelineModel}">
                 <Views:TimelineUC/>
-            </DataTemplate>-->
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type DialogViewModels:SelectSceneViewModel}">
                 <DialogViews:SelectSceneView/>
