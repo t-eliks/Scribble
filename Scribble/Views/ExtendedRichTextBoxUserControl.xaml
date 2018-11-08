@@ -41,10 +41,15 @@
             <ComboBox x:Name="fontsizeCB" ItemsSource="{Binding FontSizes, Mode=OneWay}" SelectionChanged="FontSize_Changed"/>
             <Controls:ImageButton Content="Save Changes" Foreground="Black" BorderBrush="Black" Image="/icons/savertf.png" Width="160" Height="55" Click="Save_Changes" HorizontalAlignment="Right"/>
         </DockPanel>
-        <Controls:ExtendedRichTextBox Grid.Row="1" x:Name="rtb" TextFile="{Binding TextFile, Mode=OneWay}" Background="{StaticResource BackgroundColor1Brush}" Foreground="{StaticResource BackgroundColor3Brush}" FontFamily="{StaticResource Ubuntu}">
+        <Controls:ExtendedRichTextBox AcceptsTab="True" Grid.Row="1" x:Name="rtb" TextFile="{Binding TextFile, Mode=OneWay}" Background="{StaticResource BackgroundColor1Brush}" Foreground="{StaticResource ForegroundColorBrush}" FontFamily="{StaticResource Ubuntu}">
+            <Controls:ExtendedRichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </Controls:ExtendedRichTextBox.Resources>
             <Controls:ExtendedRichTextBox.Style>
                 <Style TargetType="Controls:ExtendedRichTextBox">
-                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="5"/>
                 </Style>
             </Controls:ExtendedRichTextBox.Style>
         </Controls:ExtendedRichTextBox>

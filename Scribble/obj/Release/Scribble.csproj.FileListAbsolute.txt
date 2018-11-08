@@ -48,8 +48,6 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\ComboB
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\NewColors.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\ScrollBarStyle.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogViews\SelectSceneView.g.cs
-C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineView.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogViews\SelectSceneView.baml
-C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineView.baml

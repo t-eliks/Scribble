@@ -15,7 +15,7 @@
         public Item(string header, ImageSource imageSource)
             : base(header, imageSource)
         {
-            
+            IsSelected = true;
         }
 
         private ICommand _ToggleIsSelectedCommand;

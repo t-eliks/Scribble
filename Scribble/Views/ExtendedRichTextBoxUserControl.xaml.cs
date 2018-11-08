@@ -27,15 +27,16 @@
 
             if (r.Text == "")
             {
-                fontsizeCB.SelectedIndex = 4;
                 fontCB.SelectedItem = new FontFamily("Times New Roman");
+                rtb.FontFamily = new FontFamily("Times New Roman");
             }
-                
             else
             {
-                fontsizeCB.SelectedItem = r.GetPropertyValue(FontSizeProperty);
                 fontCB.SelectedItem = r.GetPropertyValue(FontFamilyProperty);
+                rtb.FontFamily = (FontFamily)r.GetPropertyValue(FontFamilyProperty);
             }
+
+            fontsizeCB.SelectedItem = r.GetPropertyValue(FontSizeProperty);
 
             rtb.SelectionChanged += (s, e) =>
             {

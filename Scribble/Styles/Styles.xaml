@@ -35,7 +35,7 @@
 
     <Style TargetType="TextBlock" x:Key="GoldTitleStyle">
         <Setter Property="FontSize" Value="36"/>
-        <Setter Property="FontFamily" Value="{DynamicResource Ubuntu}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource Quicksand}"/>
         <Setter Property="Margin" Value="15"/>
     </Style>
 

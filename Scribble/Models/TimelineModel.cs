@@ -85,7 +85,7 @@
 
         public RoutedEventHandler OnMarkedForRemoval;
 
-        private string _Name = "Roshar";
+        private string _Name = "New timeline";
 
         public string Name
         {

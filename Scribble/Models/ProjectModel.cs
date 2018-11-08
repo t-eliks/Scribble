@@ -1,7 +1,6 @@
 ﻿namespace Scribble.Models
 {
     using Scribble.Logic;
-    using Scribble.ViewModels;
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -27,12 +26,14 @@
             Genre = genre;
             CreationDate = creationdate;
             CustomItemCount = 0;
-            ProjectDirectory = directory;
 
-            if (!Directory.Exists(directory))
+            var sanitizeddirectory = Path.Combine(Path.GetDirectoryName(directory), Path.GetFileName(directory).Trim(Path.GetInvalidFileNameChars()));
+
+            if (!Directory.Exists(sanitizeddirectory))
             {
-                Directory.CreateDirectory(directory);
-                Directory.CreateDirectory(Path.Combine(directory, "Files"));
+                Directory.CreateDirectory(sanitizeddirectory);
+                Directory.CreateDirectory(Path.Combine(sanitizeddirectory, "Files"));
+                ProjectDirectory = sanitizeddirectory;
             }
 
             SymbioticLinks = new ObservableCollection<SymbioticLink>();
