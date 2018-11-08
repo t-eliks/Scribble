@@ -24,6 +24,7 @@
             }
         }
 
+
         private ObservableCollection<TimelineModel> _Timelines;
 
         public ObservableCollection<TimelineModel> Timelines
