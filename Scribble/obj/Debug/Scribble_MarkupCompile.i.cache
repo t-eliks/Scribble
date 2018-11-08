@@ -16,5 +16,5 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\App.xaml
 141287564784
 Styles\ScrollBarStyle.xaml;Styles\CheckBox.xaml;Styles\Colors.xaml;Styles\ComboBox.xaml;Styles\Buttons.xaml;Styles\ContextMenu.xaml;Styles\ExtendedTreeView.xaml;Styles\ListBoxStyles.xaml;Styles\NewColors.xaml;Styles\Styles.xaml;Styles\TabControlStyles.xaml;Styles\TextBoxStyles.xaml;Views\CharacterDetailsUserControl.xaml;Views\DialogViews\BaseDialogWindow.xaml;Views\DialogViews\CreateProjectView.xaml;Views\DialogViews\SelectSceneView.xaml;Views\DialogViews\SelectLocationView.xaml;Views\DialogViews\SelectCharacterView.xaml;Views\DialogViews\SelectProjectView.xaml;Views\ExtendedRichTextBoxUserControl.xaml;Views\LocationDetailsUserControl.xaml;Views\MainView.xaml;Views\ProjectItemsOverView.xaml;Views\SceneView.xaml;Views\TimelineUC.xaml;Views\TimelineView.xaml;
 
-False
+True
 

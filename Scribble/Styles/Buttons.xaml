@@ -564,4 +564,14 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuButton">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    
 </ResourceDictionary>
