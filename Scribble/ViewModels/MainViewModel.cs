@@ -76,7 +76,6 @@
             }
         }
 
-
         private ICommand _AddFileCommand;
 
         public ICommand AddFileCommand
