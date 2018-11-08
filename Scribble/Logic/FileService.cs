@@ -1,4 +1,8 @@
 ﻿using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Scribble.Logic
 {
@@ -13,9 +17,16 @@ namespace Scribble.Logic
                 filename = Path.GetRandomFileName() + ".rtf";
             }
 
-            using (StreamWriter writer = new StreamWriter(Path.Combine(directory, filename)))
+            var rtf = new RichTextBox();
+
+            rtf.FontFamily = new FontFamily("Times New Roman");
+            rtf.FontSize = 16;
+
+            var r = rtf.Selection;
+
+            using (FileStream stream = new FileStream(Path.Combine(directory, filename), FileMode.Create))
             {
-                writer.Write(" ");
+                r.Save(stream, DataFormats.Rtf);
             }
 
             return filename;

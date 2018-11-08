@@ -55,7 +55,7 @@
                                                 <Image Source="/icons/add_timeline.png" Stretch="UniformToFill" Width="24" Height="24"/>
                                             </Button.Content>
                                         </Button>
-                                        <Button Command="{Binding RemoveCommand}" Style="{StaticResource EditButtonIcon}" Background="{StaticResource AccentColor1Brush}" BorderBrush="{StaticResource ForegroundColorBrush}" Width="36" Height="36">
+                                        <Button Command="{Binding MarkForRemovalCommand}" Style="{StaticResource EditButtonIcon}" Background="{StaticResource AccentColor1Brush}" BorderBrush="{StaticResource ForegroundColorBrush}" Width="36" Height="36">
                                             <Button.Content>
                                                 <Image Source="/icons/remove.png" Stretch="UniformToFill" Width="24" Height="24"/>
                                             </Button.Content>

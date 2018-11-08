@@ -23,15 +23,23 @@
 
             fontsizeCB.ItemsSource = new List<double>() { 8, 10, 12, 14, 16, 24, 36, 48, 72 };
 
-            TextRange r = new TextRange(rtb.Selection.Start, rtb.Selection.End);
+            var r = rtb.Selection;
 
-            fontCB.SelectedItem = r.GetPropertyValue(FontFamilyProperty);
-
-            fontsizeCB.SelectedItem = r.GetPropertyValue(FontSizeProperty);
+            if (r.Text == "")
+            {
+                fontsizeCB.SelectedIndex = 4;
+                fontCB.SelectedItem = new FontFamily("Times New Roman");
+            }
+                
+            else
+            {
+                fontsizeCB.SelectedItem = r.GetPropertyValue(FontSizeProperty);
+                fontCB.SelectedItem = r.GetPropertyValue(FontFamilyProperty);
+            }
 
             rtb.SelectionChanged += (s, e) =>
             {
-                r = new TextRange(rtb.Selection.Start, rtb.Selection.End);
+                r = rtb.Selection;
 
                 if (r.GetPropertyValue(TextElement.FontWeightProperty).Equals(FontWeights.Normal))
                     boldbtn.IsChecked = false;
@@ -87,10 +95,12 @@
         {
             if (sender != null)
             {
-                TextRange r = new TextRange(rtb.Selection.Start, rtb.Selection.End);
+                var r = rtb.Selection;
 
                 if ((FontFamily)((ComboBox)sender).SelectedItem != null)
                     r.ApplyPropertyValue(FontFamilyProperty, (FontFamily)((ComboBox)sender).SelectedItem);
+
+                rtb.Focus();
             }
         }
 
@@ -98,10 +108,12 @@
         {
             if (sender != null)
             {
-                TextRange r = new TextRange(rtb.Selection.Start, rtb.Selection.End);
+                var r = rtb.Selection;
 
                 if (((ComboBox)sender).SelectedItem != null)
                     r.ApplyPropertyValue(FontSizeProperty, (double)((ComboBox)sender).SelectedItem);
+
+                rtb.Focus();
             }
         }
 

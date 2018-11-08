@@ -73,7 +73,17 @@
             }
         }
 
-        public RoutedEventHandler OnMarkedForDeletion;
+        private ICommand _MarkForRemovalCommand;
+
+        public ICommand MarkForRemovalCommand
+        {
+            get
+            {
+                return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() => { OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs()); }));
+            }
+        }
+
+        public RoutedEventHandler OnMarkedForRemoval;
 
         private string _Name = "Roshar";
 
@@ -132,7 +142,7 @@
             }
         }
 
-        private int _TimelineWidth = 400;
+        private int _TimelineWidth = 1000;
 
         public int TimelineWidth
         {

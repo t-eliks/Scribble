@@ -66,12 +66,17 @@
 
             var amount = Math.Abs(left - this.ActualWidth);
 
-           if (border != null)
+            var target = border.ActualWidth - amount;
+
+            if (target < 500)
+                target = 500;
+
+            if (border != null)
             {
                 var animborder = new DoubleAnimation()
                 {
                     From = border.ActualWidth,
-                    To = border.ActualWidth - amount,
+                    To = target,
                     Duration = TimeSpan.FromMilliseconds(150),
                     AccelerationRatio = 0.4,
                     EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseIn }
@@ -86,7 +91,7 @@
             var animcanvas = new DoubleAnimation()
             {
                 From = ActualWidth,
-                To = ActualWidth - amount,
+                To = target,
                 Duration = TimeSpan.FromMilliseconds(150),
                 AccelerationRatio = 0.4,
                 EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseIn }
@@ -99,7 +104,7 @@
 
             sb.Begin();
 
-            this.Width -= amount;
+            this.Width = target;
         }
 
         public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register("ItemHeight",

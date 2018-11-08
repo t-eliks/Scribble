@@ -17,7 +17,7 @@
             {
                 return _AddTimelineCommand ?? (_AddTimelineCommand = new RelayCommand(() => 
                 {
-                    Timelines.Add(new TimelineModel(80, 2) { OnMarkedForDeletion = (s, e) => { Timelines.Remove((TimelineModel)s); } });
+                    Timelines.Add(new TimelineModel(80, 2) { OnMarkedForRemoval = (s, e) => { Timelines.Remove((TimelineModel)s); } });
 
                     RaisePropertyChanged(nameof(Timelines));
                 }));
@@ -37,7 +37,9 @@
                 if (_Timelines != value)
                 {
                     if (value != null)
-
+                        foreach (var item in value)
+                            item.OnMarkedForRemoval += (s, e) => { Timelines.Remove(item); };
+   
                     _Timelines = value;
 
                     RaisePropertyChanged(nameof(Timelines));
