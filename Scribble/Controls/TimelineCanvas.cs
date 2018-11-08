@@ -50,26 +50,24 @@
 
         public void Resize()
         {
-            var resize = true;
-
-            var amount = int.MaxValue;
+            double left = 0;
 
             foreach (TimelineContent item in Children)
             {
-                if (item.CanvasLeft + item.ActualWidth >= Width)
-                    resize = false;
-                else if (item.CanvasLeft + item.ActualWidth - this.Width < amount)
-                    amount = (int)Math.Abs((item.CanvasLeft + item.ActualWidth - this.Width));
+                if (item.CanvasLeft + item.ActualWidth > left)
+                    left = item.CanvasLeft + item.ActualWidth;
             }
 
-            if (resize)
+            Storyboard sb = new Storyboard();
+
+            sb.Completed += (sender, args) => { sb.Remove(); };
+
+            var border = VisualTreeHelper.GetParent(this.Parent) as Border;
+
+            var amount = Math.Abs(left - this.ActualWidth);
+
+           if (border != null)
             {
-                Storyboard sb = new Storyboard();
-
-                sb.Completed += (sender, args) => { sb.Remove(); };
-
-                var border = VisualTreeHelper.GetParent(this.Parent) as Border;
-
                 var animborder = new DoubleAnimation()
                 {
                     From = border.ActualWidth,
@@ -79,28 +77,29 @@
                     EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseIn }
                 };
 
-                var animcanvas = new DoubleAnimation()
-                {
-                    From = ActualWidth,
-                    To = ActualWidth - amount,
-                    Duration = TimeSpan.FromMilliseconds(150),
-                    AccelerationRatio = 0.4,
-                    EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseIn }
-                };
-
-                Storyboard.SetTarget(animborder, border);
                 Storyboard.SetTargetProperty(animborder, new PropertyPath(WidthProperty));
-
-                Storyboard.SetTarget(animcanvas, this);
-                Storyboard.SetTargetProperty(animcanvas, new PropertyPath(WidthProperty));
+                Storyboard.SetTarget(animborder, border);
 
                 sb.Children.Add(animborder);
-                sb.Children.Add(animcanvas);
-
-                sb.Begin();
-
-                this.Width -= amount;
             }
+
+            var animcanvas = new DoubleAnimation()
+            {
+                From = ActualWidth,
+                To = ActualWidth - amount,
+                Duration = TimeSpan.FromMilliseconds(150),
+                AccelerationRatio = 0.4,
+                EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseIn }
+            };
+
+            Storyboard.SetTarget(animcanvas, this);
+            Storyboard.SetTargetProperty(animcanvas, new PropertyPath(WidthProperty));
+
+            sb.Children.Add(animcanvas);
+
+            sb.Begin();
+
+            this.Width -= amount;
         }
 
         public static readonly DependencyProperty ItemHeightProperty = DependencyProperty.Register("ItemHeight",
@@ -171,9 +170,7 @@
                             menu.Items.Add(menuitem);
 
                             canvas.Children.Add(new TimelineContent(item) { ContextMenu = menu });
-                        }
-
-                        
+                        }  
                     }
                 });
 
