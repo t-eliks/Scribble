@@ -91,9 +91,6 @@
     <Compile Include="Views\SceneView.xaml.cs">
       <DependentUpon>SceneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimelineUC.xaml.cs">
-      <DependentUpon>TimelineUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>
@@ -245,10 +242,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SceneView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TimelineUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
