@@ -227,6 +227,8 @@
             }
         }
 
+        public bool IsInTimeline { get; set; }
+
         public override string CreateFile()
         {
             return FileService.GenerateEmptyRtf(ProjectService.Instance.ActiveProject?.FileDirectory);
@@ -255,6 +257,7 @@
             Outcome = info.GetString("outcome");
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
+            IsInTimeline = info.GetBoolean("isintimeline");
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -272,6 +275,7 @@
             info.AddValue("outcome", Outcome);
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);
+            info.AddValue("isintimeline", IsInTimeline);
         }
 
         #endregion

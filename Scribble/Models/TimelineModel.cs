@@ -57,26 +57,18 @@
 
                     if (result != null)
                     {
-                        result.CanvasLeft = 0;
-                        result.CanvasTop = 0;
+                        if (!result.IsInTimeline)
+                        {
+                            result.CanvasLeft = 0;
+                            result.CanvasTop = 0;
 
-                        Content.Add(result);
+                            Content.Add(result);
 
-                        RaisePropertyChanged(nameof(Content));
+                            RaisePropertyChanged(nameof(Content));
+                        }
+                        else
+                            MessageBox.Show("Scene already in a timeline", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                }));
-            }
-        }
-
-        private ICommand _RemoveCommand;
-
-        public ICommand RemoveCommand
-        {
-            get
-            {
-                return _RemoveCommand ?? (_RemoveCommand = new RelayCommand(() =>
-                {
-                    OnMarkedForDeletion?.Invoke(this, new RoutedEventArgs());
                 }));
             }
         }

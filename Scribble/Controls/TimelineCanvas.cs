@@ -164,10 +164,15 @@
                             menuitem.Click += (o, a) => 
                             {
                                 if (canvas.Content.Contains(item))
+                                {
+                                    item.IsInTimeline = false;
                                     canvas.Content.Remove(item);
+                                }
                             };
 
                             menu.Items.Add(menuitem);
+
+                            item.IsInTimeline = true;
 
                             canvas.Children.Add(new TimelineContent(item) { ContextMenu = menu });
                         }  

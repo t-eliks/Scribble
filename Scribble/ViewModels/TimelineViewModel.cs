@@ -24,7 +24,6 @@
             }
         }
 
-        //as
         private ObservableCollection<TimelineModel> _Timelines;
 
         public ObservableCollection<TimelineModel> Timelines
@@ -38,8 +37,6 @@
                 if (_Timelines != value)
                 {
                     if (value != null)
-                        foreach (var timeline in value)
-                            timeline.OnMarkedForDeletion += (s, e) => { Timelines.Remove((TimelineModel)s); };
 
                     _Timelines = value;
 
