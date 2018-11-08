@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Scribble.Views.DialogViews.SelectProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
+             mc:Ignorable="d" 
+             Width="520" Height="350">
+    <Grid Background="{StaticResource BackgroundColor2Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="Pick a project" FontSize="28" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <ListBox Background="{StaticResource BackgroundColor2Brush}" Grid.Row="1" Margin="10" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}" ItemTemplate="{StaticResource PickProfileListBoxItemTemplate}" ItemContainerStyle="{DynamicResource PickProfileItemContainerTemplate}"/>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Margin="10, 0, 10, 0">
+            <Controls:ImageButton Content="New project" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CreateCommand}"/>
+            <Controls:ImageButton Content="Remove" Image="/icons/delete.png" Width="120" Height="50" IsEnabled="{Binding ProjectSelected}" Command="{Binding RemoveProjectCommand}"/>
+            <Controls:ImageButton Content="Select" Image="/icons/confirm.png" Width="120" Height="50" IsEnabled="{Binding ProjectSelected}" Command="{Binding SelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

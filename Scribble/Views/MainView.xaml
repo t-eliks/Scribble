@@ -1,0 +1,109 @@
+﻿<Window x:Class="Scribble.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModels="clr-namespace:Scribble.ViewModels"
+        xmlns:Controls="clr-namespace:Scribble.Controls"
+        xmlns:Models="clr-namespace:Scribble.Models"
+        xmlns:Views="clr-namespace:Scribble.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1100"
+        WindowStyle="None" AllowsTransparency="True" BorderBrush="{DynamicResource BackgroundColor2Brush}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"/>
+    </WindowChrome.WindowChrome>
+    
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
+
+    <DockPanel>
+        <Border BorderBrush="{DynamicResource BackgroundColor1Brush}" BorderThickness="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/icons/smokebg.png" Stretch="Fill"/>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Scribble" Style="{StaticResource TitleFont}"/>
+                    <Border BorderThickness="1" Grid.Row="1">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button Command="{Binding CollapseCommand}" Style="{StaticResource ToolBarButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/collapse.png" Stretch="UniformToFill"/>
+                                </Button.Content>
+                            </Button>
+                            <Button IsEnabled="{Binding ToolButtonEnabled}" Click="Button_Click" Style="{StaticResource ToolBarButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/remove_toolbar.png" Stretch="UniformToFill"/>
+                                </Button.Content>
+                            </Button>
+                            <Button IsEnabled="{Binding ToolButtonEnabled}" Command="{Binding AddFolderCommand}" Style="{StaticResource ToolBarButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/add_toolbar.png" Stretch="UniformToFill"/>
+                                </Button.Content>
+                            </Button>
+                            <Button Command="{Binding SaveCommand}" Style="{StaticResource ToolBarButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/save.png" Stretch="UniformToFill"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <ToggleButton IsChecked="{Binding IsTimelineView, Mode=OneWay}" Command="{Binding SwitchToTimelineView}" Content="Timeline" FontSize="18" Grid.Row="2"/>
+                    <Border Margin="0, 10, 0, 0" Grid.Row="3" BorderThickness="1">
+                        <Controls:ExtendedTreeView BorderBrush="Transparent" Grid.Row="1" ItemTemplate="{StaticResource TreeViewDataTemplate}" Background="Transparent" ItemsSource="{Binding TreeViewItems}" _SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}" ItemContainerStyle="{DynamicResource ExtendedTreeViewItemStyle}"/>
+                    </Border>
+                    <!--<ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemStyle1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}"></ComboBox>
+                    <CheckBox Style="{DynamicResource CheckBoxStyle1}"></CheckBox>-->
+                </Grid>
+                <Border Grid.Column="1">
+                    <Grid Background="{DynamicResource BackgroundColor2Brush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 0, 5, 0">
+                            <Button x:Name="minimiseBtn" Width="18" Height="18" Style="{StaticResource WindowStyleButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/minimise.png"/>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="maximiseBtn" Width="18" Height="18" Style="{StaticResource WindowStyleButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/maximise.png"/>
+                                </Button.Content>
+                            </Button>
+                            <Button x:Name="exitBtn" Width="18" Height="18" Style="{StaticResource WindowStyleButton}">
+                                <Button.Content>
+                                    <Image Source="/icons/exit.png"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Style="{StaticResource TopSearchTextBox}" Margin="10"/>
+                            <Button Background="{DynamicResource BackgroundColor2Brush}" Content="{Binding ProjectName}" Grid.Column="1" Height="30" Width="100" MinWidth="100"/>
+                        </Grid>
+                        <ContentControl Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </DockPanel>
+</Window>

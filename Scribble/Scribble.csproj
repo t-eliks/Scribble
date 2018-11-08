@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5A6EFBCC-1894-487A-85D1-FB49330590B5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Scribble</RootNamespace>
+    <AssemblyName>Scribble</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\TimelineCanvas.cs" />
+    <Compile Include="Controls\TimelineContent.cs" />
+    <Compile Include="Logic\FieldGenerator.cs" />
+    <Compile Include="Logic\FileService.cs" />
+    <Compile Include="Logic\SymbioticLink.cs" />
+    <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\SelectCharacterViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\SelectLocationViewModel.cs" />
+    <Compile Include="ViewModels\ProjectItemsOverViewModel.cs" />
+    <Compile Include="ViewModels\SceneViewModel.cs" />
+    <Compile Include="Models\TimelineModel.cs" />
+    <Compile Include="ViewModels\TimelineViewModel.cs" />
+    <Compile Include="Views\DialogViews\SelectSceneView.xaml.cs">
+      <DependentUpon>SelectSceneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\SelectLocationView.xaml.cs">
+      <DependentUpon>SelectLocationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\SelectCharacterView.xaml.cs">
+      <DependentUpon>SelectCharacterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectItemsOverView.xaml.cs">
+      <DependentUpon>ProjectItemsOverView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SceneView.xaml.cs">
+      <DependentUpon>SceneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimelineUC.xaml.cs">
+      <DependentUpon>TimelineUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimelineView.xaml.cs">
+      <DependentUpon>TimelineView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Styles\ScrollBarStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ExtendedTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ListBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\NewColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TabControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBoxStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CharacterDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\BaseDialogWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DialogViews\CreateProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\SelectSceneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DialogViews\SelectLocationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DialogViews\SelectCharacterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\SelectProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtendedRichTextBoxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocationDetailsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\ExtendedRichTextBox.cs" />
+    <Compile Include="Controls\ExtendedTreeView.cs" />
+    <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Controls\ImageToggleButton.cs" />
+    <Compile Include="Interfaces\IDialogWindow.cs" />
+    <Compile Include="Logic\BindingProxy.cs" />
+    <Compile Include="Logic\Dialog\DialogResults.cs" />
+    <Compile Include="Logic\Dialog\DialogService.cs" />
+    <Compile Include="Logic\IconHelper.cs" />
+    <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\BaseItem.cs" />
+    <Compile Include="Logic\RelayCommand.cs" />
+    <Compile Include="Logic\SerializationService.cs" />
+    <Compile Include="Logic\ProjectService.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ProjectFile.cs" />
+    <Compile Include="Models\ProjectFolder.cs" />
+    <Compile Include="Models\ItemTypes.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
+    <Compile Include="Models\Scene.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CharacterDetailsViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\DialogViewModelBase.cs" />
+    <Compile Include="ViewModels\DialogViewModels\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\SelectProjectViewModel.cs" />
+    <Compile Include="ViewModels\LocationDetailsViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\CharacterDetailsUserControl.xaml.cs">
+      <DependentUpon>CharacterDetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\BaseDialogWindow.xaml.cs">
+      <DependentUpon>BaseDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\CreateProjectView.xaml.cs">
+      <DependentUpon>CreateProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\SelectProjectView.xaml.cs">
+      <DependentUpon>SelectProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExtendedRichTextBoxUserControl.xaml.cs">
+      <DependentUpon>ExtendedRichTextBoxUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocationDetailsUserControl.xaml.cs">
+      <DependentUpon>LocationDetailsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\ProjectItemsOverView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SceneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimelineUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimelineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <Resource Include="Fonts\Ubuntu-R.ttf" />
+    <Resource Include="Fonts\Quicksand-Regular.otf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\character.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\bwhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\bblack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\iwhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\iblack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\confirm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\collapse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\remove_toolbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add_toolbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\savertf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\minimise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\maximise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\smokebg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\bulletbutton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\align_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\align_center.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Editing\align_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add_timeline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\subtract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\remove.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

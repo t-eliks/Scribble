@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Scribble.Views.DialogViews.SelectCharacterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views.DialogViews"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
+             mc:Ignorable="d" 
+             Height="600" Width="800">
+    <StackPanel Background="{StaticResource BackgroundColor2Brush}">
+        <TextBlock Style="{StaticResource GoldTitleStyle}" Foreground="{StaticResource ForegroundColorBrush}" Text="All characters in project" HorizontalAlignment="Center"/>
+        <ListBox Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedCharacter}" MinHeight="420" MaxHeight="420" ItemsSource="{Binding Characters}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource CharactersListBoxItemTemplate}" Margin="20"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Controls:ImageButton Content="Close" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
+            <Controls:ImageButton Content="Add character" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddCharacterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

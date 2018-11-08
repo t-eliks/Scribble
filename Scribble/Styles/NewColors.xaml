@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Scribble.Styles">
+
+    <Color x:Key="BackgroundColor1">#373737</Color>
+    <SolidColorBrush Color="{DynamicResource BackgroundColor1}" x:Key="BackgroundColor1Brush"/>
+
+    <Color x:Key="BackgroundColor2">Blue</Color>
+    <SolidColorBrush Color="{DynamicResource BackgroundColor2}" x:Key="BackgroundColor2Brush"/>
+
+    <Color x:Key="BackgroundColor3">#F4F4F4</Color>
+    <SolidColorBrush Color="{DynamicResource BackgroundColor3}" x:Key="BackgroundColor3Brush"/>
+
+    <Color x:Key="BackgroundColor4">#444444</Color>
+    <SolidColorBrush Color="{DynamicResource BackgroundColor4}" x:Key="BackgroundColor4Brush"/>
+
+    <Color x:Key="MouseHoverColor">#161123</Color>
+    <SolidColorBrush Color="{DynamicResource MouseHoverColor}" x:Key="MouseHoverBrush"/>
+
+    <Color x:Key="ForegroundColor">Red</Color>
+    <SolidColorBrush Color="{DynamicResource ForegroundColor}" x:Key="ForegroundColorBrush"/>
+
+    <Color x:Key="SecondaryColor">Green</Color>
+    <SolidColorBrush Color="{DynamicResource SecondaryColor}" x:Key="SecondaryColorBrush"/>
+
+</ResourceDictionary>

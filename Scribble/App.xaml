@@ -1,0 +1,107 @@
+﻿<Application x:Class="Scribble.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Scribble"
+             xmlns:DialogViewModels="clr-namespace:Scribble.ViewModels.DialogViewModels"
+             xmlns:ViewModels="clr-namespace:Scribble.ViewModels"
+             xmlns:Views="clr-namespace:Scribble.Views"
+             xmlns:Logic="clr-namespace:Scribble.Logic"
+             xmlns:DialogViews="clr-namespace:Scribble.Views.DialogViews"
+             xmlns:Models="clr-namespace:Scribble.Models"
+             StartupUri="Views/MainView.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <!-- Data templates -->
+
+            <DataTemplate DataType="{x:Type DialogViewModels:SelectProjectViewModel}">
+                <DialogViews:SelectProjectView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type DialogViewModels:CreateProjectViewModel}">
+                <DialogViews:CreateProjectView/>
+            </DataTemplate>
+
+            <!--<DataTemplate DataType="{x:Type ViewModels:ExtendedRichTextBoxViewModel}">
+                <Views:ExtendedRichTextBoxUserControl TextFile="{Binding TextFilePath}"/>
+            </DataTemplate>-->
+
+            <DataTemplate DataType="{x:Type ViewModels:CharacterDetailsViewModel}">
+                <Views:CharacterDetailsUserControl/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:LocationDetailsViewModel}">
+                <Views:LocationDetailsUserControl/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:SceneViewModel}">
+                <Views:SceneView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type DialogViewModels:SelectCharacterViewModel}">
+                <DialogViews:SelectCharacterView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type DialogViewModels:SelectLocationViewModel}">
+                <DialogViews:SelectLocationView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:ProjectItemsOverViewModel}">
+                <Views:ProjectItemsOverView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:TimelineViewModel}">
+                <Views:TimelineView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type Models:TimelineModel}">
+                <Views:TimelineUC/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type DialogViewModels:SelectSceneViewModel}">
+                <DialogViews:SelectSceneView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type Models:Scene}">
+                <DockPanel Height="80">
+                    <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
+                    <StackPanel DockPanel.Dock="Right" Background="Transparent">
+                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
+                        <TextBlock Text="{Binding Description}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </DockPanel>
+            </DataTemplate>
+
+            <!-- Application Interface Colors -->
+
+            <!-- Icons -->
+
+            <BitmapImage UriSource="/icons/folder.png" x:Key="Folder"/>
+            <BitmapImage UriSource="/icons/pen.png" x:Key="Pen"/>
+            <BitmapImage UriSource="/icons/book.png" x:Key="Book"/>
+            <BitmapImage UriSource="/icons/map.png" x:Key="Map"/>
+            <BitmapImage UriSource="/icons/character.png" x:Key="Character"/>
+            <BitmapImage UriSource="/icons/note.png" x:Key="Note"/>
+
+            <!-- Fonts -->
+
+            <FontFamily x:Key="Ubuntu">/Fonts/#Ubuntu</FontFamily>
+            <FontFamily x:Key="Quicksand">/Fonts/#Quicksand</FontFamily>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ExtendedTreeView.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ContextMenu.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/TabControlStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ListBoxStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ComboBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/CheckBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ScrollBarStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>
