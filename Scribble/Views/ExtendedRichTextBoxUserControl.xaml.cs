@@ -2,7 +2,6 @@
 {
     using Scribble.Controls;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows;
@@ -58,15 +57,6 @@
             };
 
             rtb.LostFocus += (s, e) => { e.Handled = true; };
-        }
-
-        public static readonly DependencyProperty TextFileProperty = DependencyProperty.Register("TextFile",
-           typeof(string), typeof(ExtendedRichTextBoxUserControl), new FrameworkPropertyMetadata(null));
-
-        public string TextFile
-        {
-            get { return (string)GetValue(TextFileProperty); }
-            set { SetValue(TextFileProperty, value); }
         }
 
         private void Save_Changes(object sender, RoutedEventArgs e)

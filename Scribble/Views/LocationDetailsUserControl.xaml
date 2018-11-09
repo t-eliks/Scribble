@@ -14,30 +14,30 @@
                     <RowDefinition Height="2"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" HorizontalAlignment="Center" Text="{Binding Name}"/>
+                <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" HorizontalAlignment="Center" Text="{Binding Location.Name}"/>
                 <Rectangle Grid.Row="1" Fill="{StaticResource GoldTrimGradientHorizontal}">
                 </Rectangle>
                 <StackPanel Grid.Row="2" Margin="15">
                     <DockPanel Margin="10">
                         <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Name"/>
-                        <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Name, Mode=TwoWay}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Location.Name, Mode=TwoWay}"/>
                     </DockPanel>
                     <DockPanel Margin="10">
                         <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Description"/>
-                        <TextBox Style="{StaticResource TextBoxStyle1}" Height="150" DockPanel.Dock="Right" Text="{Binding Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+                        <TextBox Style="{StaticResource TextBoxStyle1}" Height="150" DockPanel.Dock="Right" Text="{Binding Location.Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
                     </DockPanel>
                     <DockPanel Margin="10">
                         <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Tags"/>
-                        <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Tags, Mode=TwoWay}"/>
+                        <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Location.Tags, Mode=TwoWay}"/>
                     </DockPanel>
                 </StackPanel>
             </Grid>
         </TabItem>
         <TabItem Header="Details/History">
-            <TextBox Style="{StaticResource TextBoxStyle1}" Margin="20" VerticalAlignment="Stretch" Text="{Binding Details, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle1}" Margin="20" VerticalAlignment="Stretch" Text="{Binding Location.Details, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
         </TabItem>
         <TabItem Header="Notes">
-            <TextBox Style="{StaticResource TextBoxStyle1}" Margin="20" VerticalAlignment="Stretch" Text="{Binding Notes, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+            <TextBox Style="{StaticResource TextBoxStyle1}" Margin="20" VerticalAlignment="Stretch" Text="{Binding Location.Notes, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
         </TabItem>
         <TabItem Header="Scenes">
             <Grid>

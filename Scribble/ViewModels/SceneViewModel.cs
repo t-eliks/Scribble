@@ -110,126 +110,7 @@
                     _Scene = value;
 
                     RaisePropertyChanged(nameof(Scene));
-                    RaisePropertyChanged(nameof(Name));
-                    RaisePropertyChanged(nameof(Role));
-                    RaisePropertyChanged(nameof(Description));
-                    RaisePropertyChanged(nameof(Sights));
-                    RaisePropertyChanged(nameof(Sounds));
-                    RaisePropertyChanged(nameof(Smells));
-                    RaisePropertyChanged(nameof(Tags));
-                    RaisePropertyChanged(nameof(Outcome));
-                    RaisePropertyChanged(nameof(Notes));
                 }
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return Scene.Name;
-            }
-            set
-            {
-                Scene.Name = value;
-
-                RaisePropertyChanged(nameof(Name));
-            }
-        }
-
-        public string Role
-        {
-            get
-            {
-                return Scene.Role;
-            }
-            set
-            {
-                Scene.Role = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return Scene.Description;
-            }
-            set
-            {
-                Scene.Description = value;
-            }
-        }
-
-        public string Sights
-        {
-            get
-            {
-                return Scene.Sights;
-            }
-            set
-            {
-                Scene.Sights = value;
-            }
-        }
-
-        public string Sounds
-        {
-            get
-            {
-                return Scene.Sounds;
-            }
-            set
-            {
-                Scene.Sounds = value;
-            }
-        }
-
-        public string Smells
-        {
-            get
-            {
-                return Scene.Smells;
-            }
-            set
-            {
-                Scene.Smells = value;
-            }
-        }
-
-        public string Notes
-        {
-            get
-            {
-                return Scene.Notes;
-            }
-            set
-            {
-                Scene.Notes = value;
-            }
-        }
-
-        public string Tags
-        {
-            get
-            {
-                return Scene.Tags;
-            }
-            set
-            {
-                Scene.Tags = value;
-            }
-        }
-
-        public string Outcome
-        {
-            get
-            {
-                return Scene.Outcome;
-            }
-            set
-            {
-                Scene.Outcome = value;
             }
         }
 
@@ -246,14 +127,6 @@
             get
             {
                 return ProjectService.Instance.FindLinks<Location>(Scene);
-            }
-        }
-
-        public string TextFile
-        {
-            get
-            {
-                return Scene.FilePath;
             }
         }
 
@@ -274,6 +147,14 @@
                     RaisePropertyChanged(nameof(SelectedItem));
                     RaisePropertyChanged(nameof(ItemSelected));
                 }
+            }
+        }
+
+        public string TextFile
+        {
+            get
+            {
+                return Scene.FilePath;
             }
         }
 
