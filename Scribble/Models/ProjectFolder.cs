@@ -11,8 +11,8 @@
     {
         public ProjectFolder() { }
 
-        public ProjectFolder(string header, ImageSource imageSource)
-            : base(header, imageSource)
+        public ProjectFolder(string name, ImageSource imageSource)
+            : base(name, imageSource)
         {
             
         }

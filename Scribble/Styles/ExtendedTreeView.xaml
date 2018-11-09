@@ -10,7 +10,7 @@
                 <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}"/>
             </StackPanel.Resources>
             <Image Source="{Binding Image}" Stretch="UniformToFill" Width="16" Height="16" Margin="3, 0, 5, 0"/>
-            <TextBlock Text="{Binding Header}" Margin="0, 0, 5, 0">
+            <TextBlock Text="{Binding Name}" Margin="0, 0, 5, 0">
                 <TextBlock.Style>
                     <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Visible"/>
@@ -28,7 +28,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <TextBox Name="textbox" Text="{Binding Header}">
+            <TextBox Name="textbox" Text="{Binding Name}">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -137,37 +137,37 @@
                             <ContentPresenter x:Name="PART_Header" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             <Border.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Add">
+                                    <MenuItem Header="Add" Template="{DynamicResource SubmenuHeader}">
                                         <MenuItem.Icon>
                                             <Image Source="/icons/plus.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                         </MenuItem.Icon>
-                                        <MenuItem Header="Folder" Command="{Binding Data.AddFolderCommand, Source={StaticResource proxy}}">
+                                        <MenuItem Header="Folder" Command="{Binding Data.AddFolderCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
                                             <MenuItem.Icon>
                                                 <Image Source="/icons/folder.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Scene" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Scene}">
+                                        <MenuItem Header="Scene" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Scene}" Template="{DynamicResource SubmenuItem}">
                                             <MenuItem.Icon>
                                                 <Image Source="/icons/pen.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Character" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Character}">
+                                        <MenuItem Header="Character" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Character}" Template="{DynamicResource SubmenuItem}">
                                             <MenuItem.Icon>
                                                 <Image Source="/icons/character.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Location" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Location}">
+                                        <MenuItem Header="Location" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Location}" Template="{DynamicResource SubmenuItem}">
                                             <MenuItem.Icon>
                                                 <Image Source="/icons/map.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
                                     </MenuItem>
-                                    <MenuItem Header="Rename" Command="{Binding Data.RenameCommand, Source={StaticResource proxy}}">
+                                    <MenuItem Header="Rename" Command="{Binding Data.RenameCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
                                         <MenuItem.Icon>
                                             <Image Source="/icons/pencil.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem Header="Delete" Command="{Binding Data.RemoveCommand, Source={StaticResource proxy}}">
+                                    <MenuItem Header="Delete" Command="{Binding Data.RemoveCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
                                         <MenuItem.Icon>
                                             <Image Source="/icons/remove.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                         </MenuItem.Icon>

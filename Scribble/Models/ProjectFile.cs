@@ -11,8 +11,8 @@
     {
         public ProjectFile() { }
 
-        public ProjectFile(string header, ImageSource imageSource)
-            : base(header, imageSource)
+        public ProjectFile(string name, ImageSource imageSource)
+            : base(name, imageSource)
         {
             _FileName = CreateFile();
         }

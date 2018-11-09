@@ -12,8 +12,8 @@
     {
         public Item() { }
 
-        public Item(string header, ImageSource imageSource)
-            : base(header, imageSource)
+        public Item(string name, ImageSource imageSource)
+            : base(name, imageSource)
         {
             IsSelected = true;
         }

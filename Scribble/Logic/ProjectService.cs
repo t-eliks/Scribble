@@ -222,7 +222,7 @@
 
             characters.AddItem(new Character("Kaladin", IconHelper.FindIconInResources("Character"))
             {
-                Full_Name = "Kaladin",
+                Name = "Kaladin",
                 Short_Name = "Kal",
                 Description = "An accomplished spearman and a natural leader, he eventually becomes the captain of Elhokar Kholin's King's Guard, " +
                 "formerly known as the Cobalt Guard, House Kholin's personal honor guard.",
@@ -232,7 +232,7 @@
 
            characters.AddItem(new Character("Shallan", IconHelper.FindIconInResources("Character"))
             {
-                Full_Name = "Shallan",
+                Name = "Shallan",
                 Short_Name = "Shal",
                 Description = "Daughter of the recently deceased Brightlord Lin Davar of Jah Keved, Shallan pursued and received scholarly training as the ward of Jasnah Kholin.",
                 Tags = "Lightweaver, Main",
@@ -241,7 +241,7 @@
 
             characters.AddItem(new Character("Jaskier", IconHelper.FindIconInResources("Character"))
             {
-                Full_Name = "Jaskier",
+                Name = "Jaskier",
                 Description = "Julian Alfred Pankratz, Viscount de Lettenhove, better known as Dandelion/Jaskier, was a poet, minstrel, bard, and close friend of Geralt of Rivia.",
                 Tags = "Poet, Drunk, Secondary",
                 Goals = "Get drunk and be an annoying stuck up cunt."
@@ -318,7 +318,7 @@
 
                 var character = new Character(FieldGenerator.Instance.GenerateRandomCharacterName(), IconHelper.FindIconInResources("Character"));
 
-                character.Full_Name = FieldGenerator.Instance.GenerateRandomCharacterName();
+                character.Name = FieldGenerator.Instance.GenerateRandomCharacterName();
 
                 character.Description = FieldGenerator.Instance.GenerateRandomDescription();
 

@@ -12,30 +12,30 @@
     {
         public BaseItem() { }
 
-        public BaseItem(string header, ImageSource imageSource)
+        public BaseItem(string name, ImageSource imageSource)
         {
-            Header = header;
+            Name = name;
             Image = imageSource;
             ImageSource = imageSource.ToString();
 
             IsExpanded = true;
         }
 
-        private string _Header;
+        private string _Name;
 
-        public string Header
+        public string Name
         {
             get
             {
-                return _Header;
+                return _Name;
             }
             set
             {
-                if (_Header != value)
+                if (_Name != value)
                 {
-                    _Header = value;
+                    _Name = value;
 
-                    RaisePropertyChanged(nameof(Header));
+                    RaisePropertyChanged(nameof(Name));
                 }
             }
         }
@@ -120,7 +120,7 @@
 
         protected BaseItem(SerializationInfo info, StreamingContext context)
         {
-            Header = info.GetString("header");
+            Name = info.GetString("header");
             ImageSource = info.GetString("_imagesource");
             Image = new BitmapImage(new Uri(ImageSource));
 
@@ -132,7 +132,7 @@
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("header", Header);
+            info.AddValue("header", Name);
             info.AddValue("_imagesource", ImageSource);
         }
 
@@ -149,7 +149,7 @@
 
         public override string ToString()
         {
-            return Header;
+            return Name;
         }
 
         #endregion

@@ -97,6 +97,10 @@
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>
+    <Page Include="NovaMenuStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ScrollBarStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -381,9 +385,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

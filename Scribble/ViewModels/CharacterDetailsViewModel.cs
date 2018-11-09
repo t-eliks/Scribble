@@ -31,7 +31,7 @@
                     RaisePropertyChanged(nameof(Major));
                     RaisePropertyChanged(nameof(Minor));
                     RaisePropertyChanged(nameof(Background));
-                    RaisePropertyChanged(nameof(Full_Name));
+                    RaisePropertyChanged(nameof(Name));
                     RaisePropertyChanged(nameof(Short_Name));
                     RaisePropertyChanged(nameof(Description));
                     RaisePropertyChanged(nameof(Biography));
@@ -93,16 +93,16 @@
             }
         }
 
-        public string Full_Name
+        public string Name
         {
             get
             {
-                return Character.Full_Name;
+                return Character.Name;
             }
             set
             {
-                Character.Full_Name = value;
-                RaisePropertyChanged(nameof(Full_Name));
+                Character.Name = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
 

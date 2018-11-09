@@ -20,6 +20,21 @@
 
         #region ICommands
 
+        private ICommand _OpenProjectCommand;
+
+        public ICommand OpenProjectCommand
+        {
+            get
+            {
+                return _OpenProjectCommand ?? (_OpenProjectCommand = new RelayCommand(() => 
+                {
+                    ProjectService.Instance.ShowSelectProjectDialog();
+
+                    RaisePropertyChanged(nameof(TreeViewItems));
+                }));
+            }
+        }
+
         private ICommand _SwitchToProjectItemsOverView;
 
         public ICommand SwitchToProjectItemsOverView

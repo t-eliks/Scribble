@@ -10,40 +10,20 @@
     {
         public Location() { }
 
-        public Location(string header, ImageSource imageSource)
-          : base(header, imageSource)
+        public Location(string name, ImageSource imageSource)
+          : base(name, imageSource)
         {
-            
+            Description = "No description.";
         }
 
-        public Location(string header, ImageSource imageSource, string name, string description,
+        public Location(string name, ImageSource imageSource, string description,
             string details, string notes, string tags)
-          : base(header, imageSource)
+          : base(name, imageSource)
         {
-            Name = name;
             Description = description;
             Details = details;
             Notes = notes;
             Tags = tags;
-        }
-
-        private string _Name;
-
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (_Name != value)
-                {
-                    _Name = value;
-
-                    RaisePropertyChanged(nameof(Name));
-                }
-            }
         }
 
         private string _Description;
@@ -131,7 +111,6 @@
 
         protected Location(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Name = info.GetString("name");
             Description = info.GetString("description");
             Details = info.GetString("details");
             Tags = info.GetString("tags");
@@ -144,7 +123,6 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("name", Name);
             info.AddValue("description", Description);
             info.AddValue("details", Details);
             info.AddValue("tags", Tags);

@@ -10,23 +10,16 @@
     {
         public Character() { }
 
-        public Character(string header, ImageSource imageSource)
-           : base(header, imageSource)
+        public Character(string name, ImageSource imageSource)
+           : base(name, imageSource)
         {
-            Full_Name = null;
-            Short_Name = null;
-            Description = null;
-            Tags = null;
-            Biography = null;
-            Notes = null;
-            Goals = null;
+            Description = "No description.";
         }
 
-        public Character(string header, ImageSource imageSource, string full_name, string short_name, string description,
+        public Character(string name, ImageSource imageSource, string short_name, string description,
             string tags, string biography, string notes, string goals)
-           : base(header, imageSource)
+           : base(name, imageSource)
         {
-            Full_Name = full_name;
             Short_Name = short_name;
             Description = description;
             Tags = tags;
@@ -52,25 +45,6 @@
                     _CharacterType = value;
 
                     RaisePropertyChanged(nameof(CharacterType));
-                }
-            }
-        }
-
-        private string _Full_Name;
-
-        public string Full_Name
-        {
-            get
-            {
-                return _Full_Name;
-            }
-            set
-            {
-                if (_Full_Name != value)
-                {
-                    _Full_Name = value;
-
-                    RaisePropertyChanged(nameof(Full_Name));
                 }
             }
         }
@@ -191,17 +165,11 @@
 
         #endregion
 
-        public override string ToString()
-        {
-            return Full_Name;
-        }
-
         #region Serialization
 
         protected Character(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             CharacterType = (CharacterTypes)info.GetValue("charactertype", typeof(CharacterTypes));
-            Full_Name = info.GetString("fullname");
             Short_Name = info.GetString("shortname");
             Description = info.GetString("description");
             Tags = info.GetString("tags");
@@ -217,7 +185,6 @@
             base.GetObjectData(info, context);
 
             info.AddValue("charactertype", CharacterType);
-            info.AddValue("fullname", Full_Name);
             info.AddValue("shortname", Short_Name);
             info.AddValue("description", Description);
             info.AddValue("tags", Tags);

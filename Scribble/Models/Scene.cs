@@ -12,29 +12,10 @@
     {
         public Scene() { }
 
-        public Scene(string header, ImageSource imageSource)
-            : base(header, imageSource)
+        public Scene(string name, ImageSource imageSource)
+            : base(name, imageSource)
         {
-
-        }
-
-        private string _Name;
-
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (_Name != value)
-                {
-                    _Name = value;
-
-                    RaisePropertyChanged(nameof(Name));
-                }
-            }
+            Description = "No description.";
         }
 
         private string _Role;
@@ -246,7 +227,6 @@
 
         protected Scene(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Name = info.GetString("name");
             Role = info.GetString("role");
             Description = info.GetString("description");
             Sights = info.GetString("sights");
@@ -264,7 +244,6 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("name", Name);
             info.AddValue("role", Role);
             info.AddValue("description", Description);
             info.AddValue("sights", Sights);

@@ -29,7 +29,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
-                    <Border x:Name="Border" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Background="{DynamicResource BackgroundColor2Brush}">
+                    <Border x:Name="Border" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0" Background="{DynamicResource BackgroundColor2Brush}">
                         <StackPanel ClipToBounds="True" Orientation="Vertical" IsItemsHost="True" />
                     </Border>
                 </ControlTemplate>
@@ -39,7 +39,7 @@
 
     <!-- SubmenuItem -->
     
-    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}"
+    <ControlTemplate x:Key="SubmenuItem"
                      TargetType="{x:Type MenuItem}">
         <Border MinWidth="110" MinHeight="35" Name="Border" Background="{StaticResource BackgroundColor2Brush}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1">
             <Grid>
@@ -80,7 +80,7 @@
 
     <!-- SubmenuHeader -->
 
-    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}"
+    <ControlTemplate x:Key="SubmenuHeader"
                      TargetType="{x:Type MenuItem}">
         <Border Name="Border" MinWidth="110" MinHeight="35" Background="{StaticResource BackgroundColor2Brush}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1">
             <Grid>
