@@ -75,7 +75,7 @@
             <DataTemplate DataType="{x:Type Models:Character}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding Image}" Margin="5, 0, 0, 0" Width="16" Height="16" Stretch="UniformToFill"/>
-                    <TextBlock Text="{Binding Full_Name}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </StackPanel>
             </DataTemplate>
 

@@ -17,7 +17,7 @@
             <StackPanel.InputBindings>
                 <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ToggleIsSelectedCommand}"/>
             </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Full_Name}" Foreground="{StaticResource ForegroundColorBrush}" FontSize="26"/>
+            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ForegroundColorBrush}" FontSize="26"/>
             <TextBlock MaxWidth="750" MaxHeight="40" Text="{Binding Description}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Foreground="{StaticResource ForegroundColorBrush}" FontSize="16" Margin="10, 5"/>
         </StackPanel>
     </DataTemplate>

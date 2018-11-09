@@ -188,7 +188,7 @@
             {
                 var result = new ObservableCollection<Character>();
 
-                result.Add(new Character(null, IconHelper.FindIconInResources("Character")) { Name = "Any characters" });
+                result.Add(new Character("Any characters", IconHelper.FindIconInResources("Character")) { Tags = "anyscenetemp" });
 
                 foreach (var character in ProjectService.Instance.GetItemsOfType<Character>())
                 {
@@ -227,7 +227,7 @@
             {
                 var result = new ObservableCollection<Location>();
 
-                result.Add(new Location(null, IconHelper.FindIconInResources("Map")) { Name = "Any locations" });
+                result.Add(new Location("Any locations", IconHelper.FindIconInResources("Map")) { Tags = "anylocationstemp" });
 
                 foreach (var location in ProjectService.Instance.GetItemsOfType<Location>())
                 {
@@ -242,10 +242,10 @@
         {
             var result = Scenes.ToList();
 
-            if (SelectedCharacter?.Name != null)
+            if (SelectedCharacter?.Tags != "anyscenetemp")
                 result = Scenes.Where(x => x.Items.Contains(SelectedCharacter)).ToList();
 
-            if (SelectedLocation?.Name != null)
+            if (SelectedLocation?.Tags != "anylocationstemp")
                 result = result.Where(x => x.Items.Contains(SelectedLocation)).ToList();
 
             return new ObservableCollection<Scene>(result);
