@@ -1,7 +1,9 @@
 ﻿namespace Scribble
 {
+    using Scribble.Logic;
     using Scribble.ViewModels;
     using System;
+    using System.ComponentModel;
     using System.Windows;
     using System.Windows.Media.Animation;
 
@@ -23,7 +25,26 @@
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Resources.MergedDictionaries[0].Source = new System.Uri("Styles/NewColors.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries[0].Source = new Uri("Styles/NewColors.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (ProjectService.Instance.UnsavedChanges)
+            {
+                var result = MessageBox.Show("There are unsaved changes. Save?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                    ProjectService.Instance.SaveActiveProject();
+
+                if (result == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                Environment.Exit(0);
+            }
         }
     }
 }

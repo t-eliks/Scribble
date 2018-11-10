@@ -23,13 +23,6 @@
 
         #region Properties and Fields
 
-        private int NextId { get; set; } = 0;
-
-        public int GenerateId()
-        {
-            return NextId++;
-        }
-
         public string RootProjectsDirectory
         {
             get
@@ -53,6 +46,8 @@
         }
 
         public ObservableCollection<ProjectModel> Projects { get; set; }
+
+        public bool UnsavedChanges { get; set; }
 
         #endregion
 
@@ -97,6 +92,7 @@
             if (project != null)
             {
                 SerializationService<ProjectModel>.SerializeObject(project, project.ProjectDirectory, "data.scribble");
+                UnsavedChanges = false;
             }
         }
 

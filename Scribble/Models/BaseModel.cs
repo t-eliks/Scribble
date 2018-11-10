@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Logic;
     using System.ComponentModel;
 
     public class BaseModel : INotifyPropertyChanged
@@ -19,6 +20,7 @@
 
             if (handler != null)
             {
+                ProjectService.Instance.UnsavedChanges = true;
                 var e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
