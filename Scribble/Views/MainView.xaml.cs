@@ -1,11 +1,9 @@
 ﻿namespace Scribble
 {
     using Scribble.Logic;
-    using Scribble.ViewModels;
     using System;
     using System.ComponentModel;
     using System.Windows;
-    using System.Windows.Media.Animation;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,7 +30,7 @@
         {
             if (ProjectService.Instance.UnsavedChanges)
             {
-                var result = MessageBox.Show("There are unsaved changes. Save?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                var result = MessageBox.Show("Save before exiting?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                     ProjectService.Instance.SaveActiveProject();
