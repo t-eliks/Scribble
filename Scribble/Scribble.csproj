@@ -99,7 +99,7 @@
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>
-    <Page Include="NovaMenuStyles.xaml">
+    <Page Include="Styles\MenuStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +214,6 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ProjectFile.cs" />
     <Compile Include="Models\ProjectFolder.cs" />
-    <Compile Include="Models\ItemTypes.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\Scene.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />

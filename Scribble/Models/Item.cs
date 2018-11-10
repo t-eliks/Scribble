@@ -7,6 +7,8 @@
     using System.Security.Permissions;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Linq;
+    using System.Collections.Generic;
 
     [Serializable]
     public class Item : BaseItem, ISerializable
@@ -19,26 +21,24 @@
             IsSelected = true;
 
             Description = "No description.";
-
-            Tags = new ObservableCollection<Tag>();
         }
-
-        private ObservableCollection<Tag> _Tags;
 
         public ObservableCollection<Tag> Tags
         {
             get
             {
-                return _Tags;
-            }
-            set
-            {
-                if (_Tags != value)
-                {
-                    _Tags = value;
+                var tags = ProjectService.Instance.FindLinks<Tag>(this);
 
-                    RaisePropertyChanged(nameof(Tags));
-                }
+                tags.CollectionChanged += (s, e) => 
+                {
+                    foreach (var tag in Tags.Except((IEnumerable<Tag>)s))
+                        ProjectService.Instance.DeleteItemLinks(this, tag);
+
+                    foreach (var tag in ((IEnumerable<Tag>)s).Except(Tags))
+                        this.AddTag(tag);
+                };
+
+                return tags;
             }
         }
 
@@ -95,11 +95,20 @@
             return false;
         }
 
+        public void AddTag(Tag tag)
+        {
+            ProjectService.Instance.AddSymbioticLink(new SymbioticLink<Item, Tag>(this, tag));
+        }
+
+        public void AddTag(string tag)
+        {
+            AddTag(new Tag(tag));
+        }
+
         #region Serialization
 
         protected Item(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Tags = (ObservableCollection<Tag>)info.GetValue("tags", typeof(ObservableCollection<Tag>));
             Description = info.GetString("description");
         }
 
@@ -109,7 +118,6 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("tags", Tags);
             info.AddValue("description", Description);
         }
 
@@ -128,5 +136,14 @@
         }
 
         #endregion
+    }
+
+    public enum ItemTypes
+    {
+        Folder,
+        Character,
+        Location,
+        Scene,
+        Timeline
     }
 }

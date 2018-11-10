@@ -87,7 +87,7 @@
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center"
                                Background="Transparent" Text="{Binding Value}" Foreground="{StaticResource ForegroundColorBrush}"/>
-                        <Button DockPanel.Dock="Right" Width="16" Height="16" Margin="5, 0">
+                        <Button Command="{Binding MarkForRemovalCommand}" DockPanel.Dock="Right" Width="16" Height="16" Margin="5, 0">
                             <Button.Background>
                                 <ImageBrush ImageSource="/icons/delete_small.png" Stretch="UniformToFill"/>
                             </Button.Background>
@@ -122,7 +122,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ComboBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/CheckBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ScrollBarStyle.xaml"/>
-                <ResourceDictionary Source="NovaMenuStyles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/MenuStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

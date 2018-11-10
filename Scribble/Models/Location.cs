@@ -1,7 +1,6 @@
 ﻿namespace Scribble.Models
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
@@ -22,8 +21,6 @@
         {
             Details = details;
             Notes = notes;
-
-            Tags = new ObservableCollection<Tag>();
         }
 
         private string _Details;

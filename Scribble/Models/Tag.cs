@@ -1,9 +1,12 @@
-﻿using System;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-
-namespace Scribble.Models
+﻿namespace Scribble.Models
 {
+    using Scribble.Logic;
+    using System;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Windows;
+    using System.Windows.Input;
+
     [Serializable]
     public class Tag : BaseModel, ISerializable
     {
@@ -11,6 +14,19 @@ namespace Scribble.Models
         {
 
         }
+
+        private ICommand _MarkForRemovalCommand;
+
+        public ICommand MarkForRemovalCommand
+        {
+            get
+            {
+                return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() => 
+                { OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs()); }));
+            }
+        }
+
+        public RoutedEventHandler OnMarkedForRemoval;
 
         public Tag(string tag)
         {

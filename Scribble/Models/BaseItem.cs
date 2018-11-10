@@ -1,6 +1,5 @@
 ﻿namespace Scribble.Models
 {
-    using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;

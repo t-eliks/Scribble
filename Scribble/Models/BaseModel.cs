@@ -1,6 +1,5 @@
 ﻿namespace Scribble.Models
 {
-    using Scribble.Logic;
     using System.ComponentModel;
 
     public class BaseModel : INotifyPropertyChanged

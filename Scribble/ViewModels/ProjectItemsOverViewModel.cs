@@ -2,7 +2,6 @@
 {
     using Scribble.Logic;
     using Scribble.Models;
-    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
 
@@ -18,9 +17,9 @@
 
             _Initializing = true;
 
-            SelectedCharacter = Characters[0];
+            //SelectedCharacter = Characters[0];
 
-            SelectedLocation = Locations[0];
+            //SelectedLocation = Locations[0];
 
             ApplyFilter();
 
@@ -188,13 +187,13 @@
             {
                 var result = new ObservableCollection<Character>();
 
-                result.Add(new Character("Any characters", IconHelper.FindIconInResources("Character"))
-                { Tags = new ObservableCollection<Tag>() { new Tag("anyscenetemp") } });
+                //result.Add(new Character("Any characters", IconHelper.FindIconInResources("Character"))
+                //{ Tags = new ObservableCollection<Tag>() { new Tag("anyscenetemp") } });
 
-                foreach (var character in ProjectService.Instance.GetItemsOfType<Character>())
-                {
-                    result.Add(character);
-                }
+                //foreach (var character in ProjectService.Instance.GetItemsOfType<Character>())
+                //{
+                //    result.Add(character);
+                //}
 
                 return result;
             }
@@ -228,13 +227,13 @@
             {
                 var result = new ObservableCollection<Location>();
 
-                result.Add(new Location("Any locations", IconHelper.FindIconInResources("Map"))
-                { Tags = new ObservableCollection<Tag>() { new Tag("anylocationtemp") } });
+                //result.Add(new Location("Any locations", IconHelper.FindIconInResources("Map"))
+                //{ Tags = new ObservableCollection<Tag>() { new Tag("anylocationtemp") } });
 
-                foreach (var location in ProjectService.Instance.GetItemsOfType<Location>())
-                {
-                    result.Add(location);
-                }
+                //foreach (var location in ProjectService.Instance.GetItemsOfType<Location>())
+                //{
+                //    result.Add(location);
+                //}
 
                 return result;
             }

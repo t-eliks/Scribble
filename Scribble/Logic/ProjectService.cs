@@ -167,6 +167,11 @@
             return ActiveProject?.FindBiLinks<X>(item);
         }
 
+        public void DeleteItemLinks(object parent, object child)
+        {
+            ActiveProject?.DeleteItemLinks(parent, child);
+        }
+
         public ProjectModel CreateNewProject(string header, string author, string type)
         {
             return null;
@@ -194,54 +199,75 @@
 
             root.AddItem(locations);
 
-            locations.AddItem(new Location("Azeroth", IconHelper.FindIconInResources("Map"))
+            var azeroth = new Location("Azeroth", IconHelper.FindIconInResources("Map"))
             {
                 Name = "Azeroth",
                 Description = "Azeroth is the name of the world in which the majority of the Warcraft series is set. At its core dwells a slumbering world-soul, " +
                 "the nascent spirit of a titan. Long ago, it was invaded by the Old Gods, eldritch abominations from the Void. When the Pantheon arrived, " +
                 "the titans imprisoned the Old Gods deep beneath the earth, before healing and ordering the world, and seeding life across the planet. " +
                 "A great fount of magic that would nurture the land was placed at the center of Kalimdor, known as the Well of Eternity.",
-                Tags = new ObservableCollection<Tag>() { new Tag("Big place"), new Tag("Full of nerds") }
-            });
+            };
 
-            locations.AddItem(new Location("Summoner's Rift", IconHelper.FindIconInResources("Map"))
+            azeroth.AddTag("Big place");
+            azeroth.AddTag("Full of nerds");
+
+            locations.AddItem(azeroth);
+
+            var rift = new Location("Summoner's Rift", IconHelper.FindIconInResources("Map"))
             {
                 Name = "Summoner's Rift",
                 Description = "The Summoner's Rift is the most commonly used Field of Justice. The map was given a graphical and technical update on May 23rd, " +
                 "2012 and remade from scratch on November 12th, 2014.",
-                Tags = new ObservableCollection<Tag>() { new Tag("Washed up players"), new Tag("Nostalgic for S1") }
-            });
+            };
+
+            rift.AddTag("Washed up players");
+            rift.AddTag("Nostalgic for S1");
+
+            locations.AddItem(rift);
 
             var characters = new ProjectFolder("Characters", IconHelper.FindIconInResources("Character"));
 
             root.AddItem(characters);
 
-            characters.AddItem(new Character("Kaladin", IconHelper.FindIconInResources("Character"))
+            var kaladin = new Character("Kaladin", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Kaladin",
                 Short_Name = "Kal",
                 Description = "An accomplished spearman and a natural leader, he eventually becomes the captain of Elhokar Kholin's King's Guard, " +
                 "formerly known as the Cobalt Guard, House Kholin's personal honor guard.",
-                Tags = new ObservableCollection<Tag>() { new Tag("Warrior"), new Tag("Main") },
                 Goals = "Save the world, of course!"
-            });
+            };
 
-           characters.AddItem(new Character("Shallan", IconHelper.FindIconInResources("Character"))
+            kaladin.AddTag("Saves the world");
+            kaladin.AddTag("Syl <3");
+
+            characters.AddItem(kaladin);
+
+            var shallan = new Character("Shallan", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Shallan",
                 Short_Name = "Shal",
                 Description = "Daughter of the recently deceased Brightlord Lin Davar of Jah Keved, Shallan pursued and received scholarly training as the ward of Jasnah Kholin.",
-                Tags = new ObservableCollection<Tag>() { new Tag("Lightweaver"), new Tag("Main") },
-               Goals = "Solve puzzles"
-            });
+                Goals = "Solve puzzles"
+            };
 
-            characters.AddItem(new Character("Jaskier", IconHelper.FindIconInResources("Character"))
+            shallan.AddTag("Lightweaver");
+            shallan.AddTag("Main");
+
+            characters.AddItem(shallan);
+
+            var jaskier = new Character("Jaskier", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Jaskier",
                 Description = "Julian Alfred Pankratz, Viscount de Lettenhove, better known as Dandelion/Jaskier, was a poet, minstrel, bard, and close friend of Geralt of Rivia.",
-                Tags = new ObservableCollection<Tag>() { new Tag("Poet"), new Tag("Drunk"), new Tag("Secondary") },
                 Goals = "Get drunk and be an annoying stuck up cunt."
-            });
+            };
+
+            jaskier.AddTag("Poet");
+            jaskier.AddTag("Drunk");
+            jaskier.AddTag("Secondary");
+
+            characters.AddItem(jaskier);
 
             var notes = new ProjectFolder("Notes", IconHelper.FindIconInResources("Note"));
 
@@ -249,29 +275,48 @@
 
             var scenes = new ProjectFolder("Scenes", IconHelper.FindIconInResources("Pen"));
 
-            scenes.AddItem(new Scene("Scene #1", IconHelper.FindIconInResources("Pen"))
+            var scene1 = new Scene("Scene #1", IconHelper.FindIconInResources("Pen"))
             {
                 Name = "Red Wedding",
                 Description = "Starks get slaughtered like dogs"
-            });
+            };
 
-            scenes.AddItem(new Scene("Scene #2", IconHelper.FindIconInResources("Pen"))
+            scene1.AddTag("Slaughter");
+            scene1.AddTag("Lotta dead Starks");
+            scene1.AddTag("Lannisters always pay their debts");
+
+            scenes.AddItem(scene1);
+
+            var scene2 = new Scene("Scene #2", IconHelper.FindIconInResources("Pen"))
             {
                 Name = "Malfeasance",
                 Description = "Kvothe gets expelled for causing harm to Ambrose"
-            });
+            };
 
-            scenes.AddItem(new Scene("Scene #3", IconHelper.FindIconInResources("Pen"))
+            scene2.AddTag("Name of Wind");
+
+            scenes.AddItem(scene2);
+
+            var scene3 = new Scene("Scene #3", IconHelper.FindIconInResources("Pen"))
             {
                 Name = "K/DA",
                 Description = "Riot Games single-handedly ruins No Nut November"
-            });
+            };
 
-            scenes.AddItem(new Scene("Scene #4", IconHelper.FindIconInResources("Pen"))
+            scene3.AddTag("League of Legends");
+
+            scenes.AddItem(scene3);
+
+            var scene4 = new Scene("Scene #4", IconHelper.FindIconInResources("Pen"))
             {
                 Name = "LoL Worlds 2018",
                 Description = "\"It's the year of the West.\" Nice joke"
-            });
+            };
+
+            scene4.AddTag("League of Legends");
+            scene4.AddTag("Fnatic");
+
+            scenes.AddItem(scene4);
 
             root.AddItem(scenes);
 
