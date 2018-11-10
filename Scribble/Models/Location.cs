@@ -1,6 +1,7 @@
 ﻿namespace Scribble.Models
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
@@ -13,36 +14,16 @@
         public Location(string name, ImageSource imageSource)
           : base(name, imageSource)
         {
-            Description = "No description.";
         }
 
         public Location(string name, ImageSource imageSource, string description,
-            string details, string notes, string tags)
+            string details, string notes)
           : base(name, imageSource)
         {
-            Description = description;
             Details = details;
             Notes = notes;
-            Tags = tags;
-        }
 
-        private string _Description;
-
-        public string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (_Description != value)
-                {
-                    _Description = value;
-
-                    RaisePropertyChanged(nameof(Description));
-                }
-            }
+            Tags = new ObservableCollection<Tag>();
         }
 
         private string _Details;
@@ -60,25 +41,6 @@
                     _Details = value;
 
                     RaisePropertyChanged(nameof(Details));
-                }
-            }
-        }
-
-        private string _Tags;
-
-        public string Tags
-        {
-            get
-            {
-                return _Tags;
-            }
-            set
-            {
-                if (_Tags != value)
-                {
-                    _Tags = value;
-
-                    RaisePropertyChanged(nameof(Tags));
                 }
             }
         }
@@ -111,9 +73,7 @@
 
         protected Location(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Description = info.GetString("description");
             Details = info.GetString("details");
-            Tags = info.GetString("tags");
             Notes = info.GetString("notes");
         }
 
@@ -123,9 +83,7 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("description", Description);
             info.AddValue("details", Details);
-            info.AddValue("tags", Tags);
             info.AddValue("notes", Notes);
         }
 

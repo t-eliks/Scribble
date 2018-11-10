@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Scribble.Styles">
+                    xmlns:Controls="clr-namespace:Scribble.Controls"
+                    >
 
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource BackgroundColor3Brush}"/>
@@ -55,7 +56,49 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style TargetType="Controls:TagTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BackgroundColor2Brush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="{StaticResource Quicksand}"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:TagTextBox">
+                    <DockPanel LastChildFill="True">
+                        <ItemsControl DockPanel.Dock="Left" Background="{TemplateBinding Background}" ItemsSource="{TemplateBinding Content}" Width="Auto" Height="{TemplateBinding Height}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <TextBox HorizontalAlignment="Stretch" DockPanel.Dock="Right" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}"
+                             BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontStyle="{TemplateBinding FontStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text,
+                                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--<Style TargetType="RichTextBox" BasedOn="{StaticResource {x:Type RichTextBox}}" x:Key="RichTextBoxStyle1">
         <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>

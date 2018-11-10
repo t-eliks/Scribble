@@ -1,6 +1,7 @@
 ﻿namespace Scribble.Models
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
@@ -13,16 +14,13 @@
         public Character(string name, ImageSource imageSource)
            : base(name, imageSource)
         {
-            Description = "No description.";
         }
 
         public Character(string name, ImageSource imageSource, string short_name, string description,
-            string tags, string biography, string notes, string goals)
+            string biography, string notes, string goals)
            : base(name, imageSource)
         {
             Short_Name = short_name;
-            Description = description;
-            Tags = tags;
             Biography = biography;
             Notes = notes;
             Goals = goals;
@@ -64,44 +62,6 @@
                     _Short_Name = value;
 
                     RaisePropertyChanged(nameof(Short_Name));
-                }
-            }
-        }
-
-        private string _Description;
-
-        public string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (_Description != value)
-                {
-                    _Description = value;
-
-                    RaisePropertyChanged(nameof(Description));
-                }
-            }
-        }
-
-        private string _Tags;
-
-        public string Tags
-        {
-            get
-            {
-                return _Tags;
-            }
-            set
-            {
-                if (_Tags != value)
-                {
-                    _Tags = value;
-
-                    RaisePropertyChanged(nameof(Tags));
                 }
             }
         }
@@ -171,8 +131,6 @@
         {
             CharacterType = (CharacterTypes)info.GetValue("charactertype", typeof(CharacterTypes));
             Short_Name = info.GetString("shortname");
-            Description = info.GetString("description");
-            Tags = info.GetString("tags");
             Biography = info.GetString("biography");
             Notes = info.GetString("notes");
             Goals = info.GetString("goals");
@@ -186,8 +144,6 @@
 
             info.AddValue("charactertype", CharacterType);
             info.AddValue("shortname", Short_Name);
-            info.AddValue("description", Description);
-            info.AddValue("tags", Tags);
             info.AddValue("biography", Biography);
             info.AddValue("notes", Notes);
             info.AddValue("goals", Goals);

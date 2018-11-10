@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:Scribble.Controls"
              xmlns:local="clr-namespace:Scribble.Views"
              mc:Ignorable="d" 
              >
@@ -38,7 +39,7 @@
                     </DockPanel>
                     <DockPanel Margin="10">
                         <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Tags"/>
-                        <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Character.Tags, Mode=TwoWay}"/>
+                        <Controls:TagTextBox Content="{Binding Character.Tags, Mode=TwoWay}" DockPanel.Dock="Right"/>
                     </DockPanel>
                     <DockPanel Margin="10">
                         <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Goals"/>

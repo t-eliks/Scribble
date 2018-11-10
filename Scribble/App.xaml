@@ -22,10 +22,6 @@
                 <DialogViews:CreateProjectView/>
             </DataTemplate>
 
-            <!--<DataTemplate DataType="{x:Type ViewModels:ExtendedRichTextBoxViewModel}">
-                <Views:ExtendedRichTextBoxUserControl TextFile="{Binding TextFilePath}"/>
-            </DataTemplate>-->
-
             <DataTemplate DataType="{x:Type ViewModels:CharacterDetailsViewModel}">
                 <Views:CharacterDetailsUserControl/>
             </DataTemplate>
@@ -86,7 +82,19 @@
                 </StackPanel>
             </DataTemplate>
 
-            <!-- Application Interface Colors -->
+            <DataTemplate DataType="{x:Type Models:Tag}">
+                <Border HorizontalAlignment="Left" Margin="5, 0" Background="{StaticResource TextBoxBackgroundColorBrush}" Padding="5" CornerRadius="12">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Background="Transparent" Text="{Binding Value}" Foreground="{StaticResource ForegroundColorBrush}"/>
+                        <Button DockPanel.Dock="Right" Width="16" Height="16" Margin="5, 0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/icons/delete_small.png" Stretch="UniformToFill"/>
+                            </Button.Background>
+                        </Button>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
 
             <!-- Icons -->
 

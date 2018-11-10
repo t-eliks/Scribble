@@ -2,8 +2,10 @@
 {
     using Scribble.Logic;
     using System;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.Security.Permissions;
     using System.Windows;
     using System.Windows.Media;
 
@@ -15,7 +17,6 @@
         public Scene(string name, ImageSource imageSource)
             : base(name, imageSource)
         {
-            Description = "No description.";
         }
 
         private string _Role;
@@ -33,25 +34,6 @@
                     _Role = value;
 
                     RaisePropertyChanged(nameof(Role));
-                }
-            }
-        }
-
-        private string _Description;
-
-        public string Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                if (_Description != value)
-                {
-                    _Description = value;
-
-                    RaisePropertyChanged(nameof(Description));
                 }
             }
         }
@@ -151,25 +133,6 @@
             }
         }
 
-        private string _Tags;
-
-        public string Tags
-        {
-            get
-            {
-                return _Tags;
-            }
-            set
-            {
-                if (_Tags != value)
-                {
-                    _Tags = value;
-
-                    RaisePropertyChanged(nameof(Tags));
-                }
-            }
-        }
-
         private double _CanvasLeft = 0;
 
         public double CanvasLeft
@@ -228,11 +191,9 @@
         protected Scene(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Role = info.GetString("role");
-            Description = info.GetString("description");
             Sights = info.GetString("sights");
             Sounds = info.GetString("sounds");
             Smells = info.GetString("smells");
-            Tags = info.GetString("tags");
             Notes = info.GetString("notes");
             Outcome = info.GetString("outcome");
             CanvasLeft = info.GetDouble("canvasleft");
@@ -240,16 +201,16 @@
             IsInTimeline = info.GetBoolean("isintimeline");
         }
 
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
 
             info.AddValue("role", Role);
-            info.AddValue("description", Description);
             info.AddValue("sights", Sights);
             info.AddValue("sounds", Sounds);
             info.AddValue("smells", Smells);
-            info.AddValue("tags", Tags);
             info.AddValue("notes", Notes);
             info.AddValue("outcome", Outcome);
             info.AddValue("canvasleft", CanvasLeft);

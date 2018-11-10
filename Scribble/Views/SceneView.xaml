@@ -53,7 +53,7 @@
                         </DockPanel>
                         <DockPanel Margin="10">
                             <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Tags"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Tags, Mode=TwoWay}"/>
+                            <Controls:TagTextBox Content="{Binding Scene.Tags, Mode=TwoWay}" DockPanel.Dock="Right"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>

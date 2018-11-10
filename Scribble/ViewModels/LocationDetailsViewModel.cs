@@ -8,7 +8,7 @@
     {
         public LocationDetailsViewModel()
         {
-
+            
         }
 
         #region Properties and Fields

@@ -201,7 +201,7 @@
                 "the nascent spirit of a titan. Long ago, it was invaded by the Old Gods, eldritch abominations from the Void. When the Pantheon arrived, " +
                 "the titans imprisoned the Old Gods deep beneath the earth, before healing and ordering the world, and seeding life across the planet. " +
                 "A great fount of magic that would nurture the land was placed at the center of Kalimdor, known as the Well of Eternity.",
-                Tags = "Big place, full of nerds."
+                Tags = new ObservableCollection<Tag>() { new Tag("Big place"), new Tag("Full of nerds") }
             });
 
             locations.AddItem(new Location("Summoner's Rift", IconHelper.FindIconInResources("Map"))
@@ -209,7 +209,7 @@
                 Name = "Summoner's Rift",
                 Description = "The Summoner's Rift is the most commonly used Field of Justice. The map was given a graphical and technical update on May 23rd, " +
                 "2012 and remade from scratch on November 12th, 2014.",
-                Tags = "Washed up players, wishing someone turned back time to 2013"
+                Tags = new ObservableCollection<Tag>() { new Tag("Washed up players"), new Tag("Nostalgic for S1") }
             });
 
             var characters = new ProjectFolder("Characters", IconHelper.FindIconInResources("Character"));
@@ -222,7 +222,7 @@
                 Short_Name = "Kal",
                 Description = "An accomplished spearman and a natural leader, he eventually becomes the captain of Elhokar Kholin's King's Guard, " +
                 "formerly known as the Cobalt Guard, House Kholin's personal honor guard.",
-                Tags = "Warrior, Main",
+                Tags = new ObservableCollection<Tag>() { new Tag("Warrior"), new Tag("Main") },
                 Goals = "Save the world, of course!"
             });
 
@@ -231,15 +231,15 @@
                 Name = "Shallan",
                 Short_Name = "Shal",
                 Description = "Daughter of the recently deceased Brightlord Lin Davar of Jah Keved, Shallan pursued and received scholarly training as the ward of Jasnah Kholin.",
-                Tags = "Lightweaver, Main",
-                Goals = "Solve puzzles"
+                Tags = new ObservableCollection<Tag>() { new Tag("Lightweaver"), new Tag("Main") },
+               Goals = "Solve puzzles"
             });
 
             characters.AddItem(new Character("Jaskier", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Jaskier",
                 Description = "Julian Alfred Pankratz, Viscount de Lettenhove, better known as Dandelion/Jaskier, was a poet, minstrel, bard, and close friend of Geralt of Rivia.",
-                Tags = "Poet, Drunk, Secondary",
+                Tags = new ObservableCollection<Tag>() { new Tag("Poet"), new Tag("Drunk"), new Tag("Secondary") },
                 Goals = "Get drunk and be an annoying stuck up cunt."
             });
 
