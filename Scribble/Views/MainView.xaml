@@ -107,7 +107,10 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Style="{StaticResource TopSearchTextBox}" Margin="10"/>
+                            <TextBox x:Name="searchTextBox" Grid.Column="0" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TopSearchTextBox}" Margin="10"/>
+                            <Popup IsOpen="{Binding IsSearchOpen, Mode=TwoWay}" StaysOpen="False" x:Name="searchPopUp" Grid.Column="0">
+                                <ListBox Background="{StaticResource AccentColor1Brush}" Padding="3" ItemTemplateSelector="{StaticResource SearchDataTemplateSelector}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemsSource="{Binding SearchResults}"/>
+                            </Popup>
                             <Button Background="{DynamicResource BackgroundColor2Brush}" Content="{Binding ProjectName}" Grid.Column="1" Height="30" Width="100" MinWidth="100"/>
                         </Grid>
                         <ContentControl Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}"/>

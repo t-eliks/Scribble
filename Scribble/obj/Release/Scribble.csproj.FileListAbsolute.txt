@@ -51,3 +51,6 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogV
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineView.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogViews\SelectSceneView.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineView.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.g.cs
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\MenuStyles.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.baml

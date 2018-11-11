@@ -1,18 +1,21 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
 
     [Serializable]
-    public class Location : Item, ISerializable
+    public class Location : Item, ISerializable, ISearchable
     {
         public Location() { }
 
         public Location(string name, ImageSource imageSource)
           : base(name, imageSource)
         {
+            Details = "No details.";
+            Notes = "No notes.";
         }
 
         public Location(string name, ImageSource imageSource, string description,
@@ -61,9 +64,15 @@
             }
         }
 
-        public override string ToString()
+        public override bool CheckMatch(string query)
         {
-            return Name;
+            if (base.CheckMatch(query))
+                return true;
+
+            if (Details.Contains(query) || Notes.Contains(query))
+                return true;
+
+            return false;
         }
 
         #region Serialization

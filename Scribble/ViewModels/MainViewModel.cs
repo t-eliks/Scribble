@@ -336,7 +336,53 @@
             }
         }
 
+        private string _SearchQuery;
+
+        public string SearchQuery
+        {
+            get
+            {
+                return _SearchQuery;
+            }
+            set
+            {
+                if (_SearchQuery != value)
+                {
+                    _SearchQuery = value;
+
+                    SearchResults = ProjectService.Instance.FindTags(value, 5);
+
+                    IsSearchOpen = true;
+
+                    RaisePropertyChanged(nameof(SearchResults));
+                    RaisePropertyChanged(nameof(IsSearchOpen));
+                    RaisePropertyChanged(nameof(SearchQuery));
+                }
+            }
+        }
+
+        private ObservableCollection<Item> _SearchResults;
+
+        public ObservableCollection<Item> SearchResults
+        {
+            get
+            {
+                return _SearchResults ?? (_SearchResults = new ObservableCollection<Item>());
+            }
+            set
+            {
+                if (_SearchResults != value)
+                {
+                    _SearchResults = value;
+
+                    RaisePropertyChanged(nameof(SearchResults));
+                }
+            }
+        }
+
         public bool IsTimelineView { get { return CurrentView is TimelineViewModel; } }
+
+        public bool IsSearchOpen { get; set; }
 
         #endregion
 

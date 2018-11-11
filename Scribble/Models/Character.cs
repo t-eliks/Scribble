@@ -1,18 +1,23 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
 
     [Serializable]
-    public class Character : Item, ISerializable
+    public class Character : Item, ISerializable, ISearchable
     {
         public Character() { }
 
         public Character(string name, ImageSource imageSource)
            : base(name, imageSource)
         {
+            Biography = "No biography.";
+            Notes = "No notes.";
+            Goals = "No goals.";
+            Short_Name = "No short name";
         }
 
         public Character(string name, ImageSource imageSource, string short_name, string description,
@@ -123,6 +128,17 @@
         }
 
         #endregion
+
+        public override bool CheckMatch(string query)
+        {
+            if (base.CheckMatch(query))
+                return true;
+
+            if (Short_Name.Contains(query) || Biography.Contains(query) || Notes.Contains(query) || Goals.Contains(query))
+                return true;
+
+            return false;
+        }
 
         #region Serialization
 

@@ -14,10 +14,9 @@
 
     <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}" x:Key="TopSearchTextBox">
         <Setter Property="Background" Value="{StaticResource ForegroundColorBrush}"/>
-        <Setter Property="Text" Value="Search... (WIP)"/>
         <Style.Triggers>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Text" Value=""/>
+            <Trigger Property="IsFocused" Value="False">
+                <Setter Property="Text" Value="Search..."/>
             </Trigger>
         </Style.Triggers>
     </Style>

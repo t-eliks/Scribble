@@ -99,7 +99,7 @@
         public ProjectModel ShowSelectProjectDialog()
         {
             var dialog = new SelectProjectViewModel();
-            
+
             var result = MainViewModel._DialogService.OpenDialog(dialog);
 
             if (result != null)
@@ -170,6 +170,11 @@
         public void DeleteItemLinks(object parent, object child)
         {
             ActiveProject?.DeleteItemLinks(parent, child);
+        }
+
+        public ObservableCollection<Item> FindTags(string tag, int itemlimit)
+        {
+            return ActiveProject?.FindTags(tag, itemlimit);
         }
 
         public ProjectModel CreateNewProject(string header, string author, string type)

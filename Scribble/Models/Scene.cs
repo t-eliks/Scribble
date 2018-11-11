@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.IO;
@@ -8,13 +9,19 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class Scene : ProjectFile, ISerializable
+    public class Scene : ProjectFile, ISerializable, ISearchable
     {
         public Scene() { }
 
         public Scene(string name, ImageSource imageSource)
             : base(name, imageSource)
         {
+            Role = "No role.";
+            Sights = "No sights.";
+            Smells = "No smells.";
+            Sounds = "No sounds.";
+            Notes = "No notes.";
+            Outcome = "No outcome.";
         }
 
         private string _Role;
@@ -182,6 +189,18 @@
                 File.Delete(FilePath);
 
             base.Delete();
+        }
+
+        public override bool CheckMatch(string query)
+        {
+            if (base.CheckMatch(query))
+                return true;
+
+            if (Role.Contains(query) || Sights.Contains(query) || Sounds.Contains(query) || Smells.Contains(query) ||
+                Notes.Contains(query) || Outcome.Contains(query))
+                return true;
+
+            return false;
         }
 
         #region Serialization

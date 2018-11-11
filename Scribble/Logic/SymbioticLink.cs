@@ -12,11 +12,13 @@
 
         public abstract X CheckBiLink<X>(object item);
 
-        public abstract bool IsBiLink(object item);
-
         public abstract bool IsLink(object parent, object child);
 
+        public abstract bool IsBiLink(object item);
+
         public abstract X GetItemOfType<X>();
+
+        public abstract object GetObjects(out object child);
     }
 
     [Serializable]
@@ -50,17 +52,17 @@
             return default;
         }
 
-        public override bool IsBiLink(object item)
+        public override bool IsLink(object parent, object child)
         {
-            if ((Parent.Equals(item)) || (Child.Equals(item)))
+            if ((Parent.Equals(parent)) && Child.Equals(child))
                 return true;
 
             return false;
         }
 
-        public override bool IsLink(object parent, object child)
+        public override bool IsBiLink(object item)
         {
-            if ((Parent.Equals(parent)) && Child.Equals(child))
+            if ((Parent.Equals(item)) || (Child.Equals(item)))
                 return true;
 
             return false;
@@ -74,6 +76,13 @@
                 return c;
 
             return default;
+        }
+
+        public override object GetObjects(out object child)
+        {
+            child = Child;
+
+            return Parent;
         }
 
         #region Serialization

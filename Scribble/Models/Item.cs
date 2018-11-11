@@ -9,9 +9,10 @@
     using System.Windows.Media;
     using System.Linq;
     using System.Collections.Generic;
+    using Scribble.Interfaces;
 
     [Serializable]
-    public class Item : BaseItem, ISerializable
+    public class Item : BaseItem, ISerializable, ISearchable
     {
         public Item() { }
 
@@ -133,6 +134,14 @@
         public virtual void DeleteItem(Item item)
         {
             ProjectService.Instance.ActiveProject?.DeleteItemLinks(this, item);
+        }
+
+        public virtual bool CheckMatch(string query)
+        {
+            if (Name.Contains(query) || Description.Contains(query) || this.ContainsTag(query))
+                return true;
+
+            return false;
         }
 
         #endregion

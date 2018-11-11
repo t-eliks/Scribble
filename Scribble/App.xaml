@@ -6,6 +6,7 @@
              xmlns:ViewModels="clr-namespace:Scribble.ViewModels"
              xmlns:Views="clr-namespace:Scribble.Views"
              xmlns:Logic="clr-namespace:Scribble.Logic"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
              xmlns:DialogViews="clr-namespace:Scribble.Views.DialogViews"
              xmlns:Models="clr-namespace:Scribble.Models"
              StartupUri="Views/MainView.xaml">
@@ -95,6 +96,8 @@
                     </DockPanel>
                 </Border>
             </DataTemplate>
+
+            <Controls:SearchDataTemplateSelector x:Key="SearchDataTemplateSelector"/>
 
             <!-- Icons -->
 

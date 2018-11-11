@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Collections.ObjectModel;
@@ -287,6 +288,42 @@
 
                 if (result != null && !result.Equals(default(X)) && !results.Contains(result))
                     results.Add(result);
+            }
+
+            return results;
+        }
+
+        public ObservableCollection<Item> ProjectItems()
+        {
+            var files = new ObservableCollection<Item>();
+
+            foreach (var link in SymbioticLinks)
+            {
+                object child;
+
+                object parent = link.GetObjects(out child);
+
+                if (!files.Contains(parent) && !(parent is ProjectFolder) && parent is Item)
+                    files.Add((Item)parent);
+
+                if (!files.Contains(child) && !(child is ProjectFolder) && child is Item)
+                    files.Add((Item)child);
+            }
+
+            return files;
+        }
+
+        public ObservableCollection<Item> FindTags(string tag, int itemlimit)
+        {
+            var results = new ObservableCollection<Item>();
+
+            foreach (ISearchable item in ProjectItems())
+            {
+                if (item.CheckMatch(tag))
+                    results.Add((Item)item);
+
+                if (results.Count >= itemlimit)
+                    break;
             }
 
             return results;
