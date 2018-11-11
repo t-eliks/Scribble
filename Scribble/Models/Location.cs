@@ -1,6 +1,7 @@
 ﻿namespace Scribble.Models
 {
     using Scribble.Interfaces;
+    using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
@@ -69,7 +70,7 @@
             if (base.CheckMatch(query))
                 return true;
 
-            if (Details.Contains(query) || Notes.Contains(query))
+            if (StringHelper.Contains(Details, query) || StringHelper.Contains(Notes, query))
                 return true;
 
             return false;

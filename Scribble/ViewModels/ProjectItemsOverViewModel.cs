@@ -17,9 +17,11 @@
 
             _Initializing = true;
 
-            //SelectedCharacter = Characters[0];
+            if (Characters != null && Characters[0] != null)
+                SelectedCharacter = Characters[0];
 
-            //SelectedLocation = Locations[0];
+            if (Locations != null && Locations[0] != null)
+                SelectedLocation = Locations[0];
 
             ApplyFilter();
 
@@ -187,13 +189,12 @@
             {
                 var result = new ObservableCollection<Character>();
 
-                //result.Add(new Character("Any characters", IconHelper.FindIconInResources("Character"))
-                //{ Tags = new ObservableCollection<Tag>() { new Tag("anyscenetemp") } });
+                result.Add(new Character("Any characters", IconHelper.FindIconInResources("Character")));
 
-                //foreach (var character in ProjectService.Instance.GetItemsOfType<Character>())
-                //{
-                //    result.Add(character);
-                //}
+                foreach (var character in ProjectService.Instance.GetItemsOfType<Character>())
+                {
+                    result.Add(character);
+                }
 
                 return result;
             }
@@ -227,13 +228,12 @@
             {
                 var result = new ObservableCollection<Location>();
 
-                //result.Add(new Location("Any locations", IconHelper.FindIconInResources("Map"))
-                //{ Tags = new ObservableCollection<Tag>() { new Tag("anylocationtemp") } });
+                result.Add(new Location("Any locations", IconHelper.FindIconInResources("Map")));
 
-                //foreach (var location in ProjectService.Instance.GetItemsOfType<Location>())
-                //{
-                //    result.Add(location);
-                //}
+                foreach (var location in ProjectService.Instance.GetItemsOfType<Location>())
+                {
+                    result.Add(location);
+                }
 
                 return result;
             }
@@ -243,10 +243,10 @@
         {
             var result = Scenes.ToList();
 
-            if (SelectedCharacter != null && SelectedCharacter.ContainsTag("anyscenetemp"))
+            if (SelectedCharacter != null && !SelectedCharacter.Name.Equals("Any characters"))
                 result = Scenes.Where(x => x.Items.Contains(SelectedCharacter)).ToList();
 
-            if (SelectedLocation != null && SelectedLocation.ContainsTag("anylocationstemp"))
+            if (SelectedLocation != null && !SelectedLocation.Name.Equals("Any locations"))
                 result = result.Where(x => x.Items.Contains(SelectedLocation)).ToList();
 
             return new ObservableCollection<Scene>(result);

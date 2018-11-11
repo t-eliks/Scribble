@@ -89,7 +89,7 @@
         {
             foreach (var _tag in Tags)
             {
-                if (_tag.Value == tag)
+                if (StringHelper.Contains(_tag.Value, tag))
                     return true;
             }
 
@@ -138,7 +138,7 @@
 
         public virtual bool CheckMatch(string query)
         {
-            if (Name.Contains(query) || Description.Contains(query) || this.ContainsTag(query))
+            if (StringHelper.Contains(Name, query) || StringHelper.Contains(Description, query) || this.ContainsTag(query))
                 return true;
 
             return false;

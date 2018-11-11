@@ -71,6 +71,7 @@
     <Compile Include="Interfaces\ISearchable.cs" />
     <Compile Include="Logic\FieldGenerator.cs" />
     <Compile Include="Logic\FileService.cs" />
+    <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />

@@ -196,8 +196,9 @@
             if (base.CheckMatch(query))
                 return true;
 
-            if (Role.Contains(query) || Sights.Contains(query) || Sounds.Contains(query) || Smells.Contains(query) ||
-                Notes.Contains(query) || Outcome.Contains(query))
+            if (StringHelper.Contains(Role, query) || StringHelper.Contains(Sights, query) || StringHelper.Contains(Sounds, query) 
+                || StringHelper.Contains(Smells, query) || StringHelper.Contains(Notes, query)
+                || StringHelper.Contains(Outcome, query))
                 return true;
 
             return false;

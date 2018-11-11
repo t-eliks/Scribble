@@ -15,7 +15,10 @@
             {
                 if (this.Text.Contains(", "))
                 {
-                    Content.Add(new Models.Tag(this.Text.Trim(',', ' ')));
+                    var tag = new Models.Tag(this.Text.Trim(',', ' '));
+                    tag.OnMarkedForRemoval += (o, a) => { this.Content.Remove(tag); };
+
+                    Content.Add(tag);
                     this.Text = String.Empty;
                 }
             };
