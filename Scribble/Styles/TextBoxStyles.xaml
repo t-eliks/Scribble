@@ -70,16 +70,17 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Controls:TagTextBox">
-                    <DockPanel LastChildFill="True">
+                    <StackPanel>
                         <ItemsControl DockPanel.Dock="Left" Background="{TemplateBinding Background}" ItemsSource="{TemplateBinding Content}" Width="Auto" Height="{TemplateBinding Height}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <WrapPanel/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
-                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        <TextBox HorizontalAlignment="Stretch" DockPanel.Dock="Right" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}"
+                        <DockPanel Margin="0, 10" LastChildFill="True">
+                            <TextBlock Text="Add a tag:" Margin="5, 0" DockPanel.Dock="Left"/>
+                            <TextBox HorizontalAlignment="Stretch" DockPanel.Dock="Right" Height="40" Background="{StaticResource TextBoxBackgroundColorBrush}"
                              BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -87,15 +88,11 @@
                              FontStyle="{TemplateBinding FontStyle}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text,
                                 Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
-                    </DockPanel>
+                        </DockPanel>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <!--<Style TargetType="RichTextBox" BasedOn="{StaticResource {x:Type RichTextBox}}" x:Key="RichTextBoxStyle1">

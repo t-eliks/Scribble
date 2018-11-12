@@ -84,7 +84,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Tag}">
-                <Border HorizontalAlignment="Left" Margin="5, 0" Background="{StaticResource TextBoxBackgroundColorBrush}" Padding="5" CornerRadius="12">
+                <Border Height="40" HorizontalAlignment="Left" Margin="5, 5" Padding="5" CornerRadius="12">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center"
                                Background="Transparent" Text="{Binding Value}" Foreground="{StaticResource ForegroundColorBrush}"/>
@@ -94,6 +94,16 @@
                             </Button.Background>
                         </Button>
                     </DockPanel>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                 </Border>
             </DataTemplate>
 
