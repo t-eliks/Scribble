@@ -12,7 +12,7 @@
             <Views:ExtendedRichTextBoxUserControl/>
         </TabItem>
         <TabItem Header="Details">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
