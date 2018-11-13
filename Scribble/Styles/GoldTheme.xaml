@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    >
+                    xmlns:local="clr-namespace:Scribble.Styles">
 
-    <ImageBrush ImageSource="/icons/smokebg.png" Stretch="UniformToFill" x:Key="BackgroundImage"/>
+    <ImageBrush ImageSource="/icons/typewriterbg.png" Stretch="UniformToFill" x:Key="BackgroundImage"/>
 
     <Color x:Key="BackgroundColor1">#373737</Color>
     <SolidColorBrush Color="{DynamicResource BackgroundColor1}" x:Key="BackgroundColor1Brush"/>
 
-    <Color x:Key="BackgroundColor2">#1D2731</Color>
+    <Color x:Key="BackgroundColor2">#373737</Color>
     <SolidColorBrush Color="{DynamicResource BackgroundColor2}" x:Key="BackgroundColor2Brush"/>
 
     <Color x:Key="BackgroundColor3">#F4F4F4</Color>
@@ -16,25 +16,25 @@
     <Color x:Key="BackgroundColor4">#444444</Color>
     <SolidColorBrush Color="{DynamicResource BackgroundColor4}" x:Key="BackgroundColor4Brush"/>
 
-    <Color x:Key="MouseHoverColor">#233237</Color>
+    <Color x:Key="MouseHoverColor">#C0B283</Color>
     <SolidColorBrush Color="{DynamicResource MouseHoverColor}" x:Key="MouseHoverBrush"/>
 
-    <Color x:Key="MouseHoverColor2">#328CC1</Color>
+    <Color x:Key="MouseHoverColor2">#6840f9</Color>
     <SolidColorBrush Color="{DynamicResource MouseHoverColor2}" x:Key="MouseHoverBrush2"/>
 
-    <Color x:Key="ForegroundColor">#DCC7AA</Color>
+    <Color x:Key="ForegroundColor">#F4F4F4</Color>
     <SolidColorBrush Color="{DynamicResource ForegroundColor}" x:Key="ForegroundColorBrush"/>
 
-    <Color x:Key="AccentColor1">#0E0B16</Color>
+    <Color x:Key="AccentColor1">#DCD0C0</Color>
     <SolidColorBrush Color="{DynamicResource AccentColor1}" x:Key="AccentColor1Brush"/>
 
-    <Color x:Key="AccentColor2">#211a33</Color>
+    <Color x:Key="AccentColor2">#EEAA7B</Color>
     <SolidColorBrush Color="{DynamicResource AccentColor2}" x:Key="AccentColor2Brush"/>
 
-    <Color x:Key="TextBoxBackgroundColor">#0f151c</Color>
+    <Color x:Key="TextBoxBackgroundColor">#C0B283</Color>
     <SolidColorBrush Color="{DynamicResource TextBoxBackgroundColor}" x:Key="TextBoxBackgroundColorBrush"/>
 
-    <Color x:Key="DialogWindowStyleColor">#11181e</Color>
+    <Color x:Key="DialogWindowStyleColor">#C0B283</Color>
     <SolidColorBrush Color="{DynamicResource DialogWindowStyleColor}" x:Key="DialogWindowStyleColorBrush"/>
 
     <Color x:Key="HighlightBlackBackground">#5b5b5b</Color>
@@ -46,14 +46,14 @@
     <Color x:Key="Trim1">#C0B283</Color>
     <SolidColorBrush Color="{StaticResource Trim1}" x:Key="TrimBrush1"/>
 
-    <Color x:Key="Trim2">#565656</Color>
+    <Color x:Key="Trim2">#DCD0C0</Color>
     <SolidColorBrush Color="{StaticResource Trim2}" x:Key="TrimBrush2"/>
 
     <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1" x:Key="TimelineUCBackgroundGradient">
-        <GradientStop Color="{StaticResource AccentColor1}" Offset="0"/>
-        <GradientStop Color="{StaticResource AccentColor2}" Offset="0.3"/>
-        <GradientStop Color="{StaticResource AccentColor2}" Offset="0.8"/>
-        <GradientStop Color="{StaticResource BackgroundColor1}" Offset="1"/>
+        <GradientStop Color="{StaticResource BackgroundColor2}" Offset="0"/>
+        <GradientStop Color="{StaticResource AccentColor1}" Offset="0.3"/>
+        <GradientStop Color="{StaticResource AccentColor1}" Offset="0.8"/>
+        <GradientStop Color="{StaticResource BackgroundColor2}" Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1" x:Key="TimelineUCControlStripGradient">
@@ -62,7 +62,7 @@
         <GradientStop Offset="0.7" Color="#6840f9"/>
         <GradientStop Offset="1" Color="#062F4F"/>
     </LinearGradientBrush>
-    
+
     <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0" x:Key="TrimGradientBottom">
         <GradientStop Offset="0.1" Color="{StaticResource Trim1}"/>
         <GradientStop Offset="0.9" Color="{StaticResource Trim2}"/>

@@ -55,3 +55,4 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\TimelineU
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\TimelineUC.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\MenuStyles.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\NeonTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\GoldTheme.baml
