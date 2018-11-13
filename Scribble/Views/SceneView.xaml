@@ -20,7 +20,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" HorizontalAlignment="Center" Text="{Binding Scene.Name}"/>
-                    <Rectangle Grid.Row="1" Fill="{StaticResource GoldTrimGradientHorizontal}">
+                    <Rectangle Grid.Row="1" Fill="{StaticResource TrimGradientHorizontal}">
                     </Rectangle>
                     <StackPanel Grid.Row="2" Margin="15">
                         <DockPanel Margin="10">

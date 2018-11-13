@@ -27,10 +27,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="/icons/smokebg.png" Stretch="Fill"/>
-                    </Grid.Background>
+                <Grid Grid.Column="0" Background="{StaticResource BackgroundImage}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="30"/>

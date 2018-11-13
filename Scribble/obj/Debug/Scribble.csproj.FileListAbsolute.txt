@@ -54,3 +54,4 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\DialogVie
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\TimelineUC.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\TimelineUC.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\MenuStyles.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\NeonTheme.baml

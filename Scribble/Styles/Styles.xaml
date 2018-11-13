@@ -4,35 +4,6 @@
                     xmlns:Models="clr-namespace:Scribble.Models"
                     xmlns:Logic="clr-namespace:Scribble.Logic">
 
-    <Color x:Key="BlackBackground">#373737</Color>
-    <SolidColorBrush x:Key="BlackBackgroundBrush" Color="{StaticResource BlackBackground}"/>
-
-    <!-- #373737 Void - 0E0B16 Silk - DCD0C0 -->
-    
-    <!--<Color x:Key="BrigtherBlackBackground">#444444</Color>
-    <SolidColorBrush x:Key="BrighterBlackBackgroundBrush" Color="{StaticResource BrigtherBlackBackground}"/>-->
-
-    <Color x:Key="HighlightBlackBackground">#5b5b5b</Color>
-    <SolidColorBrush x:Key="HighlightBlackBackgroundBrush" Color="{StaticResource HighlightBlackBackground}"/>
-
-    <!--<Color x:Key="WhiteBackground">#F4F4F4</Color>
-    <SolidColorBrush x:Key="WhiteBackgroundBrush" Color="{StaticResource WhiteBackground}"/>
-
-    <Color x:Key="ControlBackground">#0E0B16</Color>
-    <SolidColorBrush Color="{StaticResource ControlBackground}" x:Key="ControlBackgroundBrush"/>
-
-    <Color x:Key="ControlBackgroundHover">#161123</Color>
-    <SolidColorBrush Color="{StaticResource ControlBackgroundHover}" x:Key="ControlBackgroundHoverBrush"/>
-
-    <Color x:Key="ControlForeground">#DCD0C0</Color>
-    <SolidColorBrush Color="{StaticResource ControlForeground}" x:Key="ControlForegroundBrush"/>-->
-
-    <Color x:Key="GoldTrim1">#C0B283</Color>
-    <SolidColorBrush Color="{StaticResource GoldTrim1}" x:Key="GoldTrimBrush1"/>
-
-    <Color x:Key="GoldTrim2">#565656</Color>
-    <SolidColorBrush Color="{StaticResource GoldTrim2}" x:Key="GoldTrimBrush2"/>
-
     <Style TargetType="TextBlock" x:Key="GoldTitleStyle">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontFamily" Value="{DynamicResource Quicksand}"/>
@@ -62,22 +33,7 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
-    <LinearGradientBrush StartPoint="0, 1" EndPoint="0, 0" x:Key="GoldTrimGradientBottom">
-        <GradientStop Offset="0.1" Color="{StaticResource GoldTrim1}"/>
-        <GradientStop Offset="0.9" Color="{StaticResource GoldTrim2}"/>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush StartPoint="1, 0" EndPoint="1, 1" x:Key="GoldTrimGradientTop">
-        <GradientStop Offset="0.1" Color="{StaticResource GoldTrim1}"/>
-        <GradientStop Offset="0.9" Color="{StaticResource GoldTrim2}"/>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1" x:Key="GoldTrimGradientHorizontal">
-        <GradientStop Offset="0.1" Color="{StaticResource GoldTrim1}"/>
-        <GradientStop Offset="0.3" Color="{StaticResource GoldTrim2}"/>
-        <GradientStop Offset="0.7" Color="{StaticResource GoldTrim2}"/>
-        <GradientStop Offset="0.9" Color="{StaticResource GoldTrim1}"/>
-    </LinearGradientBrush>
+   
 
     <Style TargetType="Controls:TimelineContent">
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>

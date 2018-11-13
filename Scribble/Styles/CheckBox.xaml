@@ -8,7 +8,7 @@
             <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
         </Style.Resources>
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource GoldTrimGradientHorizontal}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TrimGradientHorizontal}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>

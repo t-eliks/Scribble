@@ -96,10 +96,10 @@
                     </DockPanel>
                     <Border.Style>
                         <Style TargetType="Border">
-                            <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColorBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                                    <Setter Property="Background" Value="{StaticResource MouseHoverBrush}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

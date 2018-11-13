@@ -7,23 +7,15 @@
              xmlns:local="clr-namespace:Scribble.Views"
              mc:Ignorable="d" 
              >
-    <Border HorizontalAlignment="Left" Width="{Binding TimelineWidth}" BorderThickness="1" BorderBrush="{StaticResource GoldTrimGradientTop}">
+    <Border HorizontalAlignment="Left" Width="{Binding TimelineWidth}" BorderThickness="1" BorderBrush="{StaticResource TrimGradientTop}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding ElementName=tc, Path=ActualHeight}"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Controls:TimelineCanvas x:Name="tc" ItemHeight="{Binding ItemHeight}" Rows="{Binding Rows, Mode=TwoWay}" Content="{Binding Content, Mode=TwoWay}" Width="{Binding TimelineWidth, Mode=TwoWay}" VerticalAlignment="Top">
-                <Controls:TimelineCanvas.Background>
-                    <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 1">
-                        <GradientStop Color="{StaticResource AccentColor2}" Offset="0"/>
-                        <GradientStop Color="{StaticResource AccentColor1}" Offset="0.3"/>
-                        <GradientStop Color="{StaticResource AccentColor1}" Offset="0.8"/>
-                        <GradientStop Color="{StaticResource AccentColor2}" Offset="1"/>
-                    </LinearGradientBrush>
-                </Controls:TimelineCanvas.Background>
+            <Controls:TimelineCanvas x:Name="tc" Background="{StaticResource TimelineUCBackgroundGradient}" ItemHeight="{Binding ItemHeight}" Rows="{Binding Rows, Mode=TwoWay}" Content="{Binding Content, Mode=TwoWay}" Width="{Binding TimelineWidth, Mode=TwoWay}" VerticalAlignment="Top">
             </Controls:TimelineCanvas>
-            <DockPanel Grid.Row="1" Background="{StaticResource GoldTrimGradientHorizontal}">
+            <DockPanel Grid.Row="1" Background="{StaticResource TimelineUCControlStripGradient}">
                 <TextBox Text="{Binding Name, Mode=TwoWay}" Style="{StaticResource TimelineTextBoxStyle}" FontFamily="{StaticResource Ubuntu}" BorderThickness="0" FontSize="24" Margin="5"/>
                 <StackPanel Margin="30, 0, 0, 0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button x:Name="addrowBtn" Command="{Binding AddRowCommand}" Style="{StaticResource EditButtonIcon}" Background="{StaticResource AccentColor1Brush}" BorderBrush="{StaticResource ForegroundColorBrush}" Width="36" Height="36">

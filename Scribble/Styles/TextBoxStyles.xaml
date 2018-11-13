@@ -47,7 +47,7 @@
         <Setter Property="FontFamily" Value="{StaticResource Ubuntu}"/>
         <Setter Property="FontStyle" Value="Normal"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="{StaticResource AccentColor1Brush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsFocused" Value="True">
                 <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
