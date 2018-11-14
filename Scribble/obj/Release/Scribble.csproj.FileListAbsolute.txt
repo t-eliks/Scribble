@@ -54,3 +54,5 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\Timelin
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\MenuStyles.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\GoldTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\NeonTheme.baml

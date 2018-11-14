@@ -74,6 +74,7 @@
     <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Models\Tag.cs" />
+    <Compile Include="Models\TextFile.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectCharacterViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectLocationViewModel.cs" />

@@ -25,7 +25,7 @@
             {
                 return _CreateCommand ?? (_CreateCommand = new RelayCommand<IDialogWindow>((window) =>
                 {
-                    this.CloseDialogWithResult(window, ProjectService.Instance.SetUpPerformanceTestProject(Name, Author, SelectedForm, SelectedGenre));
+                    this.CloseDialogWithResult(window, ProjectService.Instance.SetUpTestProject(Name, Author, SelectedForm, SelectedGenre));
                 }));
             }
         }

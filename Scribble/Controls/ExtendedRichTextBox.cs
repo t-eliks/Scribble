@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Controls
 {
+    using Scribble.Models;
     using System;
     using System.IO;
     using System.Windows;
@@ -14,33 +15,34 @@
         }
 
         public static readonly DependencyProperty TextFileProperty = DependencyProperty.Register("TextFile",
-           typeof(string), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null) { BindsTwoWayByDefault = true, PropertyChangedCallback = (s, e) => 
+           typeof(TextFile), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null) { PropertyChangedCallback = (s, e) => 
            {
                RichTextBox rtb = s as RichTextBox;
-               string file = (string)e.NewValue;
+               TextFile file = (TextFile)e.NewValue;
 
-               if (!String.IsNullOrEmpty(file) && File.Exists(file))
+               if (file != null)
                {
                    var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                   using (var stream = new FileStream(file, FileMode.Open))
+                   using (var stream = file.GetStream())
                    {
                        text.Load(stream, DataFormats.Rtf);
                    }
                }
            } });
 
-        public string TextFile
+        public TextFile TextFile
         {
-            get { return (string)GetValue(TextFileProperty); }
+            get { return (TextFile)GetValue(TextFileProperty); }
             set { SetValue(TextFileProperty, value); }
         }
 
         public static void Save(ExtendedRichTextBox rtb)
         {
-            using (var stream = new FileStream(rtb.TextFile, FileMode.Open))
+            using (var stream = rtb.TextFile.GetStream())
             {
                 var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
                 text.Save(stream, DataFormats.Rtf);
+                rtb.TextFile.SaveChangesToMainFile();
             }
         }
     }

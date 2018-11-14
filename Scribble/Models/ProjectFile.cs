@@ -9,48 +9,48 @@
     [Serializable]
     public abstract class ProjectFile : Item, ISerializable
     {
-        public ProjectFile() { }
+        //public ProjectFile() { }
 
-        public ProjectFile(string name, ImageSource imageSource)
-            : base(name, imageSource)
-        {
-            _FileName = CreateFile();
-        }
+        //public ProjectFile(string name, ImageSource imageSource)
+        //    : base(name, imageSource)
+        //{
+        //    _FileName = CreateFile();
+        //}
 
-        public virtual string FilePath
-        {
-            get
-            {
-                return Path.Combine(ProjectService.Instance.ActiveProject?.FileDirectory, _FileName);
-            }
-        }
+        //public virtual string FilePath
+        //{
+        //    get
+        //    {
+        //        return Path.Combine(ProjectService.Instance.ActiveProject?.FileDirectory, _FileName);
+        //    }
+        //}
 
-        public override void Delete()
-        {
-            if (System.IO.Directory.Exists(FilePath))
-                System.IO.Directory.Delete(FilePath);
+        //public override void Delete()
+        //{
+        //    if (System.IO.Directory.Exists(FilePath))
+        //        System.IO.Directory.Delete(FilePath);
 
-            base.Delete();
-        }
+        //    base.Delete();
+        //}
 
-        public string _FileName { get; private set; }
+        //public string _FileName { get; private set; }
 
-        public abstract string CreateFile();
+        //public abstract string CreateFile();
 
-        #region Serialization
+        //#region Serialization
 
-        protected ProjectFile(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            _FileName = info.GetString("filename");
-        }
+        //protected ProjectFile(SerializationInfo info, StreamingContext context) : base(info, context)
+        //{
+        //    _FileName = info.GetString("filename");
+        //}
 
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
+        //public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        //{
+        //    base.GetObjectData(info, context);
 
-            info.AddValue("filename", _FileName);
-        }
+        //    info.AddValue("filename", _FileName);
+        //}
 
-        #endregion
+        //#endregion
     }
 }

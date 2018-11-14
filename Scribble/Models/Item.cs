@@ -122,6 +122,8 @@
             info.AddValue("description", Description);
         }
 
+        #endregion
+
         public virtual void AddItem(Item item)
         {
             if (!ProjectService.Instance.ActiveProject.FindLinks<Item>(this).Contains(item))
@@ -144,7 +146,6 @@
             return false;
         }
 
-        #endregion
     }
 
     public enum ItemTypes

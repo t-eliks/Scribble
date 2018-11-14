@@ -150,11 +150,11 @@
             }
         }
 
-        public string TextFile
+        public TextFile TextFile
         {
             get
             {
-                return Scene.FilePath;
+                return Scene.TextFile;
             }
         }
 

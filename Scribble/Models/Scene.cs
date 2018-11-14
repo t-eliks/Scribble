@@ -3,13 +3,12 @@
     using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
-    using System.IO;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
 
     [Serializable]
-    public class Scene : ProjectFile, ISerializable, ISearchable
+    public class Scene : Item, ISerializable, ISearchable
     {
         public Scene() { }
 
@@ -22,6 +21,8 @@
             Sounds = "No sounds.";
             Notes = "No notes.";
             Outcome = "No outcome.";
+
+            TextFile = new TextFile(ProjectService.Instance.ActiveProject?.FileDirectory);
         }
 
         private string _Role;
@@ -178,15 +179,11 @@
 
         public bool IsInTimeline { get; set; }
 
-        public override string CreateFile()
-        {
-            return FileService.GenerateEmptyRtf(ProjectService.Instance.ActiveProject?.FileDirectory);
-        }
+        public TextFile TextFile { get; private set; }
 
         public override void Delete()
         {
-            if (File.Exists(FilePath))
-                File.Delete(FilePath);
+            TextFile.Delete();
 
             base.Delete();
         }
@@ -217,6 +214,7 @@
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
             IsInTimeline = info.GetBoolean("isintimeline");
+            TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -234,6 +232,7 @@
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);
             info.AddValue("isintimeline", IsInTimeline);
+            info.AddValue("textfile", TextFile);
         }
 
         #endregion

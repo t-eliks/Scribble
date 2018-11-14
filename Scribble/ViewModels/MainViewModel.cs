@@ -116,8 +116,6 @@
                                 break;
                         }
 
-                        //_ProjectService.SaveActiveProject();
-
                         RaisePropertyChanged(nameof(TreeViewItems));
                     }
                 }));
@@ -290,9 +288,6 @@
                     RaisePropertyChanged(nameof(SelectedProjectItem));
                     RaisePropertyChanged(nameof(ToolButtonEnabled));
 
-                    if (SelectedProjectItem is ProjectFile file)
-                        TextFile = file.FilePath;
-
                     LoadFileCommand.Execute(null);
                 }
             }
@@ -313,25 +308,6 @@
                     _Editing = value;
 
                     RaisePropertyChanged(nameof(Editing));
-                }
-            }
-        }
-
-        private string _TextFile;
-
-        public string TextFile
-        {
-            get
-            {
-                return _TextFile;
-            }
-            set
-            {
-                if (_TextFile != value)
-                {
-                    _TextFile = value;
-
-                    RaisePropertyChanged(nameof(TextFile));
                 }
             }
         }
