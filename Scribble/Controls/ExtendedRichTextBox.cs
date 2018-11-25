@@ -2,16 +2,40 @@
 {
     using Scribble.Models;
     using System;
-    using System.IO;
+    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Documents;
+    using System.Windows.Threading;
 
     public class ExtendedRichTextBox : RichTextBox
     {
         public ExtendedRichTextBox()
         {
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Tick += (s,e ) => 
+            {
+                if (_ChangedSinceSave)
+                {
+                    Save(this);
+                    Status = "Last autosaved at " + DateTime.Now.ToString("HH:mm:ss");
+                    _ChangedSinceSave = false;
+                }
+            };
+            dt.Interval = new TimeSpan(0, 0, 5);
+            dt.Start();
 
+            this.TextChanged += (s, e) =>
+            {
+                var range = new TextRange(Document.ContentStart, Document.ContentEnd);
+                char[] delimiters = new char[] { ' ', '\r', '\n' };
+                WordCount = range.Text.Split(delimiters, System.StringSplitOptions.RemoveEmptyEntries).Length;
+                if (!_ChangedSinceSave)
+                {
+                    _ChangedSinceSave = true;
+                    Status = "Not saved";
+                }
+            };
         }
 
         public static readonly DependencyProperty TextFileProperty = DependencyProperty.Register("TextFile",
@@ -36,6 +60,26 @@
             set { SetValue(TextFileProperty, value); }
         }
 
+        public static readonly DependencyProperty WordCountProperty = DependencyProperty.Register("WordCount",
+           typeof(int), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null));
+
+        public int WordCount
+        {
+            get { return (int)GetValue(WordCountProperty); }
+            set { SetValue(WordCountProperty, value); }
+        }
+
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status",
+           typeof(string), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null));
+
+        public string Status
+        {
+            get { return (string)GetValue(StatusProperty); }
+            set { SetValue(StatusProperty, value); }
+        }
+
+        private bool _ChangedSinceSave { get; set; }
+
         public static void Save(ExtendedRichTextBox rtb)
         {
             using (var stream = rtb.TextFile.GetStream())
@@ -43,6 +87,7 @@
                 var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
                 text.Save(stream, DataFormats.Rtf);
                 rtb.TextFile.SaveChangesToMainFile();
+                rtb.Status = "Saved at " + DateTime.Now.ToString("HH:mm:ss");
             }
         }
     }

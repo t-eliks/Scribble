@@ -31,13 +31,6 @@
                     RaisePropertyChanged(nameof(Major));
                     RaisePropertyChanged(nameof(Minor));
                     RaisePropertyChanged(nameof(Background));
-                    //RaisePropertyChanged(nameof(Name));
-                    //RaisePropertyChanged(nameof(Short_Name));
-                    //RaisePropertyChanged(nameof(Description));
-                    //RaisePropertyChanged(nameof(Biography));
-                    //RaisePropertyChanged(nameof(Notes));
-                    //RaisePropertyChanged(nameof(Tags));
-                    //RaisePropertyChanged(nameof(Goals));
                 }
             }
         }
@@ -92,91 +85,6 @@
                 RaisePropertyChanged(nameof(Background));
             }
         }
-
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        return Character.Name;
-        //    }
-        //    set
-        //    {
-        //        Character.Name = value;
-        //        RaisePropertyChanged(nameof(Name));
-        //    }
-        //}
-
-        //public string Short_Name
-        //{
-        //    get
-        //    {
-        //        return Character.Short_Name;
-        //    }
-        //    set
-        //    {
-        //        Character.Short_Name = value;
-        //    }
-        //}
-
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        return Character.Description;
-        //    }
-        //    set
-        //    {
-        //        Character.Description = value;
-        //    }
-        //}
-
-        //public string Biography
-        //{
-        //    get
-        //    {
-        //        return Character.Biography;
-        //    }
-        //    set
-        //    {
-        //        Character.Biography = value;
-        //    }
-        //}
-
-        //public string Notes
-        //{
-        //    get
-        //    {
-        //        return Character.Notes;
-        //    }
-        //    set
-        //    {
-        //        Character.Notes = value;
-        //    }
-        //}
-
-        //public string Tags
-        //{
-        //    get
-        //    {
-        //        return Character.Tags;
-        //    }
-        //    set
-        //    {
-        //        Character.Tags = value;
-        //    }
-        //}
-
-        //public string Goals
-        //{
-        //    get
-        //    {
-        //        return Character.Goals;
-        //    }
-        //    set
-        //    {
-        //        Character.Goals = value;
-        //    }
-        //}
 
         public ObservableCollection<Scene> Scenes
         {

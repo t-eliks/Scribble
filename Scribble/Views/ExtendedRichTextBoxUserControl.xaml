@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Background="{StaticResource ForegroundColorBrush}">
             <!--<Controls:ImageToggleButton x:Name="boldbtn" OffImage="/icons/editing/bwhite.png" OnImage="/icons/editing/bblack.png" Width="30" Height="30" Click="Bold_Selection"/>
@@ -49,9 +50,19 @@
             </Controls:ExtendedRichTextBox.Resources>
             <Controls:ExtendedRichTextBox.Style>
                 <Style TargetType="Controls:ExtendedRichTextBox">
+                    <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="Padding" Value="5"/>
                 </Style>
             </Controls:ExtendedRichTextBox.Style>
         </Controls:ExtendedRichTextBox>
+        <Border Grid.Row="2" BorderThickness="0, 1, 0, 0" BorderBrush="{StaticResource TrimGradientHorizontal}">
+            <DockPanel Background="{StaticResource BackgroundColor1Brush}" LastChildFill="True">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Words: "/>
+                    <TextBlock Text="{Binding ElementName=rtb, Path=WordCount}"/>
+                </StackPanel>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding ElementName=rtb, Path=Status}" DockPanel.Dock="Right"/>
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>

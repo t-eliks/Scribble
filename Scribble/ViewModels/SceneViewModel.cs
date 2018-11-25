@@ -159,5 +159,6 @@
         }
 
         public bool ItemSelected { get { return SelectedItem != null; } }
+
     }
 }
