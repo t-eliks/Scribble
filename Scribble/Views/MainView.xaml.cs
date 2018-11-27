@@ -1,11 +1,14 @@
 ﻿namespace Scribble
 {
     using Scribble.Logic;
+    using Scribble.ViewModels;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,6 +24,14 @@
             maximiseBtn.Click += (s, e) => { this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal; };
 
             exitBtn.Click += (s, e) => { this.Close(); };
+
+            ((MainViewModel)this.DataContext).OnContentChanged += (s, e) =>
+            {
+                foreach (var item in CollectDisposableChildren(new List<IDisposable>(), cc))
+                {
+                    item.Dispose();
+                }
+            };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,6 +56,22 @@
 
                 Environment.Exit(0);
             }
+        }
+
+        private List<IDisposable> CollectDisposableChildren(List<IDisposable> disposable, DependencyObject obj)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                var child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child is IDisposable)
+                    disposable?.Add((IDisposable)child);
+
+                if (VisualTreeHelper.GetChildrenCount(child) > 0)
+                    CollectDisposableChildren(disposable, child);
+            }
+
+            return disposable;
         }
     }
 }

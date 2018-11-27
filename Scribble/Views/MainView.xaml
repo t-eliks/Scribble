@@ -110,7 +110,7 @@
                             </Popup>
                             <Button Background="{DynamicResource BackgroundColor2Brush}" Content="{Binding ProjectName}" Grid.Column="1" Height="30" Width="100" MinWidth="100"/>
                         </Grid>
-                        <ContentControl Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}"/>
+                        <ContentControl x:Name="cc" Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}"/>
                     </Grid>
                 </Border>
             </Grid>

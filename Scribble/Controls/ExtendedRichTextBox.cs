@@ -8,11 +8,11 @@
     using System.Windows.Documents;
     using System.Windows.Threading;
 
-    public class ExtendedRichTextBox : RichTextBox
+    public class ExtendedRichTextBox : RichTextBox, IDisposable
     {
         public ExtendedRichTextBox()
         {
-            DispatcherTimer dt = new DispatcherTimer();
+            dt = new DispatcherTimer();
             dt.Tick += (s,e ) => 
             {
                 if (_ChangedSinceSave)
@@ -37,6 +37,8 @@
                 }
             };
         }
+
+        DispatcherTimer dt;
 
         public static readonly DependencyProperty TextFileProperty = DependencyProperty.Register("TextFile",
            typeof(TextFile), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null) { PropertyChangedCallback = (s, e) => 
@@ -90,5 +92,26 @@
                 rtb.Status = "Saved at " + DateTime.Now.ToString("HH:mm:ss");
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                dt.Stop();
+                dt = null;
+
+                disposedValue = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        #endregion
     }
 }

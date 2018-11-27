@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Windows;
     using System.Windows.Input;
     using Scribble.Logic;
     using Scribble.Logic.Dialog;
@@ -237,6 +238,8 @@
 
         internal static DialogService _DialogService;
 
+        public RoutedEventHandler OnContentChanged;
+
         private BaseViewModel _CurrentView;
 
         public BaseViewModel CurrentView
@@ -280,6 +283,9 @@
             {
                 if (_SelectedProjectItem != value)
                 {
+                    if (_SelectedProjectItem is Scene && !(value is Scene))
+                        OnContentChanged?.Invoke(this, new RoutedEventArgs());
+
                     _SelectedProjectItem = value;
 
                     if (Editing)
