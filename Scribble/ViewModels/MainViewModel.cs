@@ -238,7 +238,7 @@
 
         internal static DialogService _DialogService;
 
-        public RoutedEventHandler OnContentChanged;
+        public RoutedEventHandler OnSceneViewChanged;
 
         private BaseViewModel _CurrentView;
 
@@ -283,8 +283,9 @@
             {
                 if (_SelectedProjectItem != value)
                 {
+                    //Used to dispose of ExtendedRichTextBox control's background autosaving
                     if (_SelectedProjectItem is Scene && !(value is Scene))
-                        OnContentChanged?.Invoke(this, new RoutedEventArgs());
+                        OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
 
                     _SelectedProjectItem = value;
 

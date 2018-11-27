@@ -25,7 +25,7 @@
 
             exitBtn.Click += (s, e) => { this.Close(); };
 
-            ((MainViewModel)this.DataContext).OnContentChanged += (s, e) =>
+            ((MainViewModel)this.DataContext).OnSceneViewChanged += (s, e) =>
             {
                 foreach (var item in CollectDisposableChildren(new List<IDisposable>(), cc))
                 {
