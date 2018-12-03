@@ -303,7 +303,6 @@
 
         private BaseItem _SelectedProjectItem;
 
-        
         public BaseItem SelectedProjectItem
         {
             get
