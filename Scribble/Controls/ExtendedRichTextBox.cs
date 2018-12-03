@@ -2,7 +2,6 @@
 {
     using Scribble.Models;
     using System;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Documents;
@@ -43,7 +42,7 @@
         public static readonly DependencyProperty TextFileProperty = DependencyProperty.Register("TextFile",
            typeof(TextFile), typeof(ExtendedRichTextBox), new FrameworkPropertyMetadata(null) { PropertyChangedCallback = (s, e) => 
            {
-               RichTextBox rtb = s as RichTextBox;
+               ExtendedRichTextBox rtb = s as ExtendedRichTextBox;
                TextFile file = (TextFile)e.NewValue;
 
                if (file != null)
@@ -54,6 +53,9 @@
                        text.Load(stream, DataFormats.Rtf);
                    }
                }
+
+               rtb._ChangedSinceSave = false;
+               rtb.Status = "Idle";
            } });
 
         public TextFile TextFile
@@ -84,13 +86,14 @@
 
         public static void Save(ExtendedRichTextBox rtb)
         {
-            using (var stream = rtb.TextFile.GetStream())
-            {
-                var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                text.Save(stream, DataFormats.Rtf);
-                rtb.TextFile.SaveChangesToMainFile();
-                rtb.Status = "Saved at " + DateTime.Now.ToString("HH:mm:ss");
-            }
+           if (rtb.TextFile != null)
+                using (var stream = rtb.TextFile.GetStream())
+                {
+                    var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+                    text.Save(stream, DataFormats.Rtf);
+                    rtb.TextFile.SaveChangesToMainFile();
+                    rtb.Status = "Saved at " + DateTime.Now.ToString("HH:mm:ss");
+                }
         }
 
         #region IDisposable Support

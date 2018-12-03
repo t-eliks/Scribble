@@ -61,7 +61,7 @@
                     <TextBlock Text="Words: "/>
                     <TextBlock Text="{Binding ElementName=rtb, Path=WordCount}"/>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Right" Text="{Binding ElementName=rtb, Path=Status}" DockPanel.Dock="Right"/>
+                <TextBlock HorizontalAlignment="Right" Text="{Binding ElementName=rtb, Path=Status}" DockPanel.Dock="Right" Margin="5, 0"/>
             </DockPanel>
         </Border>
     </Grid>

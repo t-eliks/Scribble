@@ -59,3 +59,5 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\DefaultT
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\DialogViews\PreferencesView.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\DialogViews\PreferencesView.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Styles\VibrantTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\BulletinBoardView.g.cs
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\Views\BulletinBoardView.baml

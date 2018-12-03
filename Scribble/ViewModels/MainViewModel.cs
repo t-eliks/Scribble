@@ -93,6 +93,16 @@
             }
         }
 
+        private ICommand _SwitchToBulletinBoardView;
+
+        public ICommand SwitchToBulletinBoardView
+        {
+            get
+            {
+                return _SwitchToBulletinBoardView ?? (_SwitchToBulletinBoardView = new RelayCommand(() => { CurrentView = new BulletinBoardViewModel() { Folder = (ProjectFolder)SelectedProjectItem }; }));
+            }
+        }
+
         private ICommand _AddFileCommand;
 
         public ICommand AddFileCommand
@@ -210,8 +220,13 @@
                 {
                     if (SelectedProjectItem != null)
                     {
-                        if (SelectedProjectItem is ProjectFolder f && f.RootFolder)
-                            SwitchToProjectItemsOverView.Execute(null);
+                        if (SelectedProjectItem is ProjectFolder f)
+                        {
+                            if (f.RootFolder)
+                                SwitchToProjectItemsOverView.Execute(null);
+                            else
+                                SwitchToBulletinBoardView.Execute(null);
+                        }
                         else
                             switch (SelectedProjectItem)
                             {

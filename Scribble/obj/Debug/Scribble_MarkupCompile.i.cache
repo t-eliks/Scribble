@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\App.xaml
-31-1393928438
+32557592749
 
-71-1015386432
+74-1333920690
 141287564784
-Styles\GoldTheme.xaml;Styles\MenuStyles.xaml;Styles\NeonTheme.xaml;Styles\ScrollBarStyle.xaml;Styles\CheckBox.xaml;Styles\DefaultTheme.xaml;Styles\ComboBox.xaml;Styles\Buttons.xaml;Styles\ContextMenu.xaml;Styles\ExtendedTreeView.xaml;Styles\ListBoxStyles.xaml;Styles\NewColors.xaml;Styles\Styles.xaml;Styles\TabControlStyles.xaml;Styles\TextBoxStyles.xaml;Styles\VibrantTheme.xaml;Views\CharacterDetailsUserControl.xaml;Views\DialogViews\BaseDialogWindow.xaml;Views\DialogViews\CreateProjectView.xaml;Views\DialogViews\PreferencesView.xaml;Views\DialogViews\SelectSceneView.xaml;Views\DialogViews\SelectLocationView.xaml;Views\DialogViews\SelectCharacterView.xaml;Views\DialogViews\SelectProjectView.xaml;Views\ExtendedRichTextBoxUserControl.xaml;Views\LocationDetailsUserControl.xaml;Views\MainView.xaml;Views\ProjectItemsOverView.xaml;Views\SceneView.xaml;Views\TimelineUC.xaml;Views\TimelineView.xaml;
+Styles\GoldTheme.xaml;Styles\MenuStyles.xaml;Styles\NeonTheme.xaml;Styles\ScrollBarStyle.xaml;Styles\CheckBox.xaml;Styles\DefaultTheme.xaml;Styles\ComboBox.xaml;Styles\Buttons.xaml;Styles\ContextMenu.xaml;Styles\ExtendedTreeView.xaml;Styles\ListBoxStyles.xaml;Styles\NewColors.xaml;Styles\Styles.xaml;Styles\TabControlStyles.xaml;Styles\TextBoxStyles.xaml;Styles\VibrantTheme.xaml;Views\BulletinBoardView.xaml;Views\CharacterDetailsUserControl.xaml;Views\DialogViews\BaseDialogWindow.xaml;Views\DialogViews\CreateProjectView.xaml;Views\DialogViews\PreferencesView.xaml;Views\DialogViews\SelectSceneView.xaml;Views\DialogViews\SelectLocationView.xaml;Views\DialogViews\SelectCharacterView.xaml;Views\DialogViews\SelectProjectView.xaml;Views\ExtendedRichTextBoxUserControl.xaml;Views\LocationDetailsUserControl.xaml;Views\MainView.xaml;Views\ProjectItemsOverView.xaml;Views\SceneView.xaml;Views\TimelineUC.xaml;Views\TimelineView.xaml;
 
-False
+True
 

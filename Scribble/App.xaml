@@ -54,6 +54,10 @@
             <DataTemplate DataType="{x:Type Models:TimelineModel}">
                 <Views:TimelineUC/>
             </DataTemplate>
+ 
+            <DataTemplate DataType="{x:Type ViewModels:BulletinBoardViewModel}">
+                <Views:BulletinBoardView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Theme}">
                 <TextBlock Text="{Binding Name}" Style="{StaticResource GoldRegularStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -91,6 +95,56 @@
                 </StackPanel>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type Models:Scene}" x:Key="BulletinScene">
+                <Border CornerRadius="8" BorderBrush="{StaticResource AccentColor1Brush}" BorderThickness="0.8" Margin="5">
+                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Top">
+                            <TextBlock Text="Scene" FontStyle="Italic" FontSize="11" HorizontalAlignment="Right" Margin="3, 1"/>
+                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type Models:Character}" x:Key="BulletinCharacter">
+                <Border CornerRadius="8" BorderBrush="{StaticResource AccentColor1Brush}" BorderThickness="0.8" Margin="5">
+                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Top">
+                            <TextBlock FontStyle="Italic" FontSize="11" HorizontalAlignment="Right" Margin="3, 1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                        <Setter Property="Text" Value="Major character"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CharacterType}" Value="{x:Static Models:CharacterTypes.Minor}">
+                                                <Setter Property="Text" Value="Minor character"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding CharacterType}" Value="{x:Static Models:CharacterTypes.Background}">
+                                                <Setter Property="Text" Value="Background character"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type Models:Scene}" x:Key="BulletinLocation">
+                <Border CornerRadius="8" BorderBrush="{StaticResource AccentColor1Brush}" BorderThickness="0.8" Margin="5">
+                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Top">
+                            <TextBlock Text="Location" FontStyle="Italic" FontSize="11" HorizontalAlignment="Right" Margin="3, 1"/>
+                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:Tag}">
                 <Border Height="40" HorizontalAlignment="Left" Margin="5, 5" Padding="5" CornerRadius="12">
                     <DockPanel>
@@ -116,6 +170,7 @@
             </DataTemplate>
 
             <Controls:SearchDataTemplateSelector x:Key="SearchDataTemplateSelector"/>
+            <Controls:BulletinBoardDataTemplateSelector x:Key="BulletinDataTemplateSelector"/>
 
             <!-- Icons -->
 
