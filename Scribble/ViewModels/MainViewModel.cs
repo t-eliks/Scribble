@@ -7,6 +7,7 @@
     using Scribble.Logic;
     using Scribble.Logic.Dialog;
     using Scribble.Models;
+    using Scribble.ViewModels.DialogViewModels;
 
     public class MainViewModel : BaseViewModel
     {
@@ -199,13 +200,13 @@
             }
         }
 
-        private ICommand _LoadFileCommand;
+        private ICommand _ChangeViewCommand;
 
-        public ICommand LoadFileCommand
+        public ICommand ChangeViewCommand
         {
             get
             {
-                return _LoadFileCommand ?? (_LoadFileCommand = new RelayCommand(() =>
+                return _ChangeViewCommand ?? (_ChangeViewCommand = new RelayCommand(() =>
                 {
                     if (SelectedProjectItem != null)
                     {
@@ -228,6 +229,20 @@
                         RaisePropertyChanged(nameof(IsTimelineView));
                     }
 
+                }));
+            }
+        }
+
+        private ICommand _OpenPreferencesCommand;
+
+        public ICommand OpenPreferencesCommand
+        {
+            get
+            {
+                return _OpenPreferencesCommand ?? (_OpenPreferencesCommand = new RelayCommand(() => {
+                    var dialog = new PreferencesViewModel();
+
+                    var result = _DialogService.OpenDialog(dialog);
                 }));
             }
         }
@@ -295,7 +310,7 @@
                     RaisePropertyChanged(nameof(SelectedProjectItem));
                     RaisePropertyChanged(nameof(ToolButtonEnabled));
 
-                    LoadFileCommand.Execute(null);
+                    ChangeViewCommand.Execute(null);
                 }
             }
         }

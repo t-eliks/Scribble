@@ -55,10 +55,18 @@
                 <Views:TimelineUC/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type Models:Theme}">
+                <TextBlock Text="{Binding Name}" Style="{StaticResource GoldRegularStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type DialogViewModels:SelectSceneViewModel}">
                 <DialogViews:SelectSceneView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type DialogViewModels:PreferencesViewModel}">
+                <DialogViews:PreferencesView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:Scene}">
                 <DockPanel Height="80">
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
@@ -123,8 +131,17 @@
             <FontFamily x:Key="Ubuntu">/Fonts/#Ubuntu</FontFamily>
             <FontFamily x:Key="Quicksand">/Fonts/#Quicksand</FontFamily>
 
+            <!-- Themes -->
+
+            <x:Array Type="{x:Type Models:Theme}" x:Key="Themes">
+                <Models:Theme Name="Default" File="pack://application:,,,/Scribble;component/Styles/DefaultTheme.xaml"/>
+                <Models:Theme Name="Neon" File="pack://application:,,,/Scribble;component/Styles/NeonTheme.xaml"/>
+                <Models:Theme Name="Gold" File="pack://application:,,,/Scribble;component/Styles/GoldTheme.xaml"/>
+                <Models:Theme Name="Vibrant" File="pack://application:,,,/Scribble;component/Styles/VibrantTheme.xaml"/>
+            </x:Array>
+            
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/DefaultTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Styles.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ExtendedTreeView.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/ContextMenu.xaml"/>

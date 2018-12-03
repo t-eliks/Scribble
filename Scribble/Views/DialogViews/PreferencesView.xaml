@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Scribble.Views.DialogViews.PreferencesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views.DialogViews"
+             mc:Ignorable="d" 
+             Height="450" Width="800">
+    <Grid Background="{DynamicResource BackgroundColor2Brush}">
+        <TabControl Style="{StaticResource TabControlStyle1}" ItemContainerStyle="{StaticResource TabItemStyle}">
+            <TabItem Header="Just a quick mock-up. Unfinished feature and themes">
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock Text="Theme" Style="{StaticResource GoldRegularStyle}" Margin="50, 0" VerticalAlignment="Center"/>
+                        <ComboBox DockPanel.Dock="Right" Width="200" HorizontalAlignment="Right" Margin="50, 0" ItemsSource="{StaticResource Themes}" SelectedIndex="0" SelectedItem="{Binding Theme}"/>
+                    </DockPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="{StaticResource BackgroundImage}">
+                <Grid Grid.Column="0" Background="{DynamicResource BackgroundImage}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="30"/>
@@ -42,7 +42,7 @@
                                     <Image Source="/icons/collapse.png" Stretch="UniformToFill"/>
                                 </Button.Content>
                             </Button>
-                            <Button IsEnabled="{Binding ToolButtonEnabled}" Click="Button_Click" Style="{StaticResource ToolBarButton}">
+                            <Button IsEnabled="{Binding ToolButtonEnabled}" Style="{StaticResource ToolBarButton}">
                                 <Button.Content>
                                     <Image Source="/icons/remove_toolbar.png" Stretch="UniformToFill"/>
                                 </Button.Content>
@@ -78,7 +78,7 @@
                                     <MenuItem Header="Open Project.." Template="{DynamicResource MenuItemControlTemplate2}" Command="{Binding OpenProjectCommand}" />
                                 </MenuItem>
                                 <MenuItem Template="{DynamicResource MenuItemControlTemplate1}" Header="Options">
-                                    <MenuItem Template="{DynamicResource MenuItemControlTemplate2}" Header="Preferences"/>
+                                    <MenuItem Template="{DynamicResource MenuItemControlTemplate2}" Header="Preferences..." Command="{Binding OpenPreferencesCommand}"/>
                                 </MenuItem>
                             </Menu>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

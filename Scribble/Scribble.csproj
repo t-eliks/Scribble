@@ -75,6 +75,8 @@
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TextFile.cs" />
+    <Compile Include="Models\Theme.cs" />
+    <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectCharacterViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectLocationViewModel.cs" />
@@ -82,6 +84,9 @@
     <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="Models\TimelineModel.cs" />
     <Compile Include="ViewModels\TimelineViewModel.cs" />
+    <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
+      <DependentUpon>PreferencesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogViews\SelectSceneView.xaml.cs">
       <DependentUpon>SelectSceneView.xaml</DependentUpon>
     </Compile>
@@ -123,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Colors.xaml">
+    <Page Include="Styles\DefaultTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\VibrantTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CharacterDetailsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +181,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DialogViews\CreateProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\PreferencesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -406,7 +419,10 @@
     <Resource Include="Icons\neonbg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\typewriterbg.png" />
+    <Resource Include="Icons\goldbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Styles\goldbg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

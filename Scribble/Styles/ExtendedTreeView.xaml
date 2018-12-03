@@ -5,7 +5,7 @@
                     xmlns:Controls="clr-namespace:Scribble.Controls">
 
     <HierarchicalDataTemplate DataType="{x:Type Models:BaseItem}" ItemsSource="{Binding Content}" x:Key="TreeViewDataTemplate">
-        <StackPanel FocusManager.FocusedElement="{Binding ElementName=textbox}" Orientation="Horizontal">
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=textbox}" Orientation="Horizontal" SnapsToDevicePixels="True">
             <StackPanel.Resources>
                 <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}"/>
             </StackPanel.Resources>
@@ -13,6 +13,8 @@
             <TextBlock Text="{Binding Name}" Margin="0, 0, 5, 0">
                 <TextBlock.Style>
                     <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                        <Setter Property="FontSize" Value="16"/>
                         <Setter Property="Visibility" Value="Visible"/>
                         <Style.Triggers>
                             <MultiDataTrigger>

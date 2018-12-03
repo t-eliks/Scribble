@@ -34,11 +34,6 @@
             };
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Resources.MergedDictionaries[0].Source = new Uri("Styles/NewColors.xaml", UriKind.RelativeOrAbsolute);
-        }
-
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (ProjectService.Instance.UnsavedChanges)

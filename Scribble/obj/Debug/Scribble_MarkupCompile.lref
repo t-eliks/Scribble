@@ -1,5 +1,6 @@
-﻿
+﻿C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\App.xaml;;
+FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\GoldTheme.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\MenuStyles.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\NeonTheme.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\ScrollBarStyle.xaml;;
@@ -13,6 +14,7 @@ FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\TabControlStyles.
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\TextBoxStyles.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\CharacterDetailsUserControl.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\DialogViews\BaseDialogWindow.xaml;;
+FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\DialogViews\PreferencesView.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\DialogViews\SelectSceneView.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\DialogViews\SelectLocationView.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\DialogViews\SelectCharacterView.xaml;;
@@ -24,5 +26,4 @@ FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\ProjectItemsOverVi
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\SceneView.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\TimelineUC.xaml;;
 FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Views\TimelineView.xaml;;
-FC:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\Styles\GoldTheme.xaml;;
 
