@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scribble.Views"
              mc:Ignorable="d" 
-             Height="450" Width="800">
-    <Grid Background="{StaticResource BackgroundColor2Brush}">
+             >
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundColor2Brush}">
         <ItemsControl ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -14,5 +14,5 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

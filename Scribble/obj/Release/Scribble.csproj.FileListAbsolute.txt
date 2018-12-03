@@ -43,7 +43,6 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\SceneVi
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\ProjectItemsOverView.g.cs
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\ProjectItemsOverView.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\CheckBox.baml
-C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\Colors.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\ComboBox.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\NewColors.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\ScrollBarStyle.baml
@@ -56,3 +55,9 @@ C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\MenuSt
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\TimelineUC.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\GoldTheme.baml
 C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\NeonTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\DefaultTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Styles\VibrantTheme.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\BulletinBoardView.g.cs
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogViews\PreferencesView.g.cs
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\BulletinBoardView.baml
+C:\Users\Rokas\Documents\Personal\C#\Scribble\Scribble\obj\Release\Views\DialogViews\PreferencesView.baml

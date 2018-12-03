@@ -17,6 +17,9 @@
             if (item is Scene)
                 return App.Current.TryFindResource("BulletinScene") as DataTemplate;
 
+            if (item is ProjectFolder)
+                return App.Current.TryFindResource("BulletinFolder") as DataTemplate;
+
             return null;
         }
     }
