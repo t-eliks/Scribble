@@ -103,10 +103,20 @@
                 <DataTemplate DataType="{x:Type Controls:TabControlViewItem}">
                     <DockPanel LastChildFill="False">
                         <TextBlock Text="{Binding Header}" DockPanel.Dock="Left" HorizontalAlignment="Center"/>
-                        <Button Command="{Binding MarkForRemovalCommand}" DockPanel.Dock="Right" Width="16" Height="16" Margin="5">
+                        <Button Command="{Binding MarkForRemovalCommand}" DockPanel.Dock="Right" Width="12" Height="12" Margin="15, 0, 0, 0">
                             <Button.Background>
-                                <ImageBrush ImageSource="/icons/delete_small.png" Stretch="UniformToFill"/>
+                                <ImageBrush ImageSource="/icons/exit.png" Stretch="UniformToFill"/>
                             </Button.Background>
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsMouseOver}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </DockPanel>
                 </DataTemplate>
