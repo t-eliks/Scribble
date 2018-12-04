@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Windows;
     using System.Windows.Input;
+    using Scribble.Controls;
     using Scribble.Logic;
     using Scribble.Logic.Dialog;
     using Scribble.Models;
@@ -38,46 +39,6 @@
             }
         }
 
-        private ICommand _SwitchToProjectItemsOverView;
-
-        public ICommand SwitchToProjectItemsOverView
-        {
-            get
-            {
-                return _SwitchToProjectItemsOverView ?? (_SwitchToProjectItemsOverView = new RelayCommand(() => { CurrentView = new ProjectItemsOverViewModel(); }));
-            }
-        }
-
-        private ICommand _SwitchToSceneView;
-
-        public ICommand SwitchToSceneView
-        {
-            get
-            {
-                return _SwitchToSceneView ?? (_SwitchToSceneView = new RelayCommand(() => { CurrentView = new SceneViewModel() { Scene = (Scene)SelectedProjectItem }; }));
-            }
-        }
-
-        private ICommand _SwitchToCharacterDetailsView;
-
-        public ICommand SwitchToCharacterDetailsView
-        {
-            get
-            {
-                return _SwitchToCharacterDetailsView ?? (_SwitchToCharacterDetailsView = new RelayCommand(() => { CurrentView = new CharacterDetailsViewModel() { Character = (Character)SelectedProjectItem } ; }));
-            }
-        }
-
-        private ICommand _SwitchToLocationDetailsView;
-
-        public ICommand SwitchToLocationDetailsView
-        {
-            get
-            {
-                return _SwitchToLocationDetailsView ?? (_SwitchToLocationDetailsView = new RelayCommand(() => { CurrentView = new LocationDetailsViewModel() { Location = (Location)SelectedProjectItem }; }));
-            }
-        }
-
         private ICommand _SwitchToTimelineView;
 
         public ICommand SwitchToTimelineView
@@ -88,19 +49,13 @@
                 {
                     if (SelectedProjectItem != null)
                         SelectedProjectItem.IsSelected = false;
-                    CurrentView = new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines };
+
+                    var viewitem = new TabControlViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
+                    if (!ViewItems.Contains(viewitem))
+                        ViewItems.Add(viewitem);
+
                     RaisePropertyChanged(nameof(IsTimelineView));
                 }));
-            }
-        }
-
-        private ICommand _SwitchToBulletinBoardView;
-
-        public ICommand SwitchToBulletinBoardView
-        {
-            get
-            {
-                return _SwitchToBulletinBoardView ?? (_SwitchToBulletinBoardView = new RelayCommand(() => { CurrentView = new BulletinBoardViewModel() { Folder = (ProjectFolder)SelectedProjectItem }; }));
             }
         }
 
@@ -211,41 +166,58 @@
             }
         }
 
-        private ICommand _ChangeViewCommand;
-
-        public ICommand ChangeViewCommand
+        private void ChangeView()
         {
-            get
+            if (SelectedProjectItem != null)
             {
-                return _ChangeViewCommand ?? (_ChangeViewCommand = new RelayCommand(() =>
-                {
-                    if (SelectedProjectItem != null)
-                    {
-                        if (SelectedProjectItem is ProjectFolder f)
-                        {
-                            if (f.RootFolder)
-                                SwitchToProjectItemsOverView.Execute(null);
-                            else
-                                SwitchToBulletinBoardView.Execute(null);
-                        }
-                        else
-                            switch (SelectedProjectItem)
-                            {
-                                case Character c:
-                                    SwitchToCharacterDetailsView.Execute(null);
-                                    break;
-                                case Location l:
-                                    SwitchToLocationDetailsView.Execute(null);
-                                    break;
-                                case Scene s:
-                                    SwitchToSceneView.Execute(null);
-                                    break;
-                            }
+                BaseViewModel vm = null;
 
-                        RaisePropertyChanged(nameof(IsTimelineView));
+                if (SelectedProjectItem is ProjectFolder f)
+                {
+                    if (f.RootFolder)
+                        vm = new ProjectItemsOverViewModel();
+                    else
+                        vm = new BulletinBoardViewModel() { Folder = f };
+                }
+                else
+                    switch (SelectedProjectItem)
+                    {
+                        case Character c:
+                            vm = new CharacterDetailsViewModel() { Character = c };
+                            break;
+                        case Location l:
+                            vm = new LocationDetailsViewModel() { Location = l };
+                            break;
+                        case Scene s:
+                            vm = new SceneViewModel() { Scene = s };
+                            break;
                     }
 
-                }));
+                if (vm != null)
+                {
+                    var viewitem = new TabControlViewItem(SelectedProjectItem, vm);
+                    viewitem.OnMarkedForRemoval += (s, e) => {
+                        if (ViewItems != null)
+                        {
+                            if (SelectedProjectItem is Scene)
+                                OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
+                            ViewItems.Remove(viewitem);
+                        }
+                    };
+
+                    if (!ViewItems.Contains(viewitem))
+                        ViewItems.Add(viewitem);
+                    else
+                    {
+                        foreach (var item in ViewItems)
+                        {
+                            if (item.Model == SelectedProjectItem)
+                                item.IsSelected = true;
+                        }
+                    }
+                }
+
+                RaisePropertyChanged(nameof(IsTimelineView));
             }
         }
 
@@ -271,24 +243,44 @@
 
         public RoutedEventHandler OnSceneViewChanged;
 
-        private BaseViewModel _CurrentView;
+        //private BaseViewModel _CurrentView;
 
-        public BaseViewModel CurrentView
+        //public BaseViewModel CurrentView
+        //{
+        //    get
+        //    {
+        //        return _CurrentView;
+        //    }
+        //    set
+        //    {
+        //        if (_CurrentView != value)
+        //        {
+        //            _CurrentView = value;
+
+        //            RaisePropertyChanged(nameof(CurrentView));
+        //        }
+        //    }
+        //}
+
+        private ObservableCollection<TabControlViewItem> _ViewItems;
+
+        public ObservableCollection<TabControlViewItem> ViewItems
         {
             get
             {
-                return _CurrentView;
+                return _ViewItems ?? (_ViewItems = new ObservableCollection<TabControlViewItem>());
             }
             set
             {
-                if (_CurrentView != value)
+                if (_ViewItems != value)
                 {
-                    _CurrentView = value;
+                    _ViewItems = value;
 
-                    RaisePropertyChanged(nameof(CurrentView));
+                    RaisePropertyChanged(nameof(ViewItems));
                 }
             }
         }
+
 
         public bool ToolButtonEnabled { get { return SelectedProjectItem != null; } }
 
@@ -314,10 +306,6 @@
             {
                 if (_SelectedProjectItem != value)
                 {
-                    //Used to dispose of ExtendedRichTextBox control's background autosaving
-                    if (_SelectedProjectItem is Scene && !(value is Scene))
-                        OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
-
                     _SelectedProjectItem = value;
 
                     if (Editing)
@@ -326,7 +314,7 @@
                     RaisePropertyChanged(nameof(SelectedProjectItem));
                     RaisePropertyChanged(nameof(ToolButtonEnabled));
 
-                    ChangeViewCommand.Execute(null);
+                    ChangeView();
                 }
             }
         }
@@ -394,7 +382,7 @@
             }
         }
 
-        public bool IsTimelineView { get { return CurrentView is TimelineViewModel; } }
+        public bool IsTimelineView { get { return false; } }
 
         public bool IsSearchOpen { get; set; }
 

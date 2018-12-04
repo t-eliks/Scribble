@@ -74,9 +74,11 @@
     <Compile Include="Logic\FileService.cs" />
     <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TextFile.cs" />
     <Compile Include="Models\Theme.cs" />
+    <Compile Include="Controls\TabControlViewItem.cs" />
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
@@ -100,6 +102,9 @@
     </Compile>
     <Compile Include="Views\DialogViews\SelectCharacterView.xaml.cs">
       <DependentUpon>SelectCharacterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NoteView.xaml.cs">
+      <DependentUpon>NoteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectItemsOverView.xaml.cs">
       <DependentUpon>ProjectItemsOverView.xaml</DependentUpon>
@@ -279,6 +284,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\NoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectItemsOverView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

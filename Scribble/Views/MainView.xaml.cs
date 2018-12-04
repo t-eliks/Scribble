@@ -1,13 +1,12 @@
 ﻿namespace Scribble
 {
+    using Scribble.Controls;
     using Scribble.Logic;
     using Scribble.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
     using System.Windows.Media;
 
     /// <summary>
@@ -27,7 +26,7 @@
 
             ((MainViewModel)this.DataContext).OnSceneViewChanged += (s, e) =>
             {
-                foreach (var item in CollectDisposableChildren(new List<IDisposable>(), cc))
+                foreach (var item in CollectDisposableChildren(new List<IDisposable>(), ((TabControlViewItem)cc.SelectedItem).Content))
                 {
                     item.Dispose();
                 }

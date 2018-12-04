@@ -3,6 +3,7 @@
     using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
+    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
@@ -16,18 +17,16 @@
            : base(name, imageSource)
         {
             Biography = "No biography.";
-            Notes = "No notes.";
             Goals = "No goals.";
             Short_Name = "No short name";
         }
 
         public Character(string name, ImageSource imageSource, string short_name, string description,
-            string biography, string notes, string goals)
+            string biography, string goals)
            : base(name, imageSource)
         {
             Short_Name = short_name;
             Biography = biography;
-            Notes = notes;
             Goals = goals;
         }
 
@@ -90,13 +89,13 @@
             }
         }
 
-        private string _Notes;
+        private ObservableCollection<Note> _Notes;
 
-        public string Notes
+        public ObservableCollection<Note> Notes
         {
             get
             {
-                return _Notes;
+                return _Notes ?? (_Notes = new ObservableCollection<Note>());
             }
             set
             {
@@ -136,7 +135,7 @@
                 return true;
 
             if (StringHelper.Contains(Short_Name, query) || StringHelper.Contains(Biography, query)
-                || StringHelper.Contains(Notes, query) || StringHelper.Contains(Goals, query))
+                || StringHelper.Contains(Goals, query))
                 return true;
 
             return false;
@@ -149,7 +148,7 @@
             CharacterType = (CharacterTypes)info.GetValue("charactertype", typeof(CharacterTypes));
             Short_Name = info.GetString("shortname");
             Biography = info.GetString("biography");
-            Notes = info.GetString("notes");
+            Notes = (ObservableCollection<Note>)info.GetValue("notes", typeof(ObservableCollection<Note>));
             Goals = info.GetString("goals");
         }
 

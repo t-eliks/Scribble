@@ -110,7 +110,8 @@
                             </Popup>
                             <Button Background="{DynamicResource BackgroundColor2Brush}" Content="{Binding ProjectName}" Grid.Column="1" Height="30" Width="100" MinWidth="100"/>
                         </Grid>
-                        <ContentControl x:Name="cc" Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}"/>
+                        <TabControl x:Name="cc" IsHitTestVisible="True" Style="{StaticResource ViewTabControlStyle}" ItemContainerStyle="{StaticResource ViewTabControlItemStyle}" Grid.Row="2" ItemsSource="{Binding ViewItems}"/>
+                        <!--<ContentControl x:Name="cc" Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}" Visibility="Collapsed"/>-->
                     </Grid>
                 </Border>
             </Grid>

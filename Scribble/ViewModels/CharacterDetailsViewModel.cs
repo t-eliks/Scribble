@@ -3,12 +3,27 @@
     using Scribble.Models;
     using Scribble.Logic;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
 
     public class CharacterDetailsViewModel : BaseViewModel
     {
         public CharacterDetailsViewModel()
         {
 
+        }
+
+        private ICommand _AddNoteCommand;
+
+        public ICommand AddNoteCommand
+        {
+            get
+            {
+                return _AddNoteCommand ?? (_AddNoteCommand = new RelayCommand(() =>
+                {
+                    if (Character != null)
+                        Character.Notes.Add(new Note());
+                }));
+            }
         }
 
         #region Properties and Fields

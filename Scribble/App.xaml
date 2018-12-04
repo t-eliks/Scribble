@@ -95,6 +95,35 @@
                 </StackPanel>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type Models:Note}">
+                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5" Padding="2">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" Duration="0:0:.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" FillBehavior="Stop" Duration="0:0:.1"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <TextBlock Text="{Binding Name}" MinHeight="100" MaxHeight="300" MinWidth="170" MaxWidth="250"/>
+                </Border>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:Scene}" x:Key="BulletinScene">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
                     <Border.InputBindings>

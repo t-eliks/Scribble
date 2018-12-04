@@ -14,7 +14,7 @@
             dt = new DispatcherTimer();
             dt.Tick += (s,e ) => 
             {
-                if (_ChangedSinceSave)
+                if (_ChangedSinceSave && !IsReadOnly)
                 {
                     Save(this);
                     Status = "Last autosaved at " + DateTime.Now.ToString("HH:mm:ss");
