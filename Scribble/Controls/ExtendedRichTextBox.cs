@@ -48,7 +48,7 @@
                if (file != null)
                {
                    var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                   using (var stream = file.GetStream())
+                   using (var stream = file.Stream)
                    {
                        text.Load(stream, DataFormats.Rtf);
                    }
@@ -87,13 +87,30 @@
         public static void Save(ExtendedRichTextBox rtb)
         {
            if (rtb.TextFile != null)
-                using (var stream = rtb.TextFile.GetStream())
+                using (var stream = rtb.TextFile.Stream)
                 {
                     var text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
                     text.Save(stream, DataFormats.Rtf);
                     rtb.TextFile.SaveChangesToMainFile();
                     rtb.Status = "Saved at " + DateTime.Now.ToString("HH:mm:ss");
+                    rtb._ChangedSinceSave = false;
                 }
+        }
+
+        public static string ParseRTF(TextFile file)
+        {
+            if (file != null)
+            {
+                RichTextBox rtb = new RichTextBox();
+
+                var range = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+
+                range.Load(file.Stream, DataFormats.Rtf);
+
+                return range.Text;
+            }
+
+            return null;
         }
 
         #region IDisposable Support

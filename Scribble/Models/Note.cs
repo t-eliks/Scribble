@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Controls;
     using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
@@ -44,6 +45,14 @@
 
                     RaisePropertyChanged(nameof(Name));
                 }
+            }
+        }
+
+        public string Preview
+        {
+            get
+            {
+                return ExtendedRichTextBox.ParseRTF(TextFile);
             }
         }
 

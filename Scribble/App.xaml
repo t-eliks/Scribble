@@ -127,7 +127,10 @@
                     <Border.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding OpenNoteCommand}"/>
                     </Border.InputBindings>
-                    <TextBlock Text="{Binding Name}" MinHeight="100" MaxHeight="300" MinWidth="170" MaxWidth="250"/>
+                    <DockPanel Background="Transparent" LastChildFill="True" MinHeight="100"  MaxHeight="300" MinWidth="170" MaxWidth="250">
+                        <TextBlock Text="{Binding Name}" DockPanel.Dock="Top" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Preview}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                    </DockPanel>
                 </Border>
             </DataTemplate>
             

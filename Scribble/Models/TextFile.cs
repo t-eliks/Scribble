@@ -45,14 +45,27 @@
             }
         }
 
-        public FileStream GetStream()
+        private FileStream _Stream;
+
+        public FileStream Stream
+        {
+            get
+            {
+                if (_Stream != null && _Stream.CanWrite)
+                    return _Stream;
+                else
+                    return (_Stream = GetStream());
+            }
+        }
+
+        private FileStream GetStream()
         {
 
             if (string.IsNullOrWhiteSpace(BackupPath) || !File.Exists(BackupPath))
                 BackupPath = Path.Combine(Path.GetDirectoryName(FilePath), $"{Path.GetRandomFileName()}.rtf");
 
             File.Copy(FilePath, BackupPath, true);
-            return new FileStream(BackupPath, FileMode.Open);
+            return new FileStream(BackupPath, FileMode.Open, FileAccess.ReadWrite);
         }
 
         public void SaveChangesToMainFile()
