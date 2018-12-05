@@ -166,6 +166,32 @@
             }
         }
 
+        private ICommand _CloseTabCommand;
+
+        public ICommand CloseTabCommand
+        {
+            get
+            {
+                return _CloseTabCommand ?? (_CloseTabCommand = new RelayCommand<TabControlViewItem>((tab) => 
+                {
+                    ViewItemService.Instance.CloseTab(tab);
+                }));
+            }
+        }
+
+        private ICommand _CloseOtherTabsCommand;
+
+        public ICommand CloseOtherTabsCommand
+        {
+            get
+            {
+                return _CloseOtherTabsCommand ?? (_CloseOtherTabsCommand = new RelayCommand<TabControlViewItem>((tab) =>
+                {
+                    ViewItemService.Instance.CloseOtherTabs(tab);
+                }));
+            }
+        }
+
         private void ChangeView()
         {
             if (SelectedProjectItem != null)

@@ -5,6 +5,7 @@
     using Scribble.Models;
     using Scribble.ViewModels;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows;
 
     public class ViewItemService : BaseModel
@@ -56,6 +57,24 @@
                 {
                     if (item.Model == model)
                         item.IsSelected = true;
+                }
+            }
+        }
+
+        public void CloseTab(TabControlViewItem viewitem)
+        {
+            if (ViewItems.Contains(viewitem))
+                ViewItems.Remove(viewitem);
+        }
+
+        public void CloseOtherTabs(TabControlViewItem viewitem)
+        {
+            if (ViewItems.Contains(viewitem))
+            {
+                foreach (var item in ViewItems.ToList())
+                {
+                    if (item != viewitem)
+                        ViewItems.Remove(item);
                 }
             }
         }
