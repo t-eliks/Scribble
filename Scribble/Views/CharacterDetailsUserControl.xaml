@@ -53,7 +53,7 @@
         </TabItem>
         <TabItem Header="Notes">
             <DockPanel LastChildFill="False">
-                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Character.Notes}">
+                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Notes}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel IsItemsHost="True"/>
