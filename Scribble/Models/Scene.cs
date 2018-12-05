@@ -8,7 +8,7 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class Scene : Item, ISerializable, ISearchable
+    public class Scene : Item, ISerializable, ISearchable, IViewItem
     {
         public Scene() { }
 

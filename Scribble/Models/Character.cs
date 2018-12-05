@@ -9,7 +9,7 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class Character : Item, ISerializable, ISearchable
+    public class Character : Item, ISerializable, ISearchable, IViewItem
     {
         public Character() { }
 

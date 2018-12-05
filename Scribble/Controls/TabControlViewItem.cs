@@ -6,13 +6,13 @@
     using System.Windows.Input;
     using Scribble.Logic;
     using System.Windows;
+    using Scribble.Interfaces;
 
     public class TabControlViewItem : BaseModel
     {
-        public TabControlViewItem(BaseItem model, BaseViewModel viewmodel)
+        public TabControlViewItem(IViewItem model, BaseViewModel viewmodel)
         {
             Model = model;
-            Header = model.Name;
             Content = new UserControl() { Content = viewmodel };
 
             IsSelected = true;
@@ -31,35 +31,17 @@
             }
         }
 
-        public TabControlViewItem(string header, BaseViewModel viewmodel)
+        public string Header
         {
-            Header = header;
-            Content = new UserControl() { Content = viewmodel };
-
-            IsSelected = true;
-        }
-
-        private string _Header;
-
-        public string Header {
             get
             {
-                return _Header;
-            }
-            set
-            {
-                if (_Header != value)
-                {
-                    _Header = value;
-
-                    RaisePropertyChanged(nameof(Header));
-                }
+                return Model.Header;
             }
         }
 
-        private BaseItem _Model;
+        private IViewItem _Model;
 
-        public BaseItem Model
+        public IViewItem Model
         {
             get
             {

@@ -1,17 +1,31 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Windows;
+    using System.Windows.Input;
 
     [Serializable]
-    public class Note : BaseModel, ISerializable
+    public class Note : BaseModel, ISerializable, IViewItem
     {
-        public Note()
+        public Note(Item parent)
         {
             Name = "New note";
             TextFile = new TextFile(ProjectService.Instance?.ActiveProject.FileDirectory);
+            Parent = parent;
+        }
+
+        private ICommand _OpenNoteCommand;
+
+        public ICommand OpenNoteCommand
+        {
+            get
+            {
+                return _OpenNoteCommand ?? (_OpenNoteCommand = new RelayCommand(() => { OnOpened?.Invoke(this, new RoutedEventArgs()); }));
+            }
         }
 
         private string _Name;
@@ -33,6 +47,29 @@
             }
         }
 
+        private Item _Parent;
+
+        public Item Parent
+        {
+            get
+            {
+                return _Parent;
+            }
+            set
+            {
+                if (_Parent != value)
+                {
+                    _Parent = value;
+
+                    RaisePropertyChanged(nameof(Parent));
+                }
+            }
+        }
+
+        public RoutedEventHandler OnOpened;
+
+        public string Header { get { return Name; } }
+
         public TextFile TextFile { get; private set; }
 
         #region Serialization
@@ -41,6 +78,7 @@
         {
             Name = info.GetString("name");
             TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
+            Parent = (Item)info.GetValue("parent", typeof(Item));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -49,6 +87,7 @@
         {
             info.AddValue("textfile", TextFile);
             info.AddValue("name", Name);
+            info.AddValue("parent", Parent);
         }
 
         #endregion

@@ -50,9 +50,9 @@
                     if (SelectedProjectItem != null)
                         SelectedProjectItem.IsSelected = false;
 
-                    var viewitem = new TabControlViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
-                    if (!ViewItems.Contains(viewitem))
-                        ViewItems.Add(viewitem);
+                    //var viewitem = new TabControlViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
+                    //if (!ViewItems.Contains(viewitem))
+                    //    ViewItems.Add(viewitem);
 
                     RaisePropertyChanged(nameof(IsTimelineView));
                 }));
@@ -194,28 +194,7 @@
                     }
 
                 if (vm != null)
-                {
-                    var viewitem = new TabControlViewItem(SelectedProjectItem, vm);
-                    viewitem.OnMarkedForRemoval += (s, e) => {
-                        if (ViewItems != null)
-                        {
-                            if (SelectedProjectItem is Scene)
-                                OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
-                            ViewItems.Remove(viewitem);
-                        }
-                    };
-
-                    if (!ViewItems.Contains(viewitem))
-                        ViewItems.Add(viewitem);
-                    else
-                    {
-                        foreach (var item in ViewItems)
-                        {
-                            if (item.Model == SelectedProjectItem)
-                                item.IsSelected = true;
-                        }
-                    }
-                }
+                    ViewItemService.Instance.AddViewItem(SelectedProjectItem, vm);
 
                 RaisePropertyChanged(nameof(IsTimelineView));
             }
@@ -241,7 +220,7 @@
 
         internal static DialogService _DialogService;
 
-        public RoutedEventHandler OnSceneViewChanged;
+        public static RoutedEventHandler OnSceneViewChanged;
 
         //private BaseViewModel _CurrentView;
 
@@ -262,25 +241,32 @@
         //    }
         //}
 
-        private ObservableCollection<TabControlViewItem> _ViewItems;
+        //private ObservableCollection<TabControlViewItem> _ViewItems;
+
+        //public ObservableCollection<TabControlViewItem> ViewItems
+        //{
+        //    get
+        //    {
+        //        return _ViewItems ?? (_ViewItems = new ObservableCollection<TabControlViewItem>());
+        //    }
+        //    set
+        //    {
+        //        if (_ViewItems != value)
+        //        {
+        //            _ViewItems = value;
+
+        //            RaisePropertyChanged(nameof(ViewItems));
+        //        }
+        //    }
+        //}
 
         public ObservableCollection<TabControlViewItem> ViewItems
         {
             get
             {
-                return _ViewItems ?? (_ViewItems = new ObservableCollection<TabControlViewItem>());
-            }
-            set
-            {
-                if (_ViewItems != value)
-                {
-                    _ViewItems = value;
-
-                    RaisePropertyChanged(nameof(ViewItems));
-                }
+                return ViewItemService.Instance.ViewItems;
             }
         }
-
 
         public bool ToolButtonEnabled { get { return SelectedProjectItem != null; } }
 

@@ -7,6 +7,17 @@
              mc:Ignorable="d" 
              >
     <Grid>
-        <local:ExtendedRichTextBoxUserControl/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" Background="{StaticResource BackgroundColor2Brush}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="Editing note of " FontSize="16" Margin="5, 0"/>
+                <ContentPresenter Content="{Binding Note.Parent}" Margin="5, 0"/>
+            </StackPanel>
+            <TextBox Text="{Binding Note.Name, Mode=TwoWay}" Style="{StaticResource TimelineTextBoxStyle}" HorizontalAlignment="Center" FontFamily="{StaticResource Ubuntu}" BorderThickness="0" FontSize="18" Margin="5, 2"/>
+        </Grid>
+        <local:ExtendedRichTextBoxUserControl Grid.Row="1"/>
     </Grid>
 </UserControl>

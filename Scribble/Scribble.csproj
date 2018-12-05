@@ -70,10 +70,12 @@
     <Compile Include="Controls\TimelineCanvas.cs" />
     <Compile Include="Controls\TimelineContent.cs" />
     <Compile Include="Interfaces\ISearchable.cs" />
+    <Compile Include="Interfaces\IViewItem.cs" />
     <Compile Include="Logic\FieldGenerator.cs" />
     <Compile Include="Logic\FileService.cs" />
     <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
+    <Compile Include="Logic\ViewItemService.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TextFile.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectCharacterViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectLocationViewModel.cs" />
+    <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemsOverViewModel.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="Models\TimelineModel.cs" />

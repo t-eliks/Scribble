@@ -30,7 +30,11 @@
                 PropertyChangedCallback = (s, e) =>
                 {
                     foreach (var item in (IEnumerable<Tag>)e.NewValue)
+                    {
+                        //Prevent multiple subscriptions
+                        item.OnMarkedForRemoval -= (o, a) => { ((TagTextBox)s).Content.Remove(item); };
                         item.OnMarkedForRemoval += (o, a) => { ((TagTextBox)s).Content.Remove(item); };
+                    } 
                 }
             });
 

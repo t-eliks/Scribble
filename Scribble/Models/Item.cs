@@ -12,7 +12,7 @@
     using Scribble.Interfaces;
 
     [Serializable]
-    public class Item : BaseItem, ISerializable, ISearchable
+    public class Item : BaseItem, ISerializable, ISearchable, IViewItem
     {
         public Item() { }
 

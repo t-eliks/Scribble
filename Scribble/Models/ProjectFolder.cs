@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class ProjectFolder : Item, ISerializable
+    public class ProjectFolder : Item, ISerializable, IViewItem
     {
         public ProjectFolder() { }
 

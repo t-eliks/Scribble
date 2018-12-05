@@ -8,7 +8,7 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class Location : Item, ISerializable, ISearchable
+    public class Location : Item, ISerializable, ISearchable, IViewItem
     {
         public Location() { }
 

@@ -70,6 +70,10 @@
             <DataTemplate DataType="{x:Type DialogViewModels:PreferencesViewModel}">
                 <DialogViews:PreferencesView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type ViewModels:NoteViewModel}">
+                <Views:NoteView/>
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type Models:Scene}">
                 <DockPanel Height="80">
@@ -120,6 +124,9 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
+                    <Border.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding OpenNoteCommand}"/>
+                    </Border.InputBindings>
                     <TextBlock Text="{Binding Name}" MinHeight="100" MaxHeight="300" MinWidth="170" MaxWidth="250"/>
                 </Border>
             </DataTemplate>

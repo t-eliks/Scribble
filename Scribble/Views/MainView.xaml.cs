@@ -24,7 +24,7 @@
 
             exitBtn.Click += (s, e) => { this.Close(); };
 
-            ((MainViewModel)this.DataContext).OnSceneViewChanged += (s, e) =>
+            MainViewModel.OnSceneViewChanged += (s, e) =>
             {
                 foreach (var item in CollectDisposableChildren(new List<IDisposable>(), ((TabControlViewItem)cc.SelectedItem).Content))
                 {

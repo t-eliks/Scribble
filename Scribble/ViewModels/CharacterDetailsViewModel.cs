@@ -21,7 +21,11 @@
                 return _AddNoteCommand ?? (_AddNoteCommand = new RelayCommand(() =>
                 {
                     if (Character != null)
-                        Character.Notes.Add(new Note());
+                    {
+                        var note = new Note(Character);
+                        note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                        Character.Notes.Add(note);
+                    }
                 }));
             }
         }
@@ -106,6 +110,21 @@
             get
             {
                 return ProjectService.Instance.FindBiLinks<Scene>(Character);
+            }
+        }
+
+        public ObservableCollection<Note> Notes
+        {
+            get
+            {
+                foreach (var note in Character.Notes)
+                {
+                    //Prevent multiple subscriptions
+                    note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                    note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                }
+
+                return Character.Notes;
             }
         }
 

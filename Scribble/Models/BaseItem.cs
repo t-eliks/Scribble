@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
@@ -7,7 +8,7 @@
     using System.Windows.Media.Imaging;
 
     [Serializable]
-    public abstract class BaseItem : BaseModel, ISerializable
+    public abstract class BaseItem : BaseModel, ISerializable, IViewItem
     {
         public BaseItem() { }
 
@@ -38,6 +39,8 @@
                 }
             }
         }
+
+        public string Header { get { return Name; } }
 
         private ImageSource _Image;
 
