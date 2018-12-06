@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Windows;
 
     [Serializable]
     public class ProjectModel : BaseModel, ISerializable
@@ -38,6 +39,7 @@
             }
 
             SymbioticLinks = new ObservableCollection<SymbioticLink>();
+
             Timelines = new ObservableCollection<TimelineModel>();
         }
 

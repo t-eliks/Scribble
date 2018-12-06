@@ -4,6 +4,7 @@
     using Scribble.Models;
     using Scribble.ViewModels.DialogViewModels;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Input;
 
     public class SceneViewModel : BaseViewModel
@@ -39,9 +40,13 @@
             {
                 return _AddCharacterCommand ?? (_AddCharacterCommand = new RelayCommand(() => 
                 {
-                    var dialog = new SelectCharacterViewModel();
-                    dialog.Characters = ProjectService.Instance.GetItemsOfType<Character>();
-                    dialog.SelectedCharacters = CharactersInScene;
+                    var dialog = new SelectViewModel();
+                    dialog.Collection = new ObservableCollection<Item>(ProjectService.Instance.GetItemsOfType<Character>().Cast<Item>());
+                    dialog.SelectedItems = new ObservableCollection<Item>(CharactersInScene.Cast<Item>());
+                    dialog.Title = "All characters in project";
+                    dialog.Warning = "Character already in scene.";
+                    dialog.Button_Text = "Add character";
+
                     var result = MainViewModel._DialogService.OpenDialog(dialog);
 
                     if (result != null)
@@ -80,9 +85,13 @@
             {
                 return _AddLocationCommand ?? (_AddLocationCommand = new RelayCommand(() =>
                 {
-                    var dialog = new SelectLocationViewModel();
-                    dialog.Locations = ProjectService.Instance.GetItemsOfType<Location>();
-                    dialog.SelectedLocations = LocationsInScene;
+                    var dialog = new SelectViewModel();
+                    dialog.Collection = new ObservableCollection<Item>(ProjectService.Instance.GetItemsOfType<Location>().Cast<Item>());
+                    dialog.SelectedItems = new ObservableCollection<Item>(LocationsInScene.Cast<Item>());
+                    dialog.Title = "All locations in project";
+                    dialog.Warning = "Location already in scene.";
+                    dialog.Button_Text = "Add location";
+
                     var result = MainViewModel._DialogService.OpenDialog(dialog);
 
                     if (result != null)

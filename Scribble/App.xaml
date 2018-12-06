@@ -34,15 +34,11 @@
             <DataTemplate DataType="{x:Type ViewModels:SceneViewModel}">
                 <Views:SceneView/>
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type DialogViewModels:SelectCharacterViewModel}">
-                <DialogViews:SelectCharacterView/>
+            
+            <DataTemplate DataType="{x:Type DialogViewModels:SelectViewModel}">
+                <DialogViews:SelectView/>
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type DialogViewModels:SelectLocationViewModel}">
-                <DialogViews:SelectLocationView/>
-            </DataTemplate>
-
+            
             <DataTemplate DataType="{x:Type ViewModels:ProjectItemsOverViewModel}">
                 <Views:ProjectItemsOverView/>
             </DataTemplate>
@@ -61,10 +57,6 @@
 
             <DataTemplate DataType="{x:Type Models:Theme}">
                 <TextBlock Text="{Binding Name}" Style="{StaticResource GoldRegularStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type DialogViewModels:SelectSceneViewModel}">
-                <DialogViews:SelectSceneView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type DialogViewModels:PreferencesViewModel}">

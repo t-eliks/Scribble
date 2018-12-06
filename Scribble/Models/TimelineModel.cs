@@ -5,6 +5,7 @@
     using Scribble.ViewModels.DialogViewModels;
     using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows;
@@ -50,10 +51,18 @@
             {
                 return _AddSceneCommand ?? (_AddSceneCommand = new RelayCommand(() => 
                 {
-                    var dialog = new SelectSceneViewModel();
-                    dialog.Scenes = ProjectService.Instance.GetItemsOfType<Scene>();
-                    dialog.SelectedScenes = new ObservableCollection<Scene>(Content);
-                    var result = MainViewModel._DialogService.OpenDialog(dialog);
+                    //var dialog = new SelectSceneViewModel();
+                    //dialog.Scenes = ProjectService.Instance.GetItemsOfType<Scene>();
+                    //dialog.SelectedScenes = new ObservableCollection<Scene>(Content);
+
+                    var dialog = new SelectViewModel();
+                    dialog.Collection = new ObservableCollection<Item>(ProjectService.Instance.GetItemsOfType<Scene>().Cast<Item>());
+                    dialog.SelectedItems = new ObservableCollection<Item>(Content.Cast<Item>());
+                    dialog.Title = "All scenes in project";
+                    dialog.Warning = "Scene already in timeline.";
+                    dialog.Button_Text = "Add scene";
+
+                    var result = MainViewModel._DialogService.OpenDialog(dialog) as Scene;
 
                     if (result != null)
                     {

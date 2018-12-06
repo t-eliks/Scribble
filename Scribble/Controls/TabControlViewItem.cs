@@ -3,8 +3,6 @@
     using Scribble.ViewModels;
     using Scribble.Models;
     using System.Windows.Controls;
-    using System.Windows.Input;
-    using Scribble.Logic;
     using System.Windows;
     using Scribble.Interfaces;
 
@@ -107,6 +105,11 @@
             }
             else
                 return this.Model == ((TabControlViewItem)obj).Model;
+        }
+
+        public override int GetHashCode()
+        {
+            return Model.GetHashCode();
         }
     }
 }

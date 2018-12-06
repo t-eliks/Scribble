@@ -248,44 +248,6 @@
 
         public static RoutedEventHandler OnSceneViewChanged;
 
-        //private BaseViewModel _CurrentView;
-
-        //public BaseViewModel CurrentView
-        //{
-        //    get
-        //    {
-        //        return _CurrentView;
-        //    }
-        //    set
-        //    {
-        //        if (_CurrentView != value)
-        //        {
-        //            _CurrentView = value;
-
-        //            RaisePropertyChanged(nameof(CurrentView));
-        //        }
-        //    }
-        //}
-
-        //private ObservableCollection<TabControlViewItem> _ViewItems;
-
-        //public ObservableCollection<TabControlViewItem> ViewItems
-        //{
-        //    get
-        //    {
-        //        return _ViewItems ?? (_ViewItems = new ObservableCollection<TabControlViewItem>());
-        //    }
-        //    set
-        //    {
-        //        if (_ViewItems != value)
-        //        {
-        //            _ViewItems = value;
-
-        //            RaisePropertyChanged(nameof(ViewItems));
-        //        }
-        //    }
-        //}
-
         public ObservableCollection<TabControlViewItem> ViewItems
         {
             get
@@ -328,6 +290,7 @@
 
                     ChangeView();
                 }
+
             }
         }
 

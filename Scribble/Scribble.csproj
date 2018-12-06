@@ -84,9 +84,7 @@
     <Compile Include="Controls\TabControlViewItem.cs" />
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\SelectSceneViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\SelectCharacterViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\SelectLocationViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemsOverViewModel.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
@@ -98,14 +96,8 @@
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DialogViews\SelectSceneView.xaml.cs">
-      <DependentUpon>SelectSceneView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogViews\SelectLocationView.xaml.cs">
-      <DependentUpon>SelectLocationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogViews\SelectCharacterView.xaml.cs">
-      <DependentUpon>SelectCharacterView.xaml</DependentUpon>
+    <Compile Include="Views\DialogViews\SelectView.xaml.cs">
+      <DependentUpon>SelectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
@@ -206,19 +198,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DialogViews\SelectSceneView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DialogViews\SelectLocationView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DialogViews\SelectCharacterView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\DialogViews\SelectProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\SelectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -445,6 +429,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Styles\goldbg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

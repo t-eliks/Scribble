@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Scribble.Views.DialogViews.SelectSceneView"
+﻿<UserControl x:Class="Scribble.Views.DialogViews.SelectView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,11 +8,11 @@
              mc:Ignorable="d" 
              Height="600" Width="800">
     <StackPanel Background="{StaticResource BackgroundColor2Brush}">
-        <TextBlock Style="{StaticResource GoldTitleStyle}" Foreground="{StaticResource ForegroundColorBrush}" Text="All characters in project" HorizontalAlignment="Center"/>
-        <ListBox Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedScene}" MinHeight="420" MaxHeight="420" ItemsSource="{Binding Scenes}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource ScenesListBoxItemTemplate}" Margin="20"/>
+        <TextBlock Style="{StaticResource GoldTitleStyle}" Foreground="{StaticResource ForegroundColorBrush}" Text="{Binding Title}" HorizontalAlignment="Center"/>
+        <ListBox Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" MinHeight="420" MaxHeight="420" ItemsSource="{Binding Collection}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource LocationsListBoxItemTemplate}" Margin="20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Controls:ImageButton Content="Close" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
-            <Controls:ImageButton Content="Add character" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddSceneCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
+            <Controls:ImageButton Content="{Binding Button_Text}" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddLocationCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

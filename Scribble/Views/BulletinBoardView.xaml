@@ -4,15 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scribble.Views"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
              mc:Ignorable="d" 
              >
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundColor2Brush}">
-        <ItemsControl ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <DockPanel>
+            <Controls:ImageButton Content="Refresh" DockPanel.Dock="Top" Background="{StaticResource ForegroundColorBrush}" BorderBrush="{StaticResource AccentColor1Brush}" Command="{Binding RefreshCommand}" Foreground="Black" Image="/icons/refresh.png" Height="35" HorizontalAlignment="Right"/>
+            <ItemsControl DockPanel.Dock="Bottom" ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DockPanel>
     </ScrollViewer>
 </UserControl>

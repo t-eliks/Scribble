@@ -39,15 +39,6 @@
         public void AddViewItem(IViewItem model, BaseViewModel viewmodel)
         {
             var viewitem = new TabControlViewItem(model, viewmodel);
-            //viewitem.OnMarkedForRemoval += (s, e) =>
-            //{
-            //    if (ViewItems != null)
-            //    {
-            //        if (model is Scene)
-            //            MainViewModel.OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
-            //        ViewItems.Remove(viewitem);
-            //    }
-            //};
 
             if (!ViewItems.Contains(viewitem))
                 ViewItems.Add(viewitem);
@@ -65,6 +56,24 @@
         {
             if (ViewItems.Contains(viewitem))
                 ViewItems.Remove(viewitem);
+        }
+
+        public void CloseTab(BaseItem item)
+        {
+            foreach (var viewitem in ViewItems.ToList())
+            {
+                if (viewitem.Model == item)
+                    CloseTab(viewitem);
+            }
+        }
+
+        public void MakeActive(BaseItem item)
+        {
+            foreach (var viewitem in ViewItems)
+            {
+                if (viewitem.Model == item)
+                    viewitem.IsSelected = true;
+            }
         }
 
         public void CloseOtherTabs(TabControlViewItem viewitem)

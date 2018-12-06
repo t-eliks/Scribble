@@ -142,6 +142,8 @@
         {
             projectItem.Delete();
 
+            ViewItemService.Instance.CloseTab(projectItem);
+
             SaveActiveProject();
         }
 
