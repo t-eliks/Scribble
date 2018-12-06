@@ -7,6 +7,7 @@
         xmlns:Controls="clr-namespace:Scribble.Controls"
         xmlns:Models="clr-namespace:Scribble.Models"
         xmlns:Views="clr-namespace:Scribble.Views"
+        xmlns:Logic="clr-namespace:Scribble.Logic"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1100"
         WindowStyle="None" AllowsTransparency="True" BorderBrush="{DynamicResource BackgroundColor2Brush}"
@@ -110,7 +111,94 @@
                             </Popup>
                             <Button Background="{DynamicResource BackgroundColor2Brush}" Content="{Binding ProjectName}" Grid.Column="1" Height="30" Width="100" MinWidth="100"/>
                         </Grid>
-                        <TabControl x:Name="cc" IsHitTestVisible="True" Style="{StaticResource ViewTabControlStyle}" ItemContainerStyle="{StaticResource ViewTabControlItemStyle}" Grid.Row="2" ItemsSource="{Binding ViewItems}"/>
+                        <TabControl x:Name="cc" IsHitTestVisible="True" Style="{StaticResource ViewTabControlStyle}" Grid.Row="2" ItemsSource="{Binding ViewItems}">
+                            <TabControl.Resources>
+                                <Style TargetType="{x:Type TabItem}">
+                                    <Setter Property="MinWidth" Value="120"/>
+                                    <Setter Property="Width" Value="Auto"/>
+                                    <Setter Property="Height" Value="Auto"/>
+                                    <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
+                                    <Setter Property="FontFamily" Value="{StaticResource Quicksand}"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                                <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                                                    <Grid.Resources>
+                                                        <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}"/>
+                                                    </Grid.Resources>
+                                                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0" CornerRadius="0" Margin="0">
+                                                    </Border>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ContentPresenter x:Name="contentPresenter" Grid.Column="0" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+                                                            <ContentPresenter.Style>
+                                                                <Style TargetType="ContentPresenter">
+                                                                    <Setter Property="AllowDrop" Value="True"/>
+                                                                    <EventSetter Event="PreviewMouseDown" Handler="TabItem_Drag"/>
+                                                                    <EventSetter Event="Drop" Handler="TabItem_Drop"/>
+                                                                </Style>
+                                                            </ContentPresenter.Style>
+                                                        </ContentPresenter>
+                                                        <Button Command="{Binding Data.CloseTabCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}" Grid.Column="1" HorizontalAlignment="Right" Width="12" Height="12" Margin="5, 0">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="/icons/exit.png" Stretch="UniformToFill"/>
+                                                            </Button.Background>
+                                                            <Button.Style>
+                                                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsMouseOver}" Value="True">
+                                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Button.Style>
+                                                        </Button>
+                                                    </Grid>
+                                                    <Grid.ContextMenu>
+                                                        <ContextMenu>
+                                                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Close" Command="{Binding Data.CloseTabCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}"/>
+                                                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Close all others" Command="{Binding Data.CloseOtherTabsCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}"/>
+                                                        </ContextMenu>
+                                                    </Grid.ContextMenu>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
+                                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+                                                        <Setter Property="BorderThickness" TargetName="mainBorder" Value="1"/>
+                                                    </MultiDataTrigger>
+                                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+                                                        <Setter Property="BorderThickness" TargetName="mainBorder" Value="1, 1, 1, 0"/>
+                                                    </DataTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="HeaderTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock x:Name="t" Text="{Binding}" FontWeight="Bold" FontSize="14" FontFamily="{DynamicResource Ubuntu}"/>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </TabControl.Resources>
+                        </TabControl>
                         <!--<ContentControl x:Name="cc" Grid.Row="2" IsHitTestVisible="True" Content="{Binding CurrentView}" Visibility="Collapsed"/>-->
                     </Grid>
                 </Border>

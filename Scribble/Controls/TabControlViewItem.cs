@@ -20,16 +20,16 @@
 
         public RoutedEventHandler OnMarkedForRemoval;
 
-        private ICommand _MarkForRemovalCommand;
+        //private ICommand _MarkForRemovalCommand;
 
-        public ICommand MarkForRemovalCommand
-        {
-            get
-            {
-                return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() =>
-                { OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs()); }));
-            }
-        }
+        //public ICommand MarkForRemovalCommand
+        //{
+        //    get
+        //    {
+        //        return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() =>
+        //        { OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs()); }));
+        //    }
+        //}
 
         public string Header
         {

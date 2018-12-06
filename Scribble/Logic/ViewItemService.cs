@@ -39,15 +39,15 @@
         public void AddViewItem(IViewItem model, BaseViewModel viewmodel)
         {
             var viewitem = new TabControlViewItem(model, viewmodel);
-            viewitem.OnMarkedForRemoval += (s, e) =>
-            {
-                if (ViewItems != null)
-                {
-                    if (model is Scene)
-                        MainViewModel.OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
-                    ViewItems.Remove(viewitem);
-                }
-            };
+            //viewitem.OnMarkedForRemoval += (s, e) =>
+            //{
+            //    if (ViewItems != null)
+            //    {
+            //        if (model is Scene)
+            //            MainViewModel.OnSceneViewChanged?.Invoke(this, new RoutedEventArgs());
+            //        ViewItems.Remove(viewitem);
+            //    }
+            //};
 
             if (!ViewItems.Contains(viewitem))
                 ViewItems.Add(viewitem);

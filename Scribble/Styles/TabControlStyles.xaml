@@ -104,21 +104,6 @@
                 <DataTemplate DataType="{x:Type Controls:TabControlViewItem}">
                     <DockPanel LastChildFill="False">
                         <TextBlock Text="{Binding Header}" DockPanel.Dock="Left" HorizontalAlignment="Center"/>
-                        <Button Command="{Binding MarkForRemovalCommand}" DockPanel.Dock="Right" Width="12" Height="12" Margin="15, 0, 0, 0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/icons/exit.png" Stretch="UniformToFill"/>
-                            </Button.Background>
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabItem}, Path=IsMouseOver}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
                     </DockPanel>
                 </DataTemplate>
             </Setter.Value>
@@ -138,68 +123,14 @@
                             <RowDefinition Height="35"/>
                             <RowDefinition Height="8*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="{StaticResource AccentColor1Brush}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" Grid.Row="0" Background="{StaticResource AccentColor1Brush}">
                             <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
-                        </Grid>
+                        </ScrollViewer>
                         <Border BorderThickness="1" Grid.Row="1">
                             <ContentPresenter ContentSource="SelectedContent"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ViewTabControlItemStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="MinWidth" Value="120"/>
-        <Setter Property="Height" Value="Auto"/>
-        <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
-        <Setter Property="FontFamily" Value="{StaticResource Quicksand}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-                        <Grid.Resources>
-                            <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}"/>
-                        </Grid.Resources>
-                        <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0" CornerRadius="0" Margin="0">
-                        </Border>
-                        <ContentPresenter x:Name="contentPresenter" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                        <Grid.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Close" Command="{Binding Data.CloseTabCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}"/>
-                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Close all others" Command="{Binding Data.CloseOtherTabsCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </Grid.ContextMenu>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1"/>
-                        </MultiDataTrigger>
-                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1, 1, 1, 0"/>
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="HeaderTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <TextBlock x:Name="t" Text="{Binding}" FontWeight="Bold" FontSize="14" FontFamily="{DynamicResource Ubuntu}"/>
-                </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
