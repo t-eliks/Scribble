@@ -1,14 +1,12 @@
 ﻿namespace Scribble.Controls
 {
-    using Scribble.ViewModels;
     using Scribble.Models;
     using System.Windows.Controls;
-    using System.Windows;
     using Scribble.Interfaces;
 
     public class TabControlViewItem : BaseModel
     {
-        public TabControlViewItem(IViewItem model, BaseViewModel viewmodel)
+        public TabControlViewItem(IViewItem model, IViewItemViewModel viewmodel)
         {
             Model = model;
             Content = new UserControl() { Content = viewmodel };
@@ -16,24 +14,22 @@
             IsSelected = true;
         }
 
-        public RoutedEventHandler OnMarkedForRemoval;
+        public TabControlViewItem(string header, IViewItemViewModel viewmodel)
+        {
+            Content = new UserControl() { Content = viewmodel };
 
-        //private ICommand _MarkForRemovalCommand;
+            _Header = header;
 
-        //public ICommand MarkForRemovalCommand
-        //{
-        //    get
-        //    {
-        //        return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() =>
-        //        { OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs()); }));
-        //    }
-        //}
+            IsSelected = true;
+        }
+
+        private string _Header;
 
         public string Header
         {
             get
             {
-                return Model.Header;
+                return Model != null ? Model.Header : _Header;
             }
         }
 
@@ -109,7 +105,10 @@
 
         public override int GetHashCode()
         {
-            return Model.GetHashCode();
+            if (Model != null)
+                return Model.GetHashCode();
+            else
+                return _Header.GetHashCode();
         }
     }
 }

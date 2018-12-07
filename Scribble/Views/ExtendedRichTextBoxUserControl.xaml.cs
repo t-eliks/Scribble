@@ -59,6 +59,20 @@
             rtb.LostFocus += (s, e) => { e.Handled = true; };
         }
 
+        public RoutedEventHandler OnFullscreenToggled;
+
+        public static readonly DependencyProperty FullscreenProperty = DependencyProperty.Register("Fullscreen",
+           typeof(bool), typeof(ExtendedRichTextBoxUserControl), new FrameworkPropertyMetadata(false) { PropertyChangedCallback = (s, e) =>
+           {
+           ((ExtendedRichTextBoxUserControl)s).OnFullscreenToggled?.Invoke(s, new RoutedEventArgs());
+           }});
+
+        public bool Fullscreen
+        {
+            get { return (bool)GetValue(FullscreenProperty); }
+            set { SetValue(FullscreenProperty, value); }
+        }
+
         private void Save_Changes(object sender, RoutedEventArgs e)
         {
             ExtendedRichTextBox.Save(rtb);
@@ -141,6 +155,30 @@
             {
                 EditingCommands.AlignRight.Execute(null, rtb);
                 rtb.Focus();
+            }
+        }
+
+        Window window;
+
+        private void Toggle_Fullscreen(object sender, RoutedEventArgs e)
+        {
+            if (!Fullscreen)
+            {
+                window = new Window();
+                window.Content = this;
+
+                window.WindowState = WindowState.Maximized;
+                window.WindowStyle = WindowStyle.None;
+
+                Fullscreen = true;
+
+                window.ShowDialog();
+            }
+            else if (window != null)
+            {
+                window.Close();
+                window = null;
+                Fullscreen = false;
             }
         }
 

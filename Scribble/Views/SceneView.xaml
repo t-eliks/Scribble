@@ -7,9 +7,9 @@
              xmlns:Controls="clr-namespace:Scribble.Controls"
              xmlns:Views="clr-namespace:Scribble.Views"
              >
-    <TabControl ItemContainerStyle="{StaticResource TabItemStyle}" Style="{StaticResource TabControlStyle1}">
+    <TabControl x:Name="tc" ItemContainerStyle="{StaticResource TabItemStyle}" Style="{StaticResource TabControlStyle1}">
         <TabItem Header="Scene">
-            <Views:ExtendedRichTextBoxUserControl/>
+            <Views:ExtendedRichTextBoxUserControl x:Name="rtb"/>
         </TabItem>
         <TabItem Header="Details">
             <ScrollViewer VerticalScrollBarVisibility="Auto">

@@ -8,15 +8,12 @@
              mc:Ignorable="d" 
              >
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundColor2Brush}">
-        <DockPanel>
-            <Controls:ImageButton Content="Refresh" DockPanel.Dock="Top" Background="{StaticResource ForegroundColorBrush}" BorderBrush="{StaticResource AccentColor1Brush}" Command="{Binding RefreshCommand}" Foreground="Black" Image="/icons/refresh.png" Height="35" HorizontalAlignment="Right"/>
-            <ItemsControl DockPanel.Dock="Bottom" ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
+        <ItemsControl Padding="15" ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-        </DockPanel>
     </ScrollViewer>
 </UserControl>

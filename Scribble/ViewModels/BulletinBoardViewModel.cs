@@ -1,11 +1,12 @@
 ﻿namespace Scribble.ViewModels
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Models;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
 
-    public class BulletinBoardViewModel : BaseViewModel
+    public class BulletinBoardViewModel : BaseViewModel, IViewItemViewModel
     {
         public BulletinBoardViewModel()
         {

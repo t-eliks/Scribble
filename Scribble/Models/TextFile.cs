@@ -5,6 +5,7 @@
     using System.IO;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Windows;
 
     [Serializable]
     public class TextFile : ISerializable
@@ -14,6 +15,8 @@
             if (!string.IsNullOrWhiteSpace(directory))
                 FilePath = FileService.GenerateEmptyRtf(directory);
         }
+
+        public RoutedEventHandler OnSavedToMainFile;
 
         private string _FilePath;
 
@@ -73,6 +76,8 @@
             if (BackupPath != null && File.Exists(BackupPath))
             {
                 File.Copy(BackupPath, FilePath, true);
+
+                OnSavedToMainFile?.Invoke(this, new RoutedEventArgs());
             }
         }
 

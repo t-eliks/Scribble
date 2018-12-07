@@ -1,12 +1,25 @@
 ﻿namespace Scribble.ViewModels
 {
+    using Scribble.Interfaces;
+    using Scribble.Logic;
     using Scribble.Models;
+    using System.Windows.Input;
 
-    public class NoteViewModel : BaseViewModel
+    public class NoteViewModel : BaseViewModel, IViewItemViewModel
     {
         public NoteViewModel()
         {
 
+        }
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { }));
+            }
         }
 
         private Note _Note;

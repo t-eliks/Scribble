@@ -1,5 +1,6 @@
 ﻿namespace Scribble.ViewModels
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Models;
     using Scribble.ViewModels.DialogViewModels;
@@ -7,7 +8,7 @@
     using System.Linq;
     using System.Windows.Input;
 
-    public class SceneViewModel : BaseViewModel
+    public class SceneViewModel : BaseViewModel, IViewItemViewModel
     {
         public SceneViewModel()
         {
@@ -101,6 +102,16 @@
                         RaisePropertyChanged(nameof(LocationsInScene));
                     }
                 }));
+            }
+        }
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(CharactersInScene)); RaisePropertyChanged(nameof(LocationsInScene)); }));
             }
         }
 

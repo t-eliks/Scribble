@@ -1,6 +1,7 @@
 ﻿namespace Scribble
 {
     using Scribble.Controls;
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.ViewModels;
     using System;
@@ -32,6 +33,14 @@
                 foreach (var item in CollectDisposableChildren(new List<IDisposable>(), ((TabControlViewItem)cc.SelectedItem).Content))
                 {
                     item.Dispose();
+                }
+            };
+
+            cc.SelectionChanged += (s, e) => 
+            {
+                if (e.Source is TabControl && ((TabControl)s).SelectedItem is TabControlViewItem viewitem)
+                {
+                    ((IViewItemViewModel)(viewitem.Content.Content)).RefreshCommand.Execute(null);
                 }
             };
         }

@@ -17,6 +17,8 @@
             Name = "New note";
             TextFile = new TextFile(ProjectService.Instance?.ActiveProject.FileDirectory);
             Parent = parent;
+
+            TextFile.OnSavedToMainFile += (s, e) => { RaisePropertyChanged(nameof(Preview)); };
         }
 
         private ICommand _OpenNoteCommand;
@@ -88,6 +90,8 @@
             Name = info.GetString("name");
             TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
             Parent = (Item)info.GetValue("parent", typeof(Item));
+
+            TextFile.OnSavedToMainFile += (s, e) => { RaisePropertyChanged(nameof(Preview)); };
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]

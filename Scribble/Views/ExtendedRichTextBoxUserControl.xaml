@@ -14,8 +14,6 @@
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Background="{StaticResource ForegroundColorBrush}">
-            <!--<Controls:ImageToggleButton x:Name="boldbtn" OffImage="/icons/editing/bwhite.png" OnImage="/icons/editing/bblack.png" Width="30" Height="30" Click="Bold_Selection"/>
-            <Controls:ImageToggleButton x:Name="italicbtn" OffImage="/icons/editing/iwhite.png" OnImage="/icons/editing/iblack.png" Width="30" Height="30" Click="Italic_Selection"/>-->
             <ToggleButton x:Name="boldbtn" Click="Bold_Selection" Content="B" Style="{StaticResource EditToggleButton}"/>
             <ToggleButton x:Name="italicbtn" Click="Italic_Selection" Content="I" Style="{StaticResource EditToggleButton}"/>
             <Button x:Name="bulletbtn" Click="Bullet_Selection" Style="{StaticResource EditButtonIcon}" Width="48" Height="48">
@@ -40,6 +38,11 @@
             </Button>
             <ComboBox x:Name="fontCB" ItemsSource="{Binding FontFamilies}" SelectionChanged="Font_Changed"/>
             <ComboBox x:Name="fontsizeCB" ItemsSource="{Binding FontSizes, Mode=OneWay}" SelectionChanged="FontSize_Changed"/>
+            <Button Click="Toggle_Fullscreen" Style="{StaticResource EditButtonIcon}" Width="36" Height="36">
+                <Button.Content>
+                    <Image Source="/icons/fullscreen.png" Stretch="UniformToFill" Width="36" Height="36"/>
+                </Button.Content>
+            </Button>
             <Controls:ImageButton Content="Save Changes" Foreground="Black" BorderBrush="Black" Image="/icons/savertf.png" Width="160" Height="55" Click="Save_Changes" HorizontalAlignment="Right"/>
         </DockPanel>
         <Controls:ExtendedRichTextBox AcceptsTab="True" Grid.Row="1" x:Name="rtb" TextFile="{Binding TextFile, Mode=OneWay}" Background="{StaticResource BackgroundColor1Brush}" Foreground="{StaticResource ForegroundColorBrush}" FontFamily="{StaticResource Ubuntu}">

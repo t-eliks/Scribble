@@ -36,17 +36,29 @@
             }
         }
 
-        public void AddViewItem(IViewItem model, BaseViewModel viewmodel)
+        public void AddViewItem(IViewItem model, IViewItemViewModel viewmodel)
         {
             var viewitem = new TabControlViewItem(model, viewmodel);
 
+            _AddViewItem(viewitem);
+        }
+
+        public void AddViewItem(string header, IViewItemViewModel viewmodel)
+        {
+            var viewitem = new TabControlViewItem(header, viewmodel);
+
+            _AddViewItem(viewitem);
+        }
+
+        private void _AddViewItem(TabControlViewItem viewitem)
+        {
             if (!ViewItems.Contains(viewitem))
                 ViewItems.Add(viewitem);
             else
             {
                 foreach (var item in ViewItems)
                 {
-                    if (item.Model == model)
+                    if (item.Model == viewitem.Model)
                         item.IsSelected = true;
                 }
             }

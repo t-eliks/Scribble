@@ -5,6 +5,7 @@
     using System.Windows;
     using System.Windows.Input;
     using Scribble.Controls;
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Logic.Dialog;
     using Scribble.Models;
@@ -18,7 +19,6 @@
 
             if (ProjectService.Instance.ShowSelectProjectDialog() == null)
                 Environment.Exit(0);
-
         }
 
 
@@ -50,9 +50,7 @@
                     if (SelectedProjectItem != null)
                         SelectedProjectItem.IsSelected = false;
 
-                    //var viewitem = new TabControlViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
-                    //if (!ViewItems.Contains(viewitem))
-                    //    ViewItems.Add(viewitem);
+                    ViewItemService.Instance.AddViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
 
                     RaisePropertyChanged(nameof(IsTimelineView));
                 }));
@@ -196,7 +194,7 @@
         {
             if (SelectedProjectItem != null)
             {
-                BaseViewModel vm = null;
+                IViewItemViewModel vm = null;
 
                 if (SelectedProjectItem is ProjectFolder f)
                 {

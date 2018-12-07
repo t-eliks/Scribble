@@ -4,8 +4,9 @@
     using Scribble.Logic;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
+    using Scribble.Interfaces;
 
-    public class CharacterDetailsViewModel : BaseViewModel
+    public class CharacterDetailsViewModel : BaseViewModel, IViewItemViewModel
     {
         public CharacterDetailsViewModel()
         {
@@ -27,6 +28,16 @@
                         Character.Notes.Add(note);
                     }
                 }));
+            }
+        }
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Scenes)); }));
             }
         }
 

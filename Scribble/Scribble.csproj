@@ -72,6 +72,7 @@
     <Compile Include="Controls\TimelineContent.cs" />
     <Compile Include="Interfaces\ISearchable.cs" />
     <Compile Include="Interfaces\IViewItem.cs" />
+    <Compile Include="Interfaces\IViewItemViewModel.cs" />
     <Compile Include="Logic\FieldGenerator.cs" />
     <Compile Include="Logic\FileService.cs" />
     <Compile Include="Logic\StringHelper.cs" />
@@ -432,6 +433,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\fullscreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

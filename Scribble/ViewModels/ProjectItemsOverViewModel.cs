@@ -1,11 +1,13 @@
 ﻿namespace Scribble.ViewModels
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Models;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows.Input;
 
-    public class ProjectItemsOverViewModel : BaseViewModel
+    public class ProjectItemsOverViewModel : BaseViewModel, IViewItemViewModel
     {
         public ProjectItemsOverViewModel()
         {
@@ -29,6 +31,16 @@
         }
 
         private bool _Initializing;
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Scenes)); }));
+            }
+        }
 
         private ProjectModel _Project;
 

@@ -1,11 +1,12 @@
 ﻿namespace Scribble.ViewModels
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Models;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
 
-    public class TimelineViewModel : BaseViewModel
+    public class TimelineViewModel : BaseViewModel, IViewItemViewModel
     {
         public TimelineViewModel() { }
 
@@ -21,6 +22,16 @@
 
                     RaisePropertyChanged(nameof(Timelines));
                 }));
+            }
+        }
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Timelines)); }));
             }
         }
 

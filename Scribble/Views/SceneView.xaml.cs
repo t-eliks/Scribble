@@ -1,5 +1,7 @@
 ﻿namespace Scribble.Views
 {
+    using System;
+    using System.Windows;
     using System.Windows.Controls;
 
     /// <summary>
@@ -10,6 +12,17 @@
         public SceneView()
         {
             InitializeComponent();
+
+
+            //Redraws the ExtendedRichTextBox user controls by switching tabs after exiting fullscreen. Temporary, until I come up with better solution.
+            rtb.OnFullscreenToggled += (s, e) => 
+            {
+                if (!rtb.Fullscreen)
+                {
+                    tc.SelectedIndex = 1;
+                    tc.SelectedIndex = 0;
+                }
+            };
         }
     }
 }

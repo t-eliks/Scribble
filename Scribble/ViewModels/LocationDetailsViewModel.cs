@@ -3,8 +3,10 @@
     using Scribble.Models;
     using Scribble.Logic;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
+    using Scribble.Interfaces;
 
-    public class LocationDetailsViewModel : BaseViewModel
+    public class LocationDetailsViewModel : BaseViewModel, IViewItemViewModel
     {
         public LocationDetailsViewModel()
         {
@@ -29,6 +31,16 @@
 
                     RaisePropertyChanged(nameof(Location));
                 }
+            }
+        }
+
+        private ICommand _RefreshCommand;
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Scenes)); }));
             }
         }
 
