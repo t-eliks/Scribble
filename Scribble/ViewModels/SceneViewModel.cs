@@ -60,6 +60,46 @@
             }
         }
 
+
+        private ICommand _AddNoteCommand;
+
+        public ICommand AddNoteCommand
+        {
+            get
+            {
+                return _AddNoteCommand ?? (_AddNoteCommand = new RelayCommand(() =>
+                {
+                    if (Scene != null)
+                    {
+                        var note = new Note(Scene);
+                        note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Scene.Notes.Remove(note); note.Remove(); } };
+                        Scene.Notes.Add(note);
+
+                        ProjectService.Instance.SaveActiveProject();
+                    }
+                }));
+            }
+        }
+
+        public ObservableCollection<Note> Notes
+        {
+            get
+            {
+                foreach (var note in Scene.Notes)
+                {
+                    //Prevent multiple subscriptions
+                    note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                    note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+
+                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                }
+
+                return Scene.Notes;
+            }
+        }
+
         private ICommand _RemoveLocationCommand;
 
         public ICommand RemoveLocationCommand

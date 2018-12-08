@@ -31,6 +31,19 @@
             }
         }
 
+        private ICommand _MarkForRemovalCommand;
+
+        public ICommand MarkForRemovalCommand
+        {
+            get
+            {
+                return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() => 
+                {
+                    OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs());
+                }));
+            }
+        }
+
         private string _Name;
 
         public string Name
@@ -79,9 +92,16 @@
 
         public RoutedEventHandler OnOpened;
 
+        public RoutedEventHandler OnMarkedForRemoval;
+
         public string Header { get { return Name; } }
 
         public TextFile TextFile { get; private set; }
+
+        public void Remove()
+        {
+            TextFile.Delete();
+        }
 
         #region Serialization
 

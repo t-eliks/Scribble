@@ -38,12 +38,16 @@
             </Button>
             <ComboBox x:Name="fontCB" ItemsSource="{Binding FontFamilies}" SelectionChanged="Font_Changed"/>
             <ComboBox x:Name="fontsizeCB" ItemsSource="{Binding FontSizes, Mode=OneWay}" SelectionChanged="FontSize_Changed"/>
-            <Button Click="Toggle_Fullscreen" Style="{StaticResource EditButtonIcon}" Width="36" Height="36">
+            <Button Click="Toggle_Fullscreen" Style="{StaticResource EditButtonIcon}" Width="48" Height="48">
                 <Button.Content>
                     <Image Source="/icons/fullscreen.png" Stretch="UniformToFill" Width="36" Height="36"/>
                 </Button.Content>
             </Button>
-            <Controls:ImageButton Content="Save Changes" Foreground="Black" BorderBrush="Black" Image="/icons/savertf.png" Width="160" Height="55" Click="Save_Changes" HorizontalAlignment="Right"/>
+            <Button Click="Save_Changes" Style="{StaticResource EditButtonIcon}" BorderBrush="Black" HorizontalAlignment="Right" Width="48" Height="48">
+                <Button.Content>
+                    <Image Source="/icons/savertf.png" Stretch="UniformToFill" Width="32" Height="32"/>
+                </Button.Content>
+            </Button>
         </DockPanel>
         <Controls:ExtendedRichTextBox AcceptsTab="True" Grid.Row="1" x:Name="rtb" TextFile="{Binding TextFile, Mode=OneWay}" Background="{StaticResource BackgroundColor1Brush}" Foreground="{StaticResource ForegroundColorBrush}" FontFamily="{StaticResource Ubuntu}">
             <Controls:ExtendedRichTextBox.Resources>

@@ -34,6 +34,27 @@
             }
         }
 
+        private ICommand _AddNoteCommand;
+
+        public ICommand AddNoteCommand
+        {
+            get
+            {
+                return _AddNoteCommand ?? (_AddNoteCommand = new RelayCommand(() =>
+                {
+                    if (Location != null)
+                    {
+                        var note = new Note(Location);
+                        note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Location.Notes.Remove(note); note.Remove(); } };
+                        Location.Notes.Add(note);
+
+                        ProjectService.Instance.SaveActiveProject();
+                    }
+                }));
+            }
+        }
+
         private ICommand _RefreshCommand;
 
         public ICommand RefreshCommand
@@ -49,6 +70,24 @@
             get
             {
                 return ProjectService.Instance.FindBiLinks<Scene>(Location);
+            }
+        }
+
+        public ObservableCollection<Note> Notes
+        {
+            get
+            {
+                foreach (var note in Location.Notes)
+                {
+                    //Prevent multiple subscriptions
+                    note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                    note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+
+                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                }
+
+                return Location.Notes;
             }
         }
 

@@ -16,15 +16,13 @@
           : base(name, imageSource)
         {
             Details = "No details.";
-            Notes = "No notes.";
         }
 
         public Location(string name, ImageSource imageSource, string description,
-            string details, string notes)
+            string details)
           : base(name, imageSource)
         {
             Details = details;
-            Notes = notes;
         }
 
         private string _Details;
@@ -46,31 +44,12 @@
             }
         }
 
-        private string _Notes;
-
-        public string Notes
-        {
-            get
-            {
-                return _Notes;
-            }
-            set
-            {
-                if (_Notes != value)
-                {
-                    _Notes = value;
-
-                    RaisePropertyChanged(nameof(Notes));
-                }
-            }
-        }
-
         public override bool CheckMatch(string query)
         {
             if (base.CheckMatch(query))
                 return true;
 
-            if (StringHelper.Contains(Details, query) || StringHelper.Contains(Notes, query))
+            if (StringHelper.Contains(Details, query))
                 return true;
 
             return false;
@@ -81,7 +60,6 @@
         protected Location(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Details = info.GetString("details");
-            Notes = info.GetString("notes");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -91,7 +69,6 @@
             base.GetObjectData(info, context);
 
             info.AddValue("details", Details);
-            info.AddValue("notes", Notes);
         }
 
         #endregion

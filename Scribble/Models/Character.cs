@@ -89,24 +89,7 @@
             }
         }
 
-        private ObservableCollection<Note> _Notes;
-
-        public ObservableCollection<Note> Notes
-        {
-            get
-            {
-                return _Notes ?? (_Notes = new ObservableCollection<Note>());
-            }
-            set
-            {
-                if (_Notes != value)
-                {
-                    _Notes = value;
-
-                    RaisePropertyChanged(nameof(Notes));
-                }
-            }
-        }
+        
 
         private string _Goals;
 
@@ -148,7 +131,6 @@
             CharacterType = (CharacterTypes)info.GetValue("charactertype", typeof(CharacterTypes));
             Short_Name = info.GetString("shortname");
             Biography = info.GetString("biography");
-            Notes = (ObservableCollection<Note>)info.GetValue("notes", typeof(ObservableCollection<Note>));
             Goals = info.GetString("goals");
         }
 
@@ -161,7 +143,6 @@
             info.AddValue("charactertype", CharacterType);
             info.AddValue("shortname", Short_Name);
             info.AddValue("biography", Biography);
-            info.AddValue("notes", Notes);
             info.AddValue("goals", Goals);
         }
 

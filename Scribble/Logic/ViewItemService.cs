@@ -3,10 +3,8 @@
     using Scribble.Controls;
     using Scribble.Interfaces;
     using Scribble.Models;
-    using Scribble.ViewModels;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Windows;
 
     public class ViewItemService : BaseModel
     {
@@ -70,7 +68,7 @@
                 ViewItems.Remove(viewitem);
         }
 
-        public void CloseTab(BaseItem item)
+        public void CloseTab(IViewItem item)
         {
             foreach (var viewitem in ViewItems.ToList())
             {
@@ -79,7 +77,7 @@
             }
         }
 
-        public void MakeActive(BaseItem item)
+        public void MakeActive(IViewItem item)
         {
             foreach (var viewitem in ViewItems)
             {

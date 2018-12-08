@@ -9,7 +9,7 @@
         xmlns:Views="clr-namespace:Scribble.Views"
         xmlns:Logic="clr-namespace:Scribble.Logic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1100"
+        Title="MainWindow" Height="700" MinWidth="1050" Width="1050"
         WindowStyle="None" AllowsTransparency="True" BorderBrush="{DynamicResource BackgroundColor2Brush}"
         Closing="Window_Closing">
 

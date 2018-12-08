@@ -42,11 +42,11 @@
             }
         }
 
-        public ObservableCollection<Item> Items
+        public ObservableCollection<BaseItem> Items
         {
             get
             {
-                return Folder?.Items;
+                return Folder?.Content;
             }
         }
     }

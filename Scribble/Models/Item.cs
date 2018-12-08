@@ -80,6 +80,25 @@
             }
         }
 
+        private ObservableCollection<Note> _Notes;
+
+        public ObservableCollection<Note> Notes
+        {
+            get
+            {
+                return _Notes ?? (_Notes = new ObservableCollection<Note>());
+            }
+            set
+            {
+                if (_Notes != value)
+                {
+                    _Notes = value;
+
+                    RaisePropertyChanged(nameof(Notes));
+                }
+            }
+        }
+
         public override void Delete()
         {
             ProjectService.Instance.ActiveProject?.DeleteItemBiLinks(this);
@@ -111,6 +130,7 @@
         protected Item(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Description = info.GetString("description");
+            Notes = (ObservableCollection<Note>)info.GetValue("notes", typeof(ObservableCollection<Note>));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -120,6 +140,7 @@
             base.GetObjectData(info, context);
 
             info.AddValue("description", Description);
+            info.AddValue("notes", Notes);
         }
 
         #endregion

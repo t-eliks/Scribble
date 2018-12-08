@@ -17,7 +17,18 @@
                         <StackPanel Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Center">
                             <Image Source="{TemplateBinding Image}" Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" Stretch="UniformToFill" Margin="3, 0, 0, 0"/>
                             <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" 
-                                   Foreground="{TemplateBinding Foreground}" Margin="5" FontSize="{TemplateBinding FontSize}" FontFamily="{DynamicResource Quicksand}"/>
+                                   Foreground="{TemplateBinding Foreground}" Margin="5" FontSize="{TemplateBinding FontSize}" FontFamily="{DynamicResource Quicksand}">
+                                <TextBlock.Style>
+                                    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="Text" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>

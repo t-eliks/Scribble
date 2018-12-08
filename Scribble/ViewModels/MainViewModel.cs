@@ -258,7 +258,7 @@
 
         public string ProjectName { get { return ProjectService.Instance.ActiveProject.Name; } }
 
-        public ObservableCollection<Item> TreeViewItems
+        public ObservableCollection<BaseItem> TreeViewItems
         {
             get
             {

@@ -60,7 +60,18 @@
             </ScrollViewer>
         </TabItem>
         <TabItem Header="Notes">
-            <TextBox Style="{StaticResource TextBoxStyle1}" Margin="20" VerticalAlignment="Stretch" Text="{Binding Scene.Notes, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+            <DockPanel LastChildFill="False">
+                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Notes}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                    <Button Content="Add note" Command="{Binding AddNoteCommand}"/>
+                </StackPanel>
+            </DockPanel>
         </TabItem>
         <TabItem Header="Characters">
             <Grid>

@@ -19,7 +19,6 @@
             Sights = "No sights.";
             Smells = "No smells.";
             Sounds = "No sounds.";
-            Notes = "No notes.";
             Outcome = "No outcome.";
 
             TextFile = new TextFile(ProjectService.Instance.ActiveProject?.FileDirectory);
@@ -101,25 +100,6 @@
             }
         }
 
-        private string _Notes;
-
-        public string Notes
-        {
-            get
-            {
-                return _Notes;
-            }
-            set
-            {
-                if (_Notes != value)
-                {
-                    _Notes = value;
-
-                    RaisePropertyChanged(nameof(Notes));
-                }
-            }
-        }
-
         private string _Outcome;
 
         public string Outcome
@@ -194,8 +174,7 @@
                 return true;
 
             if (StringHelper.Contains(Role, query) || StringHelper.Contains(Sights, query) || StringHelper.Contains(Sounds, query) 
-                || StringHelper.Contains(Smells, query) || StringHelper.Contains(Notes, query)
-                || StringHelper.Contains(Outcome, query))
+                || StringHelper.Contains(Smells, query) || StringHelper.Contains(Outcome, query))
                 return true;
 
             return false;
@@ -209,7 +188,6 @@
             Sights = info.GetString("sights");
             Sounds = info.GetString("sounds");
             Smells = info.GetString("smells");
-            Notes = info.GetString("notes");
             Outcome = info.GetString("outcome");
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
@@ -227,7 +205,6 @@
             info.AddValue("sights", Sights);
             info.AddValue("sounds", Sounds);
             info.AddValue("smells", Smells);
-            info.AddValue("notes", Notes);
             info.AddValue("outcome", Outcome);
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);

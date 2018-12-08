@@ -8,7 +8,7 @@
     using System.Windows.Media;
 
     [Serializable]
-    public class ProjectFolder : Item, ISerializable, IViewItem
+    public class ProjectFolder : BaseItem, ISerializable, IViewItem
     {
         public ProjectFolder() { }
 
@@ -20,11 +20,25 @@
 
         public bool RootFolder { get; set; }
 
-        public ObservableCollection<Item> Content
+        public ObservableCollection<BaseItem> Content
         {
             get
             {
-                return ProjectService.Instance.ActiveProject?.FindLinks<Item>(this);
+                return ProjectService.Instance.ActiveProject?.FindLinks<BaseItem>(this);
+            }
+        }
+
+        public override void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddItem(BaseItem item)
+        {
+            if (!ProjectService.Instance.ActiveProject.FindLinks<BaseItem>(this).Contains(item))
+            {
+                ProjectService.Instance.ActiveProject.AddSymbioticLink(new SymbioticLink<ProjectFolder, BaseItem>(this, item));
+                RaisePropertyChanged(nameof(Content));
             }
         }
 

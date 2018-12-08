@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Windows;
 
     [Serializable]
     public class ProjectModel : BaseModel, ISerializable
@@ -201,11 +200,11 @@
 
         public string FileDirectory { get { return Path.Combine(ProjectDirectory, "Files"); } }
 
-        public ObservableCollection<Item> ProjectFiles
+        public ObservableCollection<BaseItem> ProjectFiles
         {
             get
             {
-                return FindLinks<Item>(this);
+                return FindLinks<BaseItem>(this);
             }
         }
 
