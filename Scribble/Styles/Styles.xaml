@@ -33,8 +33,6 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
-   
-
     <Style TargetType="Controls:TimelineContent">
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
         <Setter Property="Template">
@@ -66,5 +64,58 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="Controls:MindMapContent">
+        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:MindMapContent">
+                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="200" Height="80">
+                        <ContentPresenter ContentTemplateSelector="{DynamicResource OutlineDataTemplateSelector}" Content="{TemplateBinding ContentControl.Content}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" To="3" Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" FillBehavior="Stop" Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+    </Style>
+
+    <Style TargetType="Controls:MindMapLineToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:MindMapLineToolTip">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" MinWidth="100" MaxWidth="300" Background="{TemplateBinding Background}">
+                        <DockPanel Margin="5">
+                            <TextBlock Margin="0, 4" DockPanel.Dock="Top" FontSize="18" FontWeight="Bold" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Header}"/>
+                            <TextBlock Text="{TemplateBinding Description}" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

@@ -11,6 +11,7 @@
             Model = model;
             Content = new UserControl() { Content = viewmodel };
 
+            Model.OnHeaderChanged += (s, e) => { RaisePropertyChanged(nameof(Header)); };
             IsSelected = true;
         }
 

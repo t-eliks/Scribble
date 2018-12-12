@@ -2,13 +2,13 @@
 {
     using System.Windows;
 
-    public class ExtendedRTBArgs : RoutedEventArgs
-    {
-        public ExtendedRTBArgs(RoutedEvent routedevent, string content)
-        {
-            Content = content;
-        }
+    //public class ExtendedRTBArgs : RoutedEventArgs
+    //{
+    //    public ExtendedRTBArgs(RoutedEvent routedevent, string content)
+    //    {
+    //        Content = content;
+    //    }
 
-        public string Content { get; set; }
-    }
+    //    public string Content { get; set; }
+    //}
 }

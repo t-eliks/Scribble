@@ -42,8 +42,8 @@
                 return _AddCharacterCommand ?? (_AddCharacterCommand = new RelayCommand(() => 
                 {
                     var dialog = new SelectViewModel();
-                    dialog.Collection = new ObservableCollection<Item>(ProjectService.Instance.GetItemsOfType<Character>().Cast<Item>());
-                    dialog.SelectedItems = new ObservableCollection<Item>(CharactersInScene.Cast<Item>());
+                    dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Character>().Cast<BaseItem>());
+                    dialog.SelectedItems = new ObservableCollection<BaseItem>(CharactersInScene.Cast<BaseItem>());
                     dialog.Title = "All characters in project";
                     dialog.Warning = "Character already in scene.";
                     dialog.Button_Text = "Add character";
@@ -52,7 +52,7 @@
 
                     if (result != null)
                     {
-                        Scene.AddItem(result);
+                        Scene.AddItem((Item)result);
 
                         RaisePropertyChanged(nameof(CharactersInScene));
                     }
@@ -71,9 +71,9 @@
                 {
                     if (Scene != null)
                     {
-                        var note = new Note(Scene);
+                        var note = new Note(Scene, "New note");
                         note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Scene.Notes.Remove(note); note.Remove(); } };
+                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Scene.Notes.Remove(note); note.Delete(); } };
                         Scene.Notes.Add(note);
 
                         ProjectService.Instance.SaveActiveProject();
@@ -92,8 +92,8 @@
                     note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
                     note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
 
-                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
-                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
+                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
                 }
 
                 return Scene.Notes;
@@ -127,8 +127,8 @@
                 return _AddLocationCommand ?? (_AddLocationCommand = new RelayCommand(() =>
                 {
                     var dialog = new SelectViewModel();
-                    dialog.Collection = new ObservableCollection<Item>(ProjectService.Instance.GetItemsOfType<Location>().Cast<Item>());
-                    dialog.SelectedItems = new ObservableCollection<Item>(LocationsInScene.Cast<Item>());
+                    dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Location>().Cast<BaseItem>());
+                    dialog.SelectedItems = new ObservableCollection<BaseItem>(LocationsInScene.Cast<BaseItem>());
                     dialog.Title = "All locations in project";
                     dialog.Warning = "Location already in scene.";
                     dialog.Button_Text = "Add location";
@@ -137,7 +137,7 @@
 
                     if (result != null)
                     {
-                        Scene.AddItem(result);
+                        Scene.AddItem((Item)result);
 
                         RaisePropertyChanged(nameof(LocationsInScene));
                     }

@@ -87,6 +87,12 @@
     <Compile Include="Controls\BulletinBoardDataTemplateSelector.cs" />
     <Compile Include="Controls\DefaultDataTemplateSelector.cs" />
     <Compile Include="Controls\ExtendedRTBArgs.cs" />
+    <Compile Include="Controls\MindMapCanvas.cs" />
+    <Compile Include="Controls\MindMapContent.cs" />
+    <Compile Include="Controls\MindMapDataTemplateSelector.cs" />
+    <Compile Include="Controls\MindMapLine.cs" />
+    <Compile Include="Controls\MindMapLineToolTip.cs" />
+    <Compile Include="Controls\PanScrollViewer.cs" />
     <Compile Include="Controls\SearchDataTemplateSelector.cs" />
     <Compile Include="Controls\TagTextBox.cs" />
     <Compile Include="Controls\TimelineCanvas.cs" />
@@ -100,20 +106,33 @@
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Logic\ViewItemService.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\MindMapItemModel.cs" />
+    <Compile Include="Models\MindMapLineModel.cs" />
+    <Compile Include="Models\MindMapModel.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TextFile.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Controls\TabControlViewItem.cs" />
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\MindMapInfoViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\MindMapLineInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
+    <Compile Include="ViewModels\MindMapSelectionViewModel.cs" />
+    <Compile Include="ViewModels\MindMapViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemsOverViewModel.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="Models\TimelineModel.cs" />
     <Compile Include="ViewModels\TimelineViewModel.cs" />
     <Compile Include="Views\BulletinBoardView.xaml.cs">
       <DependentUpon>BulletinBoardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\MindMapInfoView.xaml.cs">
+      <DependentUpon>MindMapInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\MindMapLineInfoView.xaml.cs">
+      <DependentUpon>MindMapLineInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
@@ -123,6 +142,12 @@
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MindMapSelectionView.xaml.cs">
+      <DependentUpon>MindMapSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MindMapView.xaml.cs">
+      <DependentUpon>MindMapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectItemsOverView.xaml.cs">
       <DependentUpon>ProjectItemsOverView.xaml</DependentUpon>
@@ -216,6 +241,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DialogViews\MindMapInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\MindMapLineInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DialogViews\PreferencesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -261,7 +294,6 @@
     <Compile Include="Logic\SerializationService.cs" />
     <Compile Include="Logic\ProjectService.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\ProjectFile.cs" />
     <Compile Include="Models\ProjectFolder.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\Scene.cs" />
@@ -295,6 +327,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\NoteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MindMapSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MindMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,6 +494,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\pipes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\timeline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mindmap.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@
     using System.Linq;
     using System.Collections.Generic;
     using Scribble.Interfaces;
+    using System.Windows;
 
     [Serializable]
     public class Item : BaseItem, ISerializable, ISearchable, IViewItem
@@ -175,6 +176,5 @@
         Character,
         Location,
         Scene,
-        Timeline
     }
 }

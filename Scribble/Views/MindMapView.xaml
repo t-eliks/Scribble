@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Scribble.Views.MindMapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <UserControl.Resources>
+        <VisualBrush 
+      x:Key="HatchBrush" 
+      TileMode="Tile" Viewport="0,0,100,100" 
+      ViewportUnits="Absolute" Viewbox="0,0,100,100"    
+      ViewboxUnits="Absolute">
+            <VisualBrush.Visual>
+                <Canvas>
+                    <Rectangle Fill="#3b4a72" Width="100" Height="100" />
+                    <Path StrokeThickness="2" Data="M 10 50 l 40 -40 l 40 40 l -40 40 l -40 -40 z">
+                        <Path.Stroke>
+                            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                <GradientStop Color="#45dba2" Offset="0.0"/>
+                                <GradientStop Color="#409c8e" Offset="1.1"/>
+                            </LinearGradientBrush>
+                        </Path.Stroke>
+                    </Path>
+                </Canvas>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BackgroundColor2Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding ElementName=canvas, Path=Status}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Controls:PanScrollViewer Grid.Row="1" x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <Controls:MindMapCanvas HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding MindMap.Content, Mode=TwoWay}">
+                <Controls:MindMapCanvas.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Template="{StaticResource SubmenuHeader}" Header="Add">
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Character" Command="{Binding AddCharacterCommand}"/>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Location" Command="{Binding AddLocationCommand}"/>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Scene" Command="{Binding AddSceneCommand}"/>
+                        </MenuItem>
+                        <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit info" Command="{Binding EditInfoCommand}"/>
+                    </ContextMenu>
+                </Controls:MindMapCanvas.ContextMenu>
+            </Controls:MindMapCanvas>
+        </Controls:PanScrollViewer>
+    </Grid>
+</UserControl>

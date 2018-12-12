@@ -4,6 +4,7 @@
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
@@ -35,10 +36,14 @@
                 {
                     _Name = value;
 
+                    OnHeaderChanged?.Invoke(this, new RoutedEventArgs());
+
                     RaisePropertyChanged(nameof(Name));
                 }
             }
         }
+
+        public event RoutedEventHandler OnHeaderChanged;
 
         public string Header { get { return Name; } }
 

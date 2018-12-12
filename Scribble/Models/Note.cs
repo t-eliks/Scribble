@@ -10,11 +10,11 @@
     using System.Windows.Input;
 
     [Serializable]
-    public class Note : BaseModel, ISerializable, IViewItem
+    public class Note : BaseItem, ISerializable, IViewItem
     {
-        public Note(Item parent)
+        public Note(Item parent, string name) : base(name, IconHelper.FindIconInResources("Note"))
         {
-            Name = "New note";
+            Name = name;
             TextFile = new TextFile(ProjectService.Instance?.ActiveProject.FileDirectory);
             Parent = parent;
 
@@ -41,25 +41,6 @@
                 {
                     OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs());
                 }));
-            }
-        }
-
-        private string _Name;
-
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (value != _Name)
-                {
-                    _Name = value;
-
-                    RaisePropertyChanged(nameof(Name));
-                }
             }
         }
 
@@ -94,20 +75,17 @@
 
         public RoutedEventHandler OnMarkedForRemoval;
 
-        public string Header { get { return Name; } }
-
         public TextFile TextFile { get; private set; }
 
-        public void Remove()
+        public override void Delete()
         {
             TextFile.Delete();
         }
 
         #region Serialization
 
-        protected Note(SerializationInfo info, StreamingContext context)
+        protected Note(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Name = info.GetString("name");
             TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
             Parent = (Item)info.GetValue("parent", typeof(Item));
 
@@ -116,10 +94,11 @@
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            base.GetObjectData(info, context);
+
             info.AddValue("textfile", TextFile);
-            info.AddValue("name", Name);
             info.AddValue("parent", Parent);
         }
 

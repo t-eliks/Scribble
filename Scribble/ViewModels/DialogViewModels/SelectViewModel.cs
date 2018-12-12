@@ -8,7 +8,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class SelectViewModel : DialogViewModelBase<Item>
+    public class SelectViewModel : DialogViewModelBase<BaseItem>
     {
         public SelectViewModel()
         {
@@ -98,13 +98,13 @@
             }
         }
 
-        private ObservableCollection<Item> _Collection;
+        private ObservableCollection<BaseItem> _Collection;
 
-        public ObservableCollection<Item> Collection
+        public ObservableCollection<BaseItem> Collection
         {
             get
             {
-                return _Collection ?? (_Collection = new ObservableCollection<Item>());
+                return _Collection ?? (_Collection = new ObservableCollection<BaseItem>());
             }
             set
             {
@@ -117,9 +117,9 @@
             }
         }
 
-        private ObservableCollection<Item> _SelectedItems;
+        private ObservableCollection<BaseItem> _SelectedItems;
 
-        public ObservableCollection<Item> SelectedItems
+        public ObservableCollection<BaseItem> SelectedItems
         {
             get
             {
@@ -136,9 +136,9 @@
             }
         }
 
-        private Item _SelectedItem;
+        private BaseItem _SelectedItem;
 
-        public Item SelectedItem
+        public BaseItem SelectedItem
         {
             get
             {

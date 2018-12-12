@@ -57,6 +57,24 @@
             }
         }
 
+        private ICommand _SwitchToOutlinesView;
+
+        public ICommand SwitchToOutlinesView
+        {
+            get
+            {
+                return _SwitchToOutlinesView ?? (_SwitchToOutlinesView = new RelayCommand(() =>
+                {
+                    if (SelectedProjectItem != null)
+                        SelectedProjectItem.IsSelected = false;
+
+                    ViewItemService.Instance.AddViewItem("Outlines", new MindMapSelectionViewModel());
+
+                    RaisePropertyChanged(nameof(IsTimelineView));
+                }));
+            }
+        }
+
         private ICommand _AddFileCommand;
 
         public ICommand AddFileCommand

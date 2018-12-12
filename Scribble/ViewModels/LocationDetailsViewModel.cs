@@ -44,9 +44,9 @@
                 {
                     if (Location != null)
                     {
-                        var note = new Note(Location);
+                        var note = new Note(Location, "New note");
                         note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Location.Notes.Remove(note); note.Remove(); } };
+                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Location.Notes.Remove(note); note.Delete(); } };
                         Location.Notes.Add(note);
 
                         ProjectService.Instance.SaveActiveProject();
@@ -83,8 +83,8 @@
                     note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
                     note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
 
-                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
-                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Remove(); } };
+                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
+                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
                 }
 
                 return Location.Notes;

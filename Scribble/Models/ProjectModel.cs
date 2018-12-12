@@ -250,6 +250,25 @@
             }
         }
 
+        private ObservableCollection<MindMapModel> _MindMaps;
+
+        public ObservableCollection<MindMapModel> MindMaps
+        {
+            get
+            {
+                return _MindMaps ?? (_MindMaps = new ObservableCollection<MindMapModel>());
+            }
+            set
+            {
+                if (_MindMaps != value)
+                {
+                    _MindMaps = value;
+
+                    RaisePropertyChanged(nameof(MindMaps));
+                }
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -384,6 +403,7 @@
             ProjectDirectory = info.GetString("projectdirectory");
             SymbioticLinks = (ObservableCollection<SymbioticLink>)info.GetValue("symbioticlinks", typeof(ObservableCollection<SymbioticLink>));
             Timelines = (ObservableCollection<TimelineModel>)info.GetValue("timelines", typeof(ObservableCollection<TimelineModel>));
+            MindMaps = (ObservableCollection<MindMapModel>)info.GetValue("outlines", typeof(ObservableCollection<MindMapModel>));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -400,6 +420,7 @@
             info.AddValue("projectdirectory", ProjectDirectory);
             info.AddValue("symbioticlinks", SymbioticLinks);
             info.AddValue("timelines", Timelines);
+            info.AddValue("outlines", MindMaps);
         }
 
         #endregion
