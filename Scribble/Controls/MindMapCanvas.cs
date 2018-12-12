@@ -73,7 +73,7 @@
                                 {
                                     MindMapContent content = new MindMapContent(item, canvas);
 
-                                    if (canvas.Parent is PanScrollViewer viewer)
+                                    if (content.CanvasLeft == 0 && content.CanvasTop == 0 && canvas.Parent is PanScrollViewer viewer)
                                     {
                                         content.CanvasLeft = viewer.HorizontalOffset;
                                         content.CanvasTop = viewer.VerticalOffset;
