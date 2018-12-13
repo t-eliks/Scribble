@@ -73,6 +73,8 @@
                                 {
                                     MindMapContent content = new MindMapContent(item, canvas);
 
+                                    content.Background = MindMapItemModel.GetBrush(content.Item.BackgroundColor);
+
                                     if (content.CanvasLeft == 0 && content.CanvasTop == 0 && canvas.Parent is PanScrollViewer viewer)
                                     {
                                         content.CanvasLeft = viewer.HorizontalOffset;
@@ -80,14 +82,17 @@
                                     }
 
                                     ContextMenu menu = new ContextMenu();
-                                    MenuItem menuitem = new MenuItem() { Header = "Remove", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
-                                    menuitem.Click += (o, a) =>
-                                    {
-                                        if (canvas.Content.Contains(item))
-                                        {
-                                            canvas.Content.Remove(item);
-                                        }
-                                    };
+
+                                    MenuItem menuitem = new MenuItem() { Header = "Change background", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
+
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Charcoal", MindMapItemColors.Charcoal, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Embers", MindMapItemColors.Embers, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Ink", MindMapItemColors.Ink, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Jewel", MindMapItemColors.Jewel, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Teal", MindMapItemColors.Teal, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Vermillion", MindMapItemColors.Vermillion, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Void", MindMapItemColors.Void, content));
+                                    menuitem.Items.Add(canvas.GetColorMenuItem("Watermelon", MindMapItemColors.Watermelon, content));
 
                                     MenuItem menuitem2 = new MenuItem() { Header = "Connect to", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                                     menuitem2.Click += (o, a) =>
@@ -96,11 +101,21 @@
                                         canvas.ConnectingItem = content;
 
                                         canvas.Status = "To connect, select another item. To cancel, right-click anywhere on the map.";
-                                        //canvas.CaptureMouse();
+                                        
+                                    };
+
+                                    MenuItem menuitem3 = new MenuItem() { Header = "Remove", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                                    menuitem3.Click += (o, a) =>
+                                    {
+                                        if (canvas.Content.Contains(item))
+                                        {
+                                            canvas.Content.Remove(item);
+                                        }
                                     };
 
                                     menu.Items.Add(menuitem);
                                     menu.Items.Add(menuitem2);
+                                    menu.Items.Add(menuitem3);
 
                                     content.ContextMenu = menu;
 
@@ -119,10 +134,16 @@
                         newContent.CollectionChanged += UpdateContent;
 
                     UpdateContent.Invoke(null, null);
-
-                    //canvas.LoadSerializedLines();
                 }
             });
+
+        private MenuItem GetColorMenuItem(string header, MindMapItemColors color, MindMapContent content)
+        {
+            MenuItem menuitem = new MenuItem() { Header = header, Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+            menuitem.Click += (o, a) => { content.ChangeBackground(color); };
+
+            return menuitem;
+        }
 
         public ObservableCollection<MindMapItemModel> Content
         {
@@ -173,7 +194,7 @@
                     {
                         if (!linemodels.Contains(linemodel))
                         {
-                            content.AddLine(GetMindMapContent(linemodel.GetOpposite(content.Item).MindMapItem), linemodel.Header, linemodel.Description);
+                            content.AddLine(GetMindMapContent(linemodel.GetOpposite(content.Item).MindMapItem), linemodel.Header, linemodel.Description, linemodel.Color);
 
                             linemodels.Add(linemodel);
                         }

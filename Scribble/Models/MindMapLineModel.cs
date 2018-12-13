@@ -51,6 +51,25 @@
             }
         }
 
+        private MindMapItemColors _Color = MindMapItemColors.Charcoal;
+
+        public MindMapItemColors Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                if (_Color != value)
+                {
+                    _Color = value;
+
+                    RaisePropertyChanged(nameof(Color));
+                }
+            }
+        }
+
         public MindMapItemModel GetOpposite(MindMapItemModel model)
         {
             if (MindMapContent1 == model)
@@ -105,6 +124,7 @@
             MindMapContent2 = (MindMapItemModel)info.GetValue("content2", typeof(MindMapItemModel));
             Header = info.GetString("header");
             Description = info.GetString("description");
+            Color = (MindMapItemColors)info.GetValue("color", typeof(MindMapItemColors));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -115,6 +135,7 @@
             info.AddValue("content2", MindMapContent2);
             info.AddValue("header", Header);
             info.AddValue("description", Description);
+            info.AddValue("color", Color);
         }
     }
 }
