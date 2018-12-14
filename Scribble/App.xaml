@@ -82,33 +82,37 @@
             <DataTemplate DataType="{x:Type DialogViewModels:MindMapLineInfoViewModel}">
                 <DialogViews:MindMapLineInfoView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type DialogViewModels:MindMapStringEditViewModel}">
+                <DialogViews:MindMapStringEditView/>
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type Models:Scene}" x:Key="SceneOutlineDataTemplate">
-                <DockPanel Height="80">
+                <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Character}" x:Key="CharacterOutlineDataTemplate">
-                <DockPanel Height="80">
+                <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Location}" x:Key="LocationOutlineDataTemplate">
-                <DockPanel Height="80">
+                <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
@@ -120,6 +124,13 @@
                 </StackPanel>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type Models:MindMapString}">
+                <StackPanel VerticalAlignment="Stretch" Margin="5" DockPanel.Dock="Right" Background="Transparent">
+                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
+                    <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:MindMapModel}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
                     <Border.InputBindings>

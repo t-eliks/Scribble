@@ -179,20 +179,17 @@
             return ActiveProject?.FindTags(tag, itemlimit);
         }
 
-        public ProjectModel CreateNewProject(string header, string author, string type)
+        public ProjectModel CreateNewProject(string header, string author, Forms form, Genres genre)
         {
-            return null;
+            var project = new ProjectModel(header, author, form, genre, DateTime.Now, RootProjectsDirectory + $"\\{header}");
 
-            //var project = new ProjectModel(header, author, type, DateTime.Now, RootProjectsDirectory + $"\\{header}");
+            this.ActiveProject = project;
 
-            //var root = new ProjectFolder(project, project.Name, IconHelper.FindIconInResources("Book"));
-            //root.AddItem(new ProjectFolder(project, "Locations", IconHelper.FindIconInResources("Map")));
-            //root.AddItem(new ProjectFolder(project, "Characters", IconHelper.FindIconInResources("Character")));
-            //root.AddItem(new ProjectFolder(project, "Notes", IconHelper.FindIconInResources("Note")));
+            var root = new ProjectFolder(project.Name, IconHelper.FindIconInResources("Book")) { RootFolder = true, IsSelected = true };
 
-            //project.ProjectFiles.Add(root);
+            project.AddSymbioticLink(new SymbioticLink<ProjectModel, ProjectFolder>(project, root));
 
-            //return project;
+            return project;
         }
 
         public ProjectModel SetUpTestProject(string header, string author, Forms form, Genres genre)

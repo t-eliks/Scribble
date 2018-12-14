@@ -105,6 +105,7 @@
     <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Logic\ViewItemService.cs" />
+    <Compile Include="Models\MindMapString.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\MindMapItemModel.cs" />
     <Compile Include="Models\MindMapLineModel.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\MindMapInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\MindMapLineInfoViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\MindMapStringEditViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
@@ -133,6 +135,9 @@
     </Compile>
     <Compile Include="Views\DialogViews\MindMapLineInfoView.xaml.cs">
       <DependentUpon>MindMapLineInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\MindMapStringEditView.xaml.cs">
+      <DependentUpon>MindMapStringEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
@@ -246,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\MindMapLineInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\MindMapStringEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

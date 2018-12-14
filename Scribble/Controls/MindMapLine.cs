@@ -126,7 +126,7 @@
                 menuitem.Items.Add(GetColorMenuItem("Void", MindMapItemColors.Void));
                 menuitem.Items.Add(GetColorMenuItem("Watermelon", MindMapItemColors.Watermelon));
 
-                MenuItem menuitem2 = new MenuItem() { Header = "Edit info", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                MenuItem menuitem2 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                 menuitem2.Click += (o, a) =>
                 {
                     var dialog = new MindMapLineInfoViewModel() { MindMapLine = this };

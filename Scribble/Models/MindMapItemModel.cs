@@ -109,6 +109,44 @@
             }
         }
 
+        private double _Width = 200.0;
+
+        public double Width
+        {
+            get
+            {
+                return _Width;
+            }
+            set
+            {
+                if (_Width != value)
+                {
+                    _Width = value;
+
+                    RaisePropertyChanged(nameof(Width));
+                }
+            }
+        }
+
+        private double _Height = 80.0;
+
+        public double Height
+        {
+            get
+            {
+                return _Height;
+            }
+            set
+            {
+                if (_Height != value)
+                {
+                    _Height = value;
+
+                    RaisePropertyChanged(nameof(Height));
+                }
+            }
+        }
+
         public MindMapLineModel GetLine(MindMapItemModel model1, MindMapItemModel model2)
         {
             foreach (var line in Lines)
@@ -139,6 +177,8 @@
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
             BackgroundColor = (MindMapItemColors)info.GetValue("backgroundcolor", typeof(MindMapItemColors));
+            Height = info.GetDouble("height");
+            Width = info.GetDouble("width");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -150,6 +190,8 @@
             info.AddValue("lines", Lines);
             info.AddValue("item", MindMapItem);
             info.AddValue("backgroundcolor", BackgroundColor);
+            info.AddValue("height", Height);
+            info.AddValue("width", Width);
         }
 
         public static SolidColorBrush GetBrush(MindMapItemColors color)

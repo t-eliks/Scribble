@@ -43,6 +43,7 @@
                             <MenuItem Template="{StaticResource SubmenuItem}" Header="Character" Command="{Binding AddCharacterCommand}"/>
                             <MenuItem Template="{StaticResource SubmenuItem}" Header="Location" Command="{Binding AddLocationCommand}"/>
                             <MenuItem Template="{StaticResource SubmenuItem}" Header="Scene" Command="{Binding AddSceneCommand}"/>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Label" Command="{Binding AddMindMapStringCommand}"/>
                         </MenuItem>
                         <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit info" Command="{Binding EditInfoCommand}"/>
                     </ContextMenu>

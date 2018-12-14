@@ -140,6 +140,19 @@
             }
         }
 
+        private ICommand _AddMindMapStringCommand;
+
+        public ICommand AddMindMapStringCommand
+        {
+            get
+            {
+                return _AddMindMapStringCommand ?? (_AddMindMapStringCommand = new RelayCommand(() =>
+                {
+                    MindMap.Content.Add(new MindMapItemModel(new MindMapString("New label", "New label content.")));
+                }));
+            }
+        }
+
         private ObservableCollection<BaseItem> SelectedItems()
         {
             var items = new ObservableCollection<BaseItem>();

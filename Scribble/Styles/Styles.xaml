@@ -39,7 +39,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Controls:TimelineContent">
                     <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="200" Height="80">
-                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                        <ContentPresenter x:Name="cc" Content="{TemplateBinding ContentControl.Content}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -64,13 +64,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="Controls:MindMapContent">
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Controls:MindMapContent">
-                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="200" Height="80">
+                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <ContentPresenter ContentTemplateSelector="{DynamicResource OutlineDataTemplateSelector}" Content="{TemplateBinding ContentControl.Content}"/>
                     </Border>
                     <ControlTemplate.Triggers>

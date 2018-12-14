@@ -16,7 +16,9 @@
             ParentCanvas = parentCanvas;
             CanvasLeft = item.CanvasLeft;
             CanvasTop = item.CanvasTop;
-            
+
+            this.MouseLeave += (s, e) => { Mouse.OverrideCursor = null; };
+
         }
 
         public MindMapCanvas ParentCanvas { get; private set; }
@@ -125,6 +127,11 @@
         double newX = 0;
         double newY = 0;
 
+        private bool WidthResizeMode = false;
+        private bool HeightResizeMode = false;
+        private double previousWidth = 0.0;
+        private double previousHeight = 0.0;
+
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonDown(e);
@@ -132,7 +139,19 @@
             point = e.GetPosition(this);
 
             if (!this.IsMouseCaptured)
+            {
+                if (point.X >= (this.ActualWidth - 5))
+                {
+                    WidthResizeMode = true;
+                    previousWidth = this.Width;
+                }
+                else if (point.Y >= (this.ActualHeight - 5))
+                {
+                    HeightResizeMode = true;
+                    previousHeight = this.Height;
+                }
                 this.CaptureMouse();
+            }
         }
 
         protected override void OnPreviewMouseMove(MouseEventArgs e)
@@ -141,32 +160,75 @@
 
             if (this.IsMouseCaptured)
             {
-                secondpoint = e.GetPosition(this);
-                MindMapCanvas c = this.Parent as MindMapCanvas;
+                if (!WidthResizeMode && !HeightResizeMode)
+                {
+                    secondpoint = e.GetPosition(this);
+                    MindMapCanvas c = this.Parent as MindMapCanvas;
 
-                newX = CanvasLeft + (secondpoint.X - point.X);
+                    newX = CanvasLeft + (secondpoint.X - point.X);
 
-                if (newX < 0)
-                    newX = 0;
-                else if (newX >= c.ActualWidth - this.ActualWidth)
-                    newX = c.ActualWidth - this.ActualWidth;
+                    if (newX < 0)
+                        newX = 0;
+                    else if (newX >= c.ActualWidth - this.ActualWidth)
+                        newX = c.ActualWidth - this.ActualWidth;
 
-                this.CanvasLeft = newX;
+                    this.CanvasLeft = newX;
 
-                newY = CanvasTop + (secondpoint.Y - point.Y);
+                    newY = CanvasTop + (secondpoint.Y - point.Y);
 
-                if (newY < 0)
-                    newY = 0;
-                else if (newY >= c.ActualHeight - this.ActualHeight)
-                    newY = c.ActualHeight - this.ActualHeight;
+                    if (newY < 0)
+                        newY = 0;
+                    else if (newY >= c.ActualHeight - this.ActualHeight)
+                        newY = c.ActualHeight - this.ActualHeight;
 
-                this.CanvasTop = newY;
+                    this.CanvasTop = newY;
+                }
+                else if (WidthResizeMode)
+                {
+                    secondpoint = e.GetPosition(this);
+
+                    if (previousWidth + secondpoint.X - point.X >= 70)
+                    {
+                        this.Width = previousWidth + secondpoint.X - point.X;
+                        this.Item.Width = previousWidth + secondpoint.X - point.X;
+                    }
+                }
+                else if (HeightResizeMode)
+                {
+                    secondpoint = e.GetPosition(this);
+
+                    if (previousHeight + secondpoint.Y - point.Y >= 50)
+                    {
+                        this.Height = previousHeight + secondpoint.Y - point.Y;
+                        this.Item.Height = previousHeight + secondpoint.Y - point.Y;
+                    }
+                }
+            }
+            else
+            {
+                var position = e.GetPosition(this);
+
+                if (position.X >= (this.ActualWidth - 5))
+                {
+                    Mouse.OverrideCursor = Cursors.SizeWE;
+                }
+                else if (position.Y >= (this.ActualHeight - 5))
+                {
+                    Mouse.OverrideCursor = Cursors.SizeNS;
+                }
+                else
+                    Mouse.OverrideCursor = Cursors.Arrow;
             }
         }
 
         protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnPreviewMouseLeftButtonUp(e);
+
+            if (WidthResizeMode)
+                WidthResizeMode = false;
+            if (HeightResizeMode)
+                HeightResizeMode = false;
 
             this.ReleaseMouseCapture();
         }

@@ -10,6 +10,8 @@
     using System.Windows.Media;
     using System.Linq;
     using System.Windows.Shapes;
+    using Scribble.ViewModels.DialogViewModels;
+    using Scribble.ViewModels;
 
     public class MindMapCanvas : Canvas
     {
@@ -32,6 +34,7 @@
             this.Focus();
 
             this.Loaded += (s, e) => { LoadSerializedLines(); Status = DefaultStatus; };
+
         }
 
         private const string DefaultStatus = "To interact, right-click anywhere on the map. Zoom-in with mouse wheel.";
@@ -74,6 +77,8 @@
                                     MindMapContent content = new MindMapContent(item, canvas);
 
                                     content.Background = MindMapItemModel.GetBrush(content.Item.BackgroundColor);
+                                    content.Width = item.Width;
+                                    content.Height = item.Height;
 
                                     if (content.CanvasLeft == 0 && content.CanvasTop == 0 && canvas.Parent is PanScrollViewer viewer)
                                     {
@@ -116,6 +121,13 @@
                                     menu.Items.Add(menuitem);
                                     menu.Items.Add(menuitem2);
                                     menu.Items.Add(menuitem3);
+
+                                    if (item.MindMapItem is MindMapString str)
+                                    {
+                                        MenuItem menuitem4 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                                        menuitem4.Click += (o, a) => { var dialog = new MindMapStringEditViewModel() { MindMapString = str }; MainViewModel._DialogService.OpenDialog(dialog); };
+                                        menu.Items.Add(menuitem4);
+                                    }
 
                                     content.ContextMenu = menu;
 
