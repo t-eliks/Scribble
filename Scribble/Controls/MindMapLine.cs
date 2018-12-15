@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Controls
 {
+    using Scribble.Logic;
     using Scribble.Models;
     using Scribble.ViewModels;
     using Scribble.ViewModels.DialogViewModels;
@@ -28,8 +29,8 @@
 
             var linemodel = new MindMapLineModel(content1.Item, content2.Item);
 
-            content1.Item.Lines.Add(linemodel);
-            content2.Item.Lines.Add(linemodel);
+            //content1.Item.Lines.Add(linemodel);
+            //content2.Item.Lines.Add(linemodel);
 
             LineModel = linemodel;
 

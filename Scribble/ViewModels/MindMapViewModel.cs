@@ -34,6 +34,15 @@
                 }
             }
         }
+
+        public ObservableCollection<MindMapItemModel> Content
+        {
+            get
+            {
+                return MindMap.Content;
+            }
+        }
+
         private ICommand _RefreshCommand;
 
         public ICommand RefreshCommand
@@ -42,10 +51,7 @@
             {
                 return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() =>
                 {
-                    foreach (var item in MindMap.Content)
-                    {
-                        //item.CallLineUpdate();
-                    }
+                    RaisePropertyChanged(nameof(Content));
                 }));
             }
         }
@@ -84,7 +90,10 @@
 
                     if (result != null)
                     {
-                        MindMap.Content.Add(new MindMapItemModel(result));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
+                        //MindMap.Content.Add(new MindMapItemModel(result));
+
+                        RaisePropertyChanged(nameof(Content));
                     }
                 }));
             }
@@ -109,7 +118,10 @@
 
                     if (result != null)
                     {
-                        MindMap.Content.Add(new MindMapItemModel(result));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
+                        //MindMap.Content.Add(new MindMapItemModel(result));
+
+                        RaisePropertyChanged(nameof(Content));
                     }
                 }));
             }
@@ -134,7 +146,10 @@
 
                     if (result != null)
                     {
-                        MindMap.Content.Add(new MindMapItemModel(result));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
+                        //MindMap.Content.Add(new MindMapItemModel(result));
+
+                        RaisePropertyChanged(nameof(Content));
                     }
                 }));
             }
@@ -149,6 +164,10 @@
                 return _AddMindMapStringCommand ?? (_AddMindMapStringCommand = new RelayCommand(() =>
                 {
                     MindMap.Content.Add(new MindMapItemModel(new MindMapString("New label", "New label content.")));
+
+                    ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(new MindMapString("New label", "New label content."))));
+
+                    RaisePropertyChanged(nameof(Content));
                 }));
             }
         }

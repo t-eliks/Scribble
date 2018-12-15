@@ -89,6 +89,8 @@
 
         public override void Delete()
         {
+            base.Delete();
+
             TextFile.Delete();
         }
 

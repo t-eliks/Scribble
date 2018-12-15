@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Logic;
     using System;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
@@ -12,6 +13,15 @@
         public MindMapItemModel(BaseItem item)
         {
             MindMapItem = item;
+            item.MarkedForRemoval += (s, e) => {
+                foreach (var linemodel in Lines)
+                {
+                    ProjectService.Instance.DeleteItemBiLinks(linemodel);
+                }
+
+                ProjectService.Instance.DeleteItemBiLinks(this);
+                
+            };
         }
 
         private BaseItem _MindMapItem;
@@ -52,22 +62,30 @@
             }
         }
 
-        private ObservableCollection<MindMapLineModel> _Lines;
+        //private ObservableCollection<MindMapLineModel> _Lines;
+
+        //public ObservableCollection<MindMapLineModel> Lines
+        //{
+        //    get
+        //    {
+        //        return _Lines ?? (_Lines = new ObservableCollection<MindMapLineModel>());
+        //    }
+        //    set
+        //    {
+        //        if (_Lines != value)
+        //        {
+        //            _Lines = value;
+
+        //            RaisePropertyChanged(nameof(Lines));
+        //        }
+        //    }
+        //}
 
         public ObservableCollection<MindMapLineModel> Lines
         {
             get
             {
-                return _Lines ?? (_Lines = new ObservableCollection<MindMapLineModel>());
-            }
-            set
-            {
-                if (_Lines != value)
-                {
-                    _Lines = value;
-
-                    RaisePropertyChanged(nameof(Lines));
-                }
+                return ProjectService.Instance.FindLinks<MindMapLineModel>(this);
             }
         }
 
@@ -173,12 +191,20 @@
         protected MindMapItemModel(SerializationInfo info, StreamingContext context)
         {
             MindMapItem = (BaseItem)info.GetValue("item", typeof(BaseItem));
-            Lines = (ObservableCollection<MindMapLineModel>)info.GetValue("lines", typeof(ObservableCollection<MindMapLineModel>));
+            //Lines = (ObservableCollection<MindMapLineModel>)info.GetValue("lines", typeof(ObservableCollection<MindMapLineModel>));
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
             BackgroundColor = (MindMapItemColors)info.GetValue("backgroundcolor", typeof(MindMapItemColors));
             Height = info.GetDouble("height");
             Width = info.GetDouble("width");
+
+            MindMapItem.MarkedForRemoval += (s, e) => {
+                ProjectService.Instance.DeleteItemBiLinks(this);
+                foreach (var linemodel in Lines)
+                {
+                    ProjectService.Instance.DeleteItemBiLinks(linemodel);
+                }
+            };
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -187,7 +213,7 @@
         {
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);
-            info.AddValue("lines", Lines);
+            //info.AddValue("lines", Lines);
             info.AddValue("item", MindMapItem);
             info.AddValue("backgroundcolor", BackgroundColor);
             info.AddValue("height", Height);

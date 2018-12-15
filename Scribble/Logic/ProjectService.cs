@@ -179,6 +179,11 @@
             return ActiveProject?.FindTags(tag, itemlimit);
         }
 
+        public void DeleteItemBiLinks(object item)
+        {
+            ActiveProject?.DeleteItemBiLinks(item);
+        }
+
         public ProjectModel CreateNewProject(string header, string author, Forms form, Genres genre)
         {
             var project = new ProjectModel(header, author, form, genre, DateTime.Now, RootProjectsDirectory + $"\\{header}");

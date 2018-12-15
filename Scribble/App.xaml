@@ -96,7 +96,7 @@
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" VerticalAlignment="Stretch" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
@@ -106,7 +106,7 @@
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" VerticalAlignment="Stretch" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
@@ -116,7 +116,7 @@
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
                         <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" MaxHeight="50" MaxWidth="190" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" VerticalAlignment="Stretch" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
                 </DockPanel>
             </DataTemplate>
@@ -129,7 +129,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:MindMapString}">
-                <StackPanel VerticalAlignment="Stretch" Margin="5" DockPanel.Dock="Right" Background="Transparent">
+                <StackPanel VerticalAlignment="Stretch" Margin="5" Background="Transparent">
                     <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
                     <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>

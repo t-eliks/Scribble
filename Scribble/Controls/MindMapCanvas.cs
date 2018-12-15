@@ -64,6 +64,8 @@
 
                     MindMapCanvas canvas = (MindMapCanvas)s;
 
+                    canvas.Children.Clear();
+
                     var newContent = (ObservableCollection<MindMapItemModel>)e.NewValue;
 
                     var UpdateContent = new NotifyCollectionChangedEventHandler((sender, args) =>
@@ -140,7 +142,7 @@
                     });
 
                     if (e.OldValue != null)
-                        ((ObservableCollection<Scene>)e.OldValue).CollectionChanged -= UpdateContent;
+                        ((ObservableCollection<MindMapItemModel>)e.OldValue).CollectionChanged -= UpdateContent;
 
                     if (newContent != null)
                         newContent.CollectionChanged += UpdateContent;

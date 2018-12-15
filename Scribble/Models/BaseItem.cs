@@ -22,6 +22,8 @@
             IsExpanded = true;
         }
 
+        public event RoutedEventHandler MarkedForRemoval;
+
         private string _Name;
 
         public string Name
@@ -147,7 +149,10 @@
 
         #region Methods
 
-        public abstract void Delete();
+        public virtual void Delete()
+        {
+            MarkedForRemoval?.Invoke(this, new RoutedEventArgs());
+        }
 
         public virtual void Collapse()
         {

@@ -18,22 +18,30 @@
 
         }
 
-        private ObservableCollection<MindMapItemModel> _Content;
+        //private ObservableCollection<MindMapItemModel> _Content;
+
+        //public ObservableCollection<MindMapItemModel> Content
+        //{
+        //    get
+        //    {
+        //        return _Content ?? (_Content = new ObservableCollection<MindMapItemModel>());
+        //    }
+        //    set
+        //    {
+        //        if (_Content != value)
+        //        {
+        //            _Content = value;
+
+        //            RaisePropertyChanged(nameof(Content));
+        //        }
+        //    }
+        //}
 
         public ObservableCollection<MindMapItemModel> Content
         {
             get
             {
-                return _Content ?? (_Content = new ObservableCollection<MindMapItemModel>());
-            }
-            set
-            {
-                if (_Content != value)
-                {
-                    _Content = value;
-
-                    RaisePropertyChanged(nameof(Content));
-                }
+                return ProjectService.Instance.FindLinks<MindMapItemModel>(this);
             }
         }
 
@@ -91,7 +99,7 @@
 
         protected MindMapModel(SerializationInfo info, StreamingContext context)
         {
-            Content = (ObservableCollection<MindMapItemModel>)info.GetValue("content", typeof(ObservableCollection<MindMapItemModel>));
+            //Content = (ObservableCollection<MindMapItemModel>)info.GetValue("content", typeof(ObservableCollection<MindMapItemModel>));
             Header = info.GetString("header");
             Description = info.GetString("description");
         }
@@ -100,7 +108,7 @@
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("content", Content);
+            //info.AddValue("content", Content);
             info.AddValue("header", Header);
             info.AddValue("description", Description);
         }

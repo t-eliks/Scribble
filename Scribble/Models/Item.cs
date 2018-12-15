@@ -102,6 +102,8 @@
 
         public override void Delete()
         {
+            base.Delete();
+
             ProjectService.Instance.ActiveProject?.DeleteItemBiLinks(this);
 
             ViewItemService.Instance.CloseTab(this);

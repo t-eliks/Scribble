@@ -36,7 +36,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding ElementName=canvas, Path=Status}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Controls:PanScrollViewer Grid.Row="1" x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-            <Controls:MindMapCanvas HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding MindMap.Content, Mode=TwoWay}">
+            <Controls:MindMapCanvas HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding Content}">
                 <Controls:MindMapCanvas.ContextMenu>
                     <ContextMenu>
                         <MenuItem Template="{StaticResource SubmenuHeader}" Header="Add">

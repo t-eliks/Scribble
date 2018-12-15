@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
@@ -11,6 +12,9 @@
         {
             MindMapContent1 = content1;
             MindMapContent2 = content2;
+
+            ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapItemModel, MindMapLineModel>(content1, this));
+            ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapItemModel, MindMapLineModel>(content2, this));
         }
 
         private MindMapItemModel _MindMapContent1;

@@ -134,9 +134,12 @@
                 {
                     if (SelectedProjectItem != null)
                     {
-                        ProjectService.Instance.RemoveItem(_SelectedProjectItem);
+                        if (MessageBox.Show("Are you sure? This cannot be undone.", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        {
+                            ProjectService.Instance.RemoveItem(_SelectedProjectItem);
 
-                        RaisePropertyChanged(nameof(TreeViewItems));
+                            RaisePropertyChanged(nameof(TreeViewItems));
+                        }
                     }
                 }));
             }
