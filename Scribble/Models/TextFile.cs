@@ -5,7 +5,9 @@
     using System.IO;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
     using System.Windows;
+    using System.Windows.Documents;
 
     [Serializable]
     public class TextFile : ISerializable
@@ -83,11 +85,18 @@
 
         public void Delete()
         {
-            if (File.Exists(FilePath))
-                File.Delete(FilePath);
+            try
+            {
+                if (File.Exists(FilePath))
+                    File.Delete(FilePath);
 
-            if (File.Exists(BackupPath))
-                File.Delete(BackupPath);
+                if (File.Exists(BackupPath))
+                    File.Delete(BackupPath);
+            }
+            catch (IOException ex)
+            {
+                
+            }
         }
 
         #region Serialization

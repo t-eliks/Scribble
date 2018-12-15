@@ -1,4 +1,4 @@
-﻿namespace Scribble.Controls
+﻿ namespace Scribble.Controls
 {
     using System.Windows;
     using System.Windows.Controls;

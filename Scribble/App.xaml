@@ -86,6 +86,10 @@
             <DataTemplate DataType="{x:Type DialogViewModels:MindMapStringEditViewModel}">
                 <DialogViews:MindMapStringEditView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type DialogViewModels:NoteInfoViewModel}">
+                <DialogViews:NoteInfoView/>
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type Models:Scene}" x:Key="SceneOutlineDataTemplate">
                 <DockPanel>
@@ -130,6 +134,7 @@
                     <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </DataTemplate>
+           
             
             <DataTemplate DataType="{x:Type Models:MindMapModel}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
@@ -183,7 +188,10 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Note}">
-                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5" Padding="2">
+                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
+                    <Border.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding OpenNoteCommand}"/>
+                    </Border.InputBindings>
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
@@ -207,20 +215,12 @@
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
-                    <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding OpenNoteCommand}"/>
-                    </Border.InputBindings>
-                    <Border.ContextMenu>
-                        <ContextMenu>
-                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Remove" Command="{Binding MarkForRemovalCommand}"/>
-                            </ContextMenu>
-                    </Border.ContextMenu>
-                    <DockPanel Background="Transparent" LastChildFill="True" MinHeight="100"  MaxHeight="300" Margin="5" MinWidth="170" MaxWidth="250">
+                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
                         <StackPanel DockPanel.Dock="Top">
                             <Image Source="{Binding Image}" Margin="3, 1" HorizontalAlignment="Right" Width="16" Height="16" Stretch="UniformToFill"/>
-                            <TextBlock Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
                         </StackPanel>
-                        <TextBlock Text="{Binding Preview}" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
                     </DockPanel>
                 </Border>
             </DataTemplate>

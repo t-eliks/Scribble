@@ -44,7 +44,7 @@
                 {
                     if (Location != null)
                     {
-                        var note = new Note(Location, "New note");
+                        var note = new Note(Location, "New note", null);
                         note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
                         note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Location.Notes.Remove(note); note.Delete(); } };
                         Location.Notes.Add(note);

@@ -85,8 +85,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\BulletinBoardDataTemplateSelector.cs" />
+    <Compile Include="Controls\DataTypeConverter.cs" />
     <Compile Include="Controls\DefaultDataTemplateSelector.cs" />
-    <Compile Include="Controls\ExtendedRTBArgs.cs" />
     <Compile Include="Controls\MindMapCanvas.cs" />
     <Compile Include="Controls\MindMapContent.cs" />
     <Compile Include="Controls\MindMapDataTemplateSelector.cs" />
@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\DialogViewModels\MindMapInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\MindMapLineInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\MindMapStringEditViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\NoteInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
@@ -138,6 +139,9 @@
     </Compile>
     <Compile Include="Views\DialogViews\MindMapStringEditView.xaml.cs">
       <DependentUpon>MindMapStringEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\NoteInfoView.xaml.cs">
+      <DependentUpon>NoteInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
@@ -255,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\MindMapStringEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\NoteInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

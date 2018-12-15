@@ -170,6 +170,23 @@
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <MenuItem Header="Delete" Command="{Binding Data.RemoveCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
+                                        <MenuItem.Resources>
+                                            <Controls:DataTypeConverter x:Key="DataTypeConverter"/>
+                                        </MenuItem.Resources>
+                                        <MenuItem.Style>
+                                            <Style TargetType="MenuItem">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Converter={StaticResource DataTypeConverter}}" Value="{x:Type Models:ProjectFolder}"/>
+                                                            <Condition Binding="{Binding Path=RootFolder}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </MenuItem.Style>
                                         <MenuItem.Icon>
                                             <Image Source="/icons/remove.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                         </MenuItem.Icon>

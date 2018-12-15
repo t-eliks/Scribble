@@ -30,7 +30,14 @@
 
         public override void Delete()
         {
-            throw new NotImplementedException();
+            foreach (var item in Content)
+            {
+                item.Delete();
+            }
+
+            ProjectService.Instance.ActiveProject?.DeleteItemBiLinks(this);
+
+            ViewItemService.Instance.CloseTab(this);
         }
 
         public void AddItem(BaseItem item)

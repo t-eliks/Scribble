@@ -103,6 +103,8 @@
         public override void Delete()
         {
             ProjectService.Instance.ActiveProject?.DeleteItemBiLinks(this);
+
+            ViewItemService.Instance.CloseTab(this);
         }
 
         public bool ContainsTag(string tag)

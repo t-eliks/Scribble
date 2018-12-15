@@ -1,6 +1,5 @@
 ﻿namespace Scribble.Models
 {
-    using Scribble.Controls;
     using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
@@ -12,13 +11,13 @@
     [Serializable]
     public class Note : BaseItem, ISerializable, IViewItem
     {
-        public Note(Item parent, string name) : base(name, IconHelper.FindIconInResources("Note"))
+        public Note(Item parent, string name, string description) : base(name, IconHelper.FindIconInResources("Note"))
         {
             Name = name;
             TextFile = new TextFile(ProjectService.Instance?.ActiveProject.FileDirectory);
             Parent = parent;
+            Description = description;
 
-            TextFile.OnSavedToMainFile += (s, e) => { RaisePropertyChanged(nameof(Preview)); };
         }
 
         private ICommand _OpenNoteCommand;
@@ -44,14 +43,6 @@
             }
         }
 
-        public string Preview
-        {
-            get
-            {
-                return ExtendedRichTextBox.ParseRTF(TextFile);
-            }
-        }
-
         private Item _Parent;
 
         public Item Parent
@@ -67,6 +58,25 @@
                     _Parent = value;
 
                     RaisePropertyChanged(nameof(Parent));
+                }
+            }
+        }
+
+        private string _Description;
+
+        public string Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (_Description != value)
+                {
+                    _Description = value;
+
+                    RaisePropertyChanged(nameof(Description));
                 }
             }
         }
@@ -88,8 +98,7 @@
         {
             TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
             Parent = (Item)info.GetValue("parent", typeof(Item));
-
-            TextFile.OnSavedToMainFile += (s, e) => { RaisePropertyChanged(nameof(Preview)); };
+            Description = info.GetString("description");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -100,6 +109,7 @@
 
             info.AddValue("textfile", TextFile);
             info.AddValue("parent", Parent);
+            info.AddValue("description", Description);
         }
 
         #endregion

@@ -71,7 +71,7 @@
                 {
                     if (Scene != null)
                     {
-                        var note = new Note(Scene, "New note");
+                        var note = new Note(Scene, "New note", null);
                         note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
                         note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Scene.Notes.Remove(note); note.Delete(); } };
                         Scene.Notes.Add(note);
