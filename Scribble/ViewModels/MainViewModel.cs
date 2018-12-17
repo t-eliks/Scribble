@@ -96,6 +96,9 @@
                             case ItemTypes.Scene:
                                 ProjectService.Instance.AddScene(folder);
                                 break;
+                            case ItemTypes.Note:
+                                ProjectService.Instance.AddNote(folder);
+                                break;
                             default:
                                 break;
                         }
@@ -235,6 +238,9 @@
                             break;
                         case Scene s:
                             vm = new SceneViewModel() { Scene = s };
+                            break;
+                        case Note n:
+                            vm = new NoteViewModel() { Note = n };
                             break;
                     }
 

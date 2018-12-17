@@ -2,6 +2,8 @@
 {
     using Scribble.Interfaces;
     using Scribble.Logic;
+    using Scribble.ViewModels;
+    using Scribble.ViewModels.DialogViewModels;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
@@ -9,7 +11,7 @@
     using System.Windows.Input;
 
     [Serializable]
-    public class Note : BaseItem, ISerializable, IViewItem
+    public class Note : BaseItem, ISerializable, IViewItem, ITwoField
     {
         public Note(Item parent, string name, string description) : base(name, IconHelper.FindIconInResources("Note"))
         {
@@ -20,13 +22,11 @@
 
         }
 
-        private ICommand _OpenNoteCommand;
-
-        public ICommand OpenNoteCommand
+        public override ICommand ToggleIsSelectedCommand
         {
             get
             {
-                return _OpenNoteCommand ?? (_OpenNoteCommand = new RelayCommand(() => { OnOpened?.Invoke(this, new RoutedEventArgs()); }));
+                return _ToggleIsSelectedCommand ?? (_ToggleIsSelectedCommand = new RelayCommand(() => { IsSelected = true; OnOpened?.Invoke(this, new RoutedEventArgs()); }));
             }
         }
 
@@ -39,6 +39,21 @@
                 return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() => 
                 {
                     OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs());
+                }));
+            }
+        }
+
+        private ICommand _EditCommand;
+
+        public ICommand EditCommand
+        {
+            get
+            {
+                return _EditCommand ?? (_EditCommand = new RelayCommand(() =>
+                {
+                    var dialog = new TwoFieldInfoViewModel() { Item = this };
+
+                    MainViewModel._DialogService.OpenDialog(dialog);
                 }));
             }
         }

@@ -127,7 +127,7 @@
                                     if (item.MindMapItem is MindMapString str)
                                     {
                                         MenuItem menuitem4 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
-                                        menuitem4.Click += (o, a) => { var dialog = new MindMapStringEditViewModel() { MindMapString = str }; MainViewModel._DialogService.OpenDialog(dialog); };
+                                        menuitem4.Click += (o, a) => { var dialog = new TwoFieldInfoViewModel() { Item = str }; MainViewModel._DialogService.OpenDialog(dialog); };
                                         menu.Items.Add(menuitem4);
                                     }
 

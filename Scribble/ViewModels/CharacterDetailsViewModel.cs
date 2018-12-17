@@ -24,10 +24,7 @@
                 {
                     if (Character != null)
                     {
-                        var note = new Note(Character, "New note", null);
-                        var dialog = new NoteInfoViewModel() { Note = note };
-                        MainViewModel._DialogService.OpenDialog(dialog);
-                        note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
+                        var note = new Note(Character, "New note", "No description.");
                         note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Character.Notes.Remove(note); note.Delete(); } };
                         Character.Notes.Add(note);
 

@@ -1,16 +1,29 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
 
     [Serializable]
-    public class MindMapString : BaseItem, ISerializable
+    public class MindMapString : BaseItem, ISerializable, ITwoField
     {
         public MindMapString(string header, string content) : base(header, IconHelper.FindIconInResources("Note"))
         {
             Content = content;
+        }
+
+        public string Description
+        {
+            get
+            {
+                return Content;
+            }
+            set
+            {
+                Content = value;
+            }
         }
 
         private string _Content;

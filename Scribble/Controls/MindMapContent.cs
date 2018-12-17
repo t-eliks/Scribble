@@ -98,7 +98,7 @@
 
             if (!linkexists)
             {
-                var l = new MindMapLine(this, content2) { ParentCanvas = ParentCanvas, Header = header, Description = description, Color = color};
+                var l = new MindMapLine(this, content2) { ParentCanvas = ParentCanvas, Name = header, Description = description, Color = color};
 
                 this.Lines.Add(l);
                 content2.Lines.Add(l);

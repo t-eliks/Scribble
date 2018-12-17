@@ -138,6 +138,15 @@
             SaveActiveProject();
         }
 
+        public void AddNote(ProjectFolder parentFolder)
+        {
+            var note = new Note(null, "New note", "No description.");
+
+            parentFolder.AddItem(note);
+
+            SaveActiveProject();
+        }
+
         public void RemoveItem(BaseItem projectItem)
         {
             projectItem.Delete();

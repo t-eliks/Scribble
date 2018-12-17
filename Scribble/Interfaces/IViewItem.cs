@@ -4,7 +4,7 @@
 
     public interface IViewItem
     {
-        string Header { get; }
+        string Name { get; }
 
         event RoutedEventHandler OnHeaderChanged;
     }

@@ -13,6 +13,16 @@
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Stretch" Background="{StaticResource BackgroundColor2Brush}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Note.Parent}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <TextBlock Text="Editing note of " FontSize="16" Margin="5, 0"/>
                 <ContentPresenter Content="{Binding Note.Parent}" ContentTemplateSelector="{StaticResource DefaultDataTemplateSelector}" Margin="5, 0"/>
             </StackPanel>

@@ -98,6 +98,7 @@
     <Compile Include="Controls\TimelineCanvas.cs" />
     <Compile Include="Controls\TimelineContent.cs" />
     <Compile Include="Interfaces\ISearchable.cs" />
+    <Compile Include="Interfaces\ITwoField.cs" />
     <Compile Include="Interfaces\IViewItem.cs" />
     <Compile Include="Interfaces\IViewItemViewModel.cs" />
     <Compile Include="Logic\FieldGenerator.cs" />
@@ -115,12 +116,9 @@
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Controls\TabControlViewItem.cs" />
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\MindMapInfoViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\MindMapLineInfoViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\MindMapStringEditViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\NoteInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\TwoFieldInfoViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\MindMapSelectionViewModel.cs" />
     <Compile Include="ViewModels\MindMapViewModel.cs" />
@@ -131,23 +129,14 @@
     <Compile Include="Views\BulletinBoardView.xaml.cs">
       <DependentUpon>BulletinBoardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DialogViews\MindMapInfoView.xaml.cs">
-      <DependentUpon>MindMapInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogViews\MindMapLineInfoView.xaml.cs">
-      <DependentUpon>MindMapLineInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogViews\MindMapStringEditView.xaml.cs">
-      <DependentUpon>MindMapStringEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogViews\NoteInfoView.xaml.cs">
-      <DependentUpon>NoteInfoView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\SelectView.xaml.cs">
       <DependentUpon>SelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\TwoFieldInfoView.xaml.cs">
+      <DependentUpon>TwoFieldInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
@@ -250,22 +239,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DialogViews\MindMapInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DialogViews\MindMapLineInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DialogViews\MindMapStringEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DialogViews\NoteInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\DialogViews\PreferencesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\SelectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\TwoFieldInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

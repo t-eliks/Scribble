@@ -11,7 +11,7 @@
     using System.Windows.Input;
 
     [Serializable]
-    public class MindMapModel : BaseModel, ISerializable, IViewItem
+    public class MindMapModel : BaseModel, ISerializable, IViewItem, ITwoField
     {
         public MindMapModel()
         {
@@ -57,23 +57,23 @@
             }
         }
 
-        private string _Header = "New Mindmap";
+        private string _Name = "New Mindmap";
 
-        public string Header
+        public string Name
         {
             get
             {
-                return _Header;
+                return _Name;
             }
             set
             {
-                if (_Header != value)
+                if (_Name != value)
                 {
-                    _Header = value;
+                    _Name = value;
 
                     OnHeaderChanged?.Invoke(this, new RoutedEventArgs());
 
-                    RaisePropertyChanged(nameof(Header));
+                    RaisePropertyChanged(nameof(Name));
                 }
             }
         }
@@ -100,7 +100,7 @@
         protected MindMapModel(SerializationInfo info, StreamingContext context)
         {
             //Content = (ObservableCollection<MindMapItemModel>)info.GetValue("content", typeof(ObservableCollection<MindMapItemModel>));
-            Header = info.GetString("header");
+            Name = info.GetString("header");
             Description = info.GetString("description");
         }
 
@@ -109,7 +109,7 @@
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             //info.AddValue("content", Content);
-            info.AddValue("header", Header);
+            info.AddValue("header", Name);
             info.AddValue("description", Description);
         }
 

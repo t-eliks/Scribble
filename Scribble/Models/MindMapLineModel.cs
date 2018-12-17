@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;

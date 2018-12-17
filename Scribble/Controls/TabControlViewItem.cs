@@ -30,7 +30,7 @@
         {
             get
             {
-                return Model != null ? Model.Header : _Header;
+                return Model != null ? Model.Name : _Header;
             }
         }
 

@@ -63,16 +63,6 @@
             }
         }
 
-        private ICommand _ToggleIsSelectedCommand;
-
-        public ICommand ToggleIsSelectedCommand
-        {
-            get
-            {
-                return _ToggleIsSelectedCommand ?? (_ToggleIsSelectedCommand = new RelayCommand(() => { IsSelected = true; }));
-            }
-        }
-
         public ObservableCollection<Item> Items
         {
             get
@@ -180,5 +170,6 @@
         Character,
         Location,
         Scene,
+        Note
     }
 }

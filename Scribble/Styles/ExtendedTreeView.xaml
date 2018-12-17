@@ -163,6 +163,11 @@
                                                 <Image Source="/icons/map.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
+                                        <MenuItem Header="Note" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Note}" Template="{DynamicResource SubmenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/icons/note.png" Stretch="UniformToFill" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </MenuItem>
                                     <MenuItem Header="Rename" Command="{Binding Data.RenameCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
                                         <MenuItem.Icon>

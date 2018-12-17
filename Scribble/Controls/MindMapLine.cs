@@ -1,16 +1,15 @@
 ﻿namespace Scribble.Controls
 {
-    using Scribble.Logic;
+    using Scribble.Interfaces;
     using Scribble.Models;
     using Scribble.ViewModels;
     using Scribble.ViewModels.DialogViewModels;
     using System;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Media;
     using System.Windows.Shapes;
 
-    public class MindMapLine : UIElement
+    public class MindMapLine : UIElement, ITwoField
     {
         public MindMapLine(MindMapContent content1, MindMapContent content2)
         {
@@ -29,12 +28,9 @@
 
             var linemodel = new MindMapLineModel(content1.Item, content2.Item);
 
-            //content1.Item.Lines.Add(linemodel);
-            //content2.Item.Lines.Add(linemodel);
-
             LineModel = linemodel;
 
-            Header = linemodel.Header;
+            Name = linemodel.Header;
             Description = linemodel.Description;
         }
 
@@ -42,7 +38,7 @@
 
         private MindMapLineModel LineModel { get; set; }
 
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header",
+        public static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name",
           typeof(string), typeof(MindMapLine), new FrameworkPropertyMetadata(null) { PropertyChangedCallback = (s, e) => {
               var snd = (MindMapLine)s;
               snd.LineModel.Header = e.NewValue as string;
@@ -50,10 +46,10 @@
               ((MindMapLineToolTip)snd.Line.ToolTip).Header = (string)e.NewValue;
           } });
 
-        public string Header
+        public string Name
         {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color",
@@ -112,7 +108,7 @@
                 l.Y1 = pt1.Y;
                 l.Y2 = pt2.Y;
 
-                l.ToolTip = new MindMapLineToolTip() { Description = Description, Header = Header };
+                l.ToolTip = new MindMapLineToolTip() { Description = Description, Header = Name };
 
                 ContextMenu menu = new ContextMenu();
 
@@ -130,7 +126,7 @@
                 MenuItem menuitem2 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                 menuitem2.Click += (o, a) =>
                 {
-                    var dialog = new MindMapLineInfoViewModel() { MindMapLine = this };
+                    var dialog = new TwoFieldInfoViewModel() { Item = this };
 
                     MainViewModel._DialogService.OpenDialog(dialog);
                 };

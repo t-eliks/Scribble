@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Scribble.Views.DialogViews
 {
     /// <summary>
-    /// Interaction logic for MindMapInfoView.xaml
+    /// Interaction logic for TwoFieldInfoView.xaml
     /// </summary>
-    public partial class MindMapInfoView : UserControl
+    public partial class TwoFieldInfoView : UserControl
     {
-        public MindMapInfoView()
+        public TwoFieldInfoView()
         {
             InitializeComponent();
         }
