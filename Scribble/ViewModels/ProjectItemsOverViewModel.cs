@@ -38,7 +38,9 @@
         {
             get
             {
-                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Scenes)); }));
+                return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(() => { RaisePropertyChanged(nameof(Scenes)); RaisePropertyChanged(nameof(NumberOfCharacters));
+                    RaisePropertyChanged(nameof(NumberOfLocations)); RaisePropertyChanged(nameof(NumberOfScenes));
+                }));
             }
         }
 
@@ -57,77 +59,12 @@
                     _Project = value;
 
                     RaisePropertyChanged(nameof(Project));
-                    RaisePropertyChanged(nameof(Name));
-                    RaisePropertyChanged(nameof(Author));
-                    RaisePropertyChanged(nameof(GenreString));
-                    RaisePropertyChanged(nameof(FormString));
                     RaisePropertyChanged(nameof(NumberOfCharacters));
                     RaisePropertyChanged(nameof(NumberOfLocations));
                     RaisePropertyChanged(nameof(NumberOfScenes));
-                    RaisePropertyChanged(nameof(Description));
-                    RaisePropertyChanged(nameof(CreationDateString));
-                    RaisePropertyChanged(nameof(Directory));
                 }
             }
         }
-
-        public string Name
-        {
-            get
-            {
-                return Project.Name;
-            }
-            set
-            {
-                Project.Name = value;
-
-                RaisePropertyChanged(nameof(Name));
-            }
-        }
-
-        public string Author
-        {
-            get
-            {
-                return Project.Author;
-            }
-            set
-            {
-                Project.Author = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return Project.Description;
-            }
-            set
-            {
-                Project.Description = value;
-            }
-        }
-
-        public string CreationDateString
-        {
-            get
-            {
-                return Project.CreationDateString;
-            }
-        }
-
-        public string Directory
-        {
-            get
-            {
-                return Project.ProjectDirectory;
-            }
-        }
-
-        public string GenreString { get { return Project.GenreString; } }
-
-        public string FormString { get { return Project.FormString; } }
 
         public int NumberOfScenes { get { return ProjectService.Instance.GetItemsOfType<Scene>().Count; } }
 

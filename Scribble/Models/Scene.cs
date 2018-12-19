@@ -15,108 +15,7 @@
         public Scene(string name, ImageSource imageSource)
             : base(name, imageSource)
         {
-            Role = "No role.";
-            Sights = "No sights.";
-            Smells = "No smells.";
-            Sounds = "No sounds.";
-            Outcome = "No outcome.";
-
             TextFile = new TextFile(ProjectService.Instance.ActiveProject?.FileDirectory);
-        }
-
-        private string _Role;
-
-        public string Role
-        {
-            get
-            {
-                return _Role;
-            }
-            set
-            {
-                if (_Role != value)
-                {
-                    _Role = value;
-
-                    RaisePropertyChanged(nameof(Role));
-                }
-            }
-        }
-
-        private string _Sights;
-
-        public string Sights
-        {
-            get
-            {
-                return _Sights;
-            }
-            set
-            {
-                if (_Sights != value)
-                {
-                    _Sights = value;
-
-                    RaisePropertyChanged(nameof(Sights));
-                }
-            }
-        }
-
-        private string _Sounds;
-
-        public string Sounds
-        {
-            get
-            {
-                return _Sounds;
-            }
-            set
-            {
-                if (_Sounds != value)
-                {
-                    _Sounds = value;
-
-                    RaisePropertyChanged(nameof(Sounds));
-                }
-            }
-        }
-
-        private string _Smells;
-
-        public string Smells
-        {
-            get
-            {
-                return _Smells;
-            }
-            set
-            {
-                if (_Smells != value)
-                {
-                    _Smells = value;
-
-                    RaisePropertyChanged(nameof(Smells));
-                }
-            }
-        }
-
-        private string _Outcome;
-
-        public string Outcome
-        {
-            get
-            {
-                return _Outcome;
-            }
-            set
-            {
-                if (_Outcome != value)
-                {
-                    _Outcome = value;
-
-                    RaisePropertyChanged(nameof(Outcome));
-                }
-            }
         }
 
         private double _CanvasLeft = 0;
@@ -173,9 +72,9 @@
             if (base.CheckMatch(query))
                 return true;
 
-            if (StringHelper.Contains(Role, query) || StringHelper.Contains(Sights, query) || StringHelper.Contains(Sounds, query) 
-                || StringHelper.Contains(Smells, query) || StringHelper.Contains(Outcome, query))
-                return true;
+            //if (StringHelper.Contains(Role, query) || StringHelper.Contains(Sights, query) || StringHelper.Contains(Sounds, query) 
+            //    || StringHelper.Contains(Smells, query) || StringHelper.Contains(Outcome, query))
+            //    return true;
 
             return false;
         }
@@ -184,11 +83,6 @@
 
         protected Scene(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Role = info.GetString("role");
-            Sights = info.GetString("sights");
-            Sounds = info.GetString("sounds");
-            Smells = info.GetString("smells");
-            Outcome = info.GetString("outcome");
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
             IsInTimeline = info.GetBoolean("isintimeline");
@@ -201,11 +95,6 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("role", Role);
-            info.AddValue("sights", Sights);
-            info.AddValue("sounds", Sounds);
-            info.AddValue("smells", Smells);
-            info.AddValue("outcome", Outcome);
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);
             info.AddValue("isintimeline", IsInTimeline);

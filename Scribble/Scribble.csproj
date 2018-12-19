@@ -106,6 +106,7 @@
     <Compile Include="Logic\StringHelper.cs" />
     <Compile Include="Logic\SymbioticLink.cs" />
     <Compile Include="Logic\ViewItemService.cs" />
+    <Compile Include="Models\DataField.cs" />
     <Compile Include="Models\MindMapString.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\MindMapItemModel.cs" />
@@ -116,9 +117,11 @@
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Controls\TabControlViewItem.cs" />
     <Compile Include="ViewModels\BulletinBoardViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\DataFieldInfoViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\PreferencesViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\SelectViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModels\TwoFieldInfoViewModel.cs" />
+    <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
     <Compile Include="ViewModels\MindMapSelectionViewModel.cs" />
     <Compile Include="ViewModels\MindMapViewModel.cs" />
@@ -128,6 +131,12 @@
     <Compile Include="ViewModels\TimelineViewModel.cs" />
     <Compile Include="Views\BulletinBoardView.xaml.cs">
       <DependentUpon>BulletinBoardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataFieldView.xaml.cs">
+      <DependentUpon>DataFieldView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\DataFieldInfoView.xaml.cs">
+      <DependentUpon>DataFieldInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
@@ -231,11 +240,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DataFieldView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DialogViews\BaseDialogWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DialogViews\CreateProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\DataFieldInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

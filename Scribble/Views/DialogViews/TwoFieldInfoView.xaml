@@ -26,6 +26,6 @@
                 <TextBox Width="250" Height="110" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Text="{Binding Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" Margin="5"/>
             </StackPanel>
         </Grid>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Close" Grid.Row="1" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Grid.Row="1" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
     </Grid>
 </UserControl>

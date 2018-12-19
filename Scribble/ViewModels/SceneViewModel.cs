@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Windows.Input;
 
-    public class SceneViewModel : BaseViewModel, IViewItemViewModel
+    public class SceneViewModel : ItemDetailsViewModel<Scene>, IViewItemViewModel
     {
         public SceneViewModel()
         {
@@ -25,7 +25,7 @@
                 {
                     if (SelectedItem != null && SelectedItem is Character character && CharactersInScene.Contains(character))
                     {
-                        Scene.Items.Remove(character);
+                        Item.Items.Remove(character);
 
                         RaisePropertyChanged(nameof(CharactersInScene));
                     }
@@ -52,50 +52,11 @@
 
                     if (result != null)
                     {
-                        Scene.AddItem((Item)result);
+                        Item.AddItem((Item)result);
 
                         RaisePropertyChanged(nameof(CharactersInScene));
                     }
                 } ));
-            }
-        }
-
-
-        private ICommand _AddNoteCommand;
-
-        public ICommand AddNoteCommand
-        {
-            get
-            {
-                return _AddNoteCommand ?? (_AddNoteCommand = new RelayCommand(() =>
-                {
-                    if (Scene != null)
-                    {
-                        var note = new Note(Scene, "New note", null);
-                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Scene.Notes.Remove(note); note.Delete(); } };
-                        Scene.Notes.Add(note);
-
-                        ProjectService.Instance.SaveActiveProject();
-                    }
-                }));
-            }
-        }
-
-        public ObservableCollection<Note> Notes
-        {
-            get
-            {
-                foreach (var note in Scene.Notes)
-                {
-                    //Prevent multiple subscriptions
-                    note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-                    note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-
-                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
-                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
-                }
-
-                return Scene.Notes;
             }
         }
 
@@ -109,7 +70,7 @@
                 {
                     if (SelectedItem != null && SelectedItem is Location location && LocationsInScene.Contains(location))
                     {
-                        Scene.Items.Remove(location);
+                        Item.Items.Remove(location);
 
                         RaisePropertyChanged(nameof(LocationsInScene));
                     }
@@ -136,7 +97,7 @@
 
                     if (result != null)
                     {
-                        Scene.AddItem((Item)result);
+                        Item.AddItem((Item)result);
 
                         RaisePropertyChanged(nameof(LocationsInScene));
                     }
@@ -144,9 +105,7 @@
             }
         }
 
-        private ICommand _RefreshCommand;
-
-        public ICommand RefreshCommand
+        public override ICommand RefreshCommand
         {
             get
             {
@@ -154,30 +113,11 @@
             }
         }
 
-        private Scene _Scene;
-
-        public Scene Scene
-        {
-            get
-            {
-                return _Scene;
-            }
-            set
-            {
-                if (_Scene != value)
-                {
-                    _Scene = value;
-
-                    RaisePropertyChanged(nameof(Scene));
-                }
-            }
-        }
-
         public ObservableCollection<Character> CharactersInScene
         {
             get
             {
-                return ProjectService.Instance.FindLinks<Character>(Scene);
+                return ProjectService.Instance.FindLinks<Character>(Item);
             }
         }
 
@@ -185,7 +125,7 @@
         {
             get
             {
-                return ProjectService.Instance.FindLinks<Location>(Scene);
+                return ProjectService.Instance.FindLinks<Location>(Item);
             }
         }
 
@@ -213,7 +153,7 @@
         {
             get
             {
-                return Scene.TextFile;
+                return ((Scene)Item).TextFile;
             }
         }
 

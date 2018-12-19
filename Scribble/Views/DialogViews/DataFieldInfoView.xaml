@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="Scribble.Views.DialogViews.DataFieldInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views.DialogViews"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
+             xmlns:Models="clr-namespace:Scribble.Models"
+             mc:Ignorable="d" 
+             Height="450" Width="400">
+    <UserControl.Resources>
+        <Controls:DataTypeConverter x:Key="DataTypeConverter"/>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BackgroundColor2Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="10">
+            <TextBlock Width="150" DockPanel.Dock="Left" FontSize="16" Text="Name of field"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" VerticalContentAlignment="Center" DockPanel.Dock="Right" Height="Auto"/>
+        </DockPanel>
+
+        <ScrollViewer Background="Transparent" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Suggestions: " HorizontalAlignment="Center" FontSize="22" Margin="0, 10"/>
+                <Controls:ExtendedTreeView Background="Transparent" BorderThickness="0" _SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemContainerStyle="{StaticResource SuggestionTreeViewItemStyle}">
+                    <Controls:ExtendedTreeView.Style>
+                        <Style TargetType="Controls:ExtendedTreeView">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Item, Converter={StaticResource DataTypeConverter}}" Value="{x:Type Models:Character}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Controls:ExtendedTreeView.Style>
+                    <TreeViewItem Header="Basic information">
+                        <TreeViewItem Header="Nickname"/>
+                        <TreeViewItem Header="Race"/>
+                        <TreeViewItem Header="Ethnicity"/>
+                        <TreeViewItem Header="Nationality"/>
+                        <TreeViewItem Header="Age"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Appearance and mannerisms">
+                        <TreeViewItem Header="Hair"/>
+                        <TreeViewItem Header="Eyes"/>
+                        <TreeViewItem Header="Skin"/>
+                        <TreeViewItem Header="Height"/>
+                        <TreeViewItem Header="Build"/>
+                        <TreeViewItem Header="Scent"/>
+                        <TreeViewItem Header="Gait"/>
+                        <TreeViewItem Header="Clothing/Style"/>
+                        <TreeViewItem Header="Style of speech"/>
+                        <TreeViewItem Header="Key possessions"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Citizenship">
+                        <TreeViewItem Header="Social status"/>
+                        <TreeViewItem Header="Occupation"/>
+                        <TreeViewItem Header="Education"/>
+                        <TreeViewItem Header="Residence"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Personality">
+                        <TreeViewItem Header="Likes"/>
+                        <TreeViewItem Header="Dislikes"/>
+                        <TreeViewItem Header="Hobbies"/>
+                        <TreeViewItem Header="Personality summary"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Relationships">
+                        <TreeViewItem Header="Friends/Allies"/>
+                        <TreeViewItem Header="Enemies/Rivals"/>
+                        <TreeViewItem Header="Family"/>
+                        <TreeViewItem Header="Romantic interest"/>
+                        <TreeViewItem Header="Pets"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Abilities">
+                        <TreeViewItem Header="Magical"/>
+                        <TreeViewItem Header="Martial"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Progression">
+                        <TreeViewItem Header="Goals"/>
+                        <TreeViewItem Header="Background"/>
+                        <TreeViewItem Header="Internal conflicts"/>
+                        <TreeViewItem Header="External conflicts"/>
+                        <TreeViewItem Header="Character arc"/>
+                    </TreeViewItem>
+                </Controls:ExtendedTreeView>
+                <Controls:ExtendedTreeView Background="Transparent" BorderThickness="0" _SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemContainerStyle="{StaticResource SuggestionTreeViewItemStyle}">
+                    <Controls:ExtendedTreeView.Style>
+                        <Style TargetType="Controls:ExtendedTreeView">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Item, Converter={StaticResource DataTypeConverter}}" Value="{x:Type Models:Scene}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Controls:ExtendedTreeView.Style>
+                    <TreeViewItem Header="Role in story"/>
+                    <TreeViewItem Header="Point of View"/>
+                    <TreeViewItem Header="Conflict"/>
+                    <TreeViewItem Header="Resolution/Outcome"/>
+                </Controls:ExtendedTreeView>
+                <Controls:ExtendedTreeView Background="Transparent" BorderThickness="0" _SelectedItem="{Binding SelectedItem, Mode=TwoWay}" ItemContainerStyle="{StaticResource SuggestionTreeViewItemStyle}">
+                    <Controls:ExtendedTreeView.Style>
+                        <Style TargetType="Controls:ExtendedTreeView">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Item, Converter={StaticResource DataTypeConverter}}" Value="{x:Type Models:Location}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Controls:ExtendedTreeView.Style>
+                    <TreeViewItem Header="Attributes">
+                        <TreeViewItem Header="Sounds"/>
+                        <TreeViewItem Header="Smells"/>
+                        <TreeViewItem Header="Sights"/>
+                        <TreeViewItem Header="Fauna"/>
+                        <TreeViewItem Header="Flora"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Society">
+                        <TreeViewItem Header="Architecture"/>
+                        <TreeViewItem Header="Culture"/>
+                        <TreeViewItem Header="Customs"/>
+                        <TreeViewItem Header="Religion"/>
+                        <TreeViewItem Header="Nationality"/>
+                        <TreeViewItem Header="Prosperity"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Story significance">
+                        <TreeViewItem Header="Relation to main character"/>
+                        <TreeViewItem Header="Relation to main story"/>
+                    </TreeViewItem>
+                </Controls:ExtendedTreeView>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Grid.Row="2" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </Grid>
+</UserControl>
+

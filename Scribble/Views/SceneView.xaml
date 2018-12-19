@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:local="clr-namespace:Scribble.Views"
              mc:Ignorable="d" 
              xmlns:Controls="clr-namespace:Scribble.Controls"
              xmlns:Views="clr-namespace:Scribble.Views"
@@ -19,41 +20,22 @@
                         <RowDefinition Height="2"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" HorizontalAlignment="Center" Text="{Binding Scene.Name}"/>
+                    <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" HorizontalAlignment="Center" Text="{Binding Item.Name}"/>
                     <Rectangle Grid.Row="1" Fill="{StaticResource TrimGradientHorizontal}">
                     </Rectangle>
                     <StackPanel Grid.Row="2" Margin="15">
                         <DockPanel Margin="10">
                             <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Name"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Name, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Role in story"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Role, Mode=TwoWay}"/>
+                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Item.Name, Mode=TwoWay}"/>
                         </DockPanel>
                         <DockPanel Margin="10">
                             <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Description"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" Height="150" DockPanel.Dock="Right" Text="{Binding Scene.Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+                            <TextBox Style="{StaticResource TextBoxStyle1}" Height="150" DockPanel.Dock="Right" Text="{Binding Item.Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
                         </DockPanel>
-                        <DockPanel Margin="10">
-                            <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Sights"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Sights, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Sounds"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Sounds, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Smells"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Smells, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Margin="10">
-                            <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Outcome"/>
-                            <TextBox Style="{StaticResource TextBoxStyle1}" DockPanel.Dock="Right" Text="{Binding Scene.Outcome, Mode=TwoWay}"/>
-                        </DockPanel>
+                        <local:DataFieldView/>
                         <DockPanel Margin="10">
                             <TextBlock Width="150" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="Tags"/>
-                            <Controls:TagTextBox Content="{Binding Scene.Tags}" DockPanel.Dock="Right"/>
+                            <Controls:TagTextBox Content="{Binding Item.Tags}" DockPanel.Dock="Right"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>

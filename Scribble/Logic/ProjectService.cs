@@ -250,10 +250,8 @@
             var kaladin = new Character("Kaladin", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Kaladin",
-                Short_Name = "Kal",
                 Description = "An accomplished spearman and a natural leader, he eventually becomes the captain of Elhokar Kholin's King's Guard, " +
                 "formerly known as the Cobalt Guard, House Kholin's personal honor guard.",
-                Goals = "Save the world, of course!"
             };
 
             kaladin.AddTag("Saves the world");
@@ -264,9 +262,7 @@
             var shallan = new Character("Shallan", IconHelper.FindIconInResources("Character"))
             {
                 Name = "Shallan",
-                Short_Name = "Shal",
                 Description = "Daughter of the recently deceased Brightlord Lin Davar of Jah Keved, Shallan pursued and received scholarly training as the ward of Jasnah Kholin.",
-                Goals = "Solve puzzles"
             };
 
             shallan.AddTag("Lightweaver");
@@ -278,7 +274,6 @@
             {
                 Name = "Jaskier",
                 Description = "Julian Alfred Pankratz, Viscount de Lettenhove, better known as Dandelion/Jaskier, was a poet, minstrel, bard, and close friend of Geralt of Rivia.",
-                Goals = "Get drunk and be an annoying stuck up cunt."
             };
 
             jaskier.AddTag("Poet");
@@ -381,21 +376,12 @@
 
                 character.Description = FieldGenerator.Instance.GenerateRandomDescription();
 
-                character.Goals = FieldGenerator.Instance.GenerateRandomLine();
 
                 characters.AddItem(character);
 
                 var scene = new Scene(FieldGenerator.Instance.GenerateRandomCharacterName(), IconHelper.FindIconInResources("Pen"));
 
                 scene.Description = FieldGenerator.Instance.GenerateRandomDescription();
-
-                scene.Outcome = FieldGenerator.Instance.GenerateRandomLine();
-
-                scene.Smells = FieldGenerator.Instance.GenerateRandomLine();
-
-                scene.Sights = FieldGenerator.Instance.GenerateRandomLine();
-
-                scene.Sounds = FieldGenerator.Instance.GenerateRandomLine();
 
                 scene.AddItem(location);
                 scene.AddItem(character);

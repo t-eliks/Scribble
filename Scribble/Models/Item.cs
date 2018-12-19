@@ -5,12 +5,10 @@
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Windows.Input;
     using System.Windows.Media;
     using System.Linq;
     using System.Collections.Generic;
     using Scribble.Interfaces;
-    using System.Windows;
 
     [Serializable]
     public class Item : BaseItem, ISerializable, ISearchable, IViewItem
@@ -90,6 +88,25 @@
             }
         }
 
+        private ObservableCollection<DataField> _DataFields;
+
+        public ObservableCollection<DataField> DataFields
+        {
+            get
+            {
+                return _DataFields ?? (_DataFields = new ObservableCollection<DataField>());
+            }
+            set
+            {
+                if (_DataFields != value)
+                {
+                    _DataFields = value;
+
+                    RaisePropertyChanged(nameof(DataFields));
+                }
+            }
+        }
+
         public override void Delete()
         {
             base.Delete();
@@ -126,6 +143,7 @@
         {
             Description = info.GetString("description");
             Notes = (ObservableCollection<Note>)info.GetValue("notes", typeof(ObservableCollection<Note>));
+            DataFields = (ObservableCollection<DataField>)info.GetValue("datafields", typeof(ObservableCollection<DataField>));
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -136,6 +154,7 @@
 
             info.AddValue("description", Description);
             info.AddValue("notes", Notes);
+            info.AddValue("datafields", DataFields);
         }
 
         #endregion

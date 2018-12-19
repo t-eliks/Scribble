@@ -231,13 +231,13 @@
                     switch (SelectedProjectItem)
                     {
                         case Character c:
-                            vm = new CharacterDetailsViewModel() { Character = c };
+                            vm = new CharacterDetailsViewModel() { Item = c };
                             break;
                         case Location l:
-                            vm = new LocationDetailsViewModel() { Location = l };
+                            vm = new LocationDetailsViewModel() { Item = l };
                             break;
                         case Scene s:
-                            vm = new SceneViewModel() { Scene = s };
+                            vm = new SceneViewModel() { Item = s };
                             break;
                         case Note n:
                             vm = new NoteViewModel() { Note = n };

@@ -79,6 +79,10 @@
                 <DialogViews:TwoFieldInfoView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type DialogViewModels:DataFieldInfoViewModel}">
+                <DialogViews:DataFieldInfoView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:Scene}" x:Key="SceneOutlineDataTemplate">
                 <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
@@ -122,7 +126,8 @@
                     <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </DataTemplate>
-           
+
+            
             
             <DataTemplate DataType="{x:Type Models:MindMapModel}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
@@ -424,7 +429,7 @@
                 <Models:Theme Name="Gold" File="pack://application:,,,/Scribble;component/Styles/GoldTheme.xaml"/>
                 <Models:Theme Name="Vibrant" File="pack://application:,,,/Scribble;component/Styles/VibrantTheme.xaml"/>
             </x:Array>
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/DefaultTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Scribble;component/Styles/Styles.xaml"/>

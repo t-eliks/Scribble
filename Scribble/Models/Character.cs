@@ -3,7 +3,6 @@
     using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
-    using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows.Media;
@@ -17,17 +16,13 @@
            : base(name, imageSource)
         {
             Biography = "No biography.";
-            Goals = "No goals.";
-            Short_Name = "No short name";
         }
 
         public Character(string name, ImageSource imageSource, string short_name, string description,
             string biography, string goals)
            : base(name, imageSource)
         {
-            Short_Name = short_name;
             Biography = biography;
-            Goals = goals;
         }
 
         #region Properties and Fields
@@ -51,25 +46,6 @@
             }
         }
 
-        private string _Short_Name;
-
-        public string Short_Name
-        {
-            get
-            {
-                return _Short_Name;
-            }
-            set
-            {
-                if (_Short_Name != value)
-                {
-                    _Short_Name = value;
-
-                    RaisePropertyChanged(nameof(Short_Name));
-                }
-            }
-        }
-
         private string _Biography;
 
         public string Biography
@@ -89,27 +65,6 @@
             }
         }
 
-        
-
-        private string _Goals;
-
-        public string Goals
-        {
-            get
-            {
-                return _Goals;
-            }
-            set
-            {
-                if (_Goals != value)
-                {
-                    _Goals = value;
-
-                    RaisePropertyChanged(nameof(Goals));
-                }
-            }
-        }
-
         #endregion
 
         public override bool CheckMatch(string query)
@@ -117,9 +72,9 @@
             if (base.CheckMatch(query))
                 return true;
 
-            if (StringHelper.Contains(Short_Name, query) || StringHelper.Contains(Biography, query)
-                || StringHelper.Contains(Goals, query))
-                return true;
+            //if (StringHelper.Contains(Short_Name, query) || StringHelper.Contains(Biography, query)
+            //    || StringHelper.Contains(Goals, query))
+            //    return true;
 
             return false;
         }
@@ -129,9 +84,7 @@
         protected Character(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             CharacterType = (CharacterTypes)info.GetValue("charactertype", typeof(CharacterTypes));
-            Short_Name = info.GetString("shortname");
             Biography = info.GetString("biography");
-            Goals = info.GetString("goals");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
@@ -141,9 +94,7 @@
             base.GetObjectData(info, context);
 
             info.AddValue("charactertype", CharacterType);
-            info.AddValue("shortname", Short_Name);
             info.AddValue("biography", Biography);
-            info.AddValue("goals", Goals);
         }
 
         #endregion

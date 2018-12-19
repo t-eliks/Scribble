@@ -20,6 +20,8 @@
             Parent = parent;
             Description = description;
 
+
+            IsSelected = true;
         }
 
         public override ICommand ToggleIsSelectedCommand

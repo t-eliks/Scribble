@@ -64,7 +64,7 @@
 
                     MindMapCanvas canvas = (MindMapCanvas)s;
 
-                    canvas.Children.Clear();
+                    //canvas.Children.Clear();
 
                     var newContent = (ObservableCollection<MindMapItemModel>)e.NewValue;
 

@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Scribble.Views.DataFieldView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views"
+             xmlns:Models="clr-namespace:Scribble.Models"
+             xmlns:Views="clr-namespace:Scribble.Views"
+             xmlns:Logic="clr-namespace:Scribble.Logic"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ItemsControl ItemsSource="{Binding DataFields}">
+            <ItemsControl.Resources>
+                <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext}"/>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type Models:DataField}">
+                    <DockPanel Background="Transparent" x:Name="dt" Margin="10">
+                        <StackPanel Width="150">
+                            <TextBlock Width="150" TextWrapping="Wrap" DockPanel.Dock="Left" Style="{StaticResource GoldRegularStyle}" Text="{Binding Name}" VerticalAlignment="Top"/>
+                            <StackPanel Height="40" Orientation="Horizontal">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=dt, Path=IsMouseOver}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Button Content="Edit" Command="{Binding Data.EditDataFieldCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}" FontSize="12"/>
+                                <Button Content="Remove" Command="{Binding Data.RemoveDataFieldCommand, Source={StaticResource proxy}}" CommandParameter="{Binding}" FontSize="12"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBox Text="{Binding Content, Mode=TwoWay}" Style="{StaticResource TextBoxStyle1}" Padding="3" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Top" Height="Auto"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button Grid.Row="1" Content="Add field" Height="30" HorizontalAlignment="Center" Command="{Binding AddDataFieldCommand}"/>
+    </Grid>
+</UserControl>
