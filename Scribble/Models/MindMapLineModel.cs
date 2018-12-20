@@ -37,6 +37,11 @@
             }
         }
 
+        public void Remove()
+        {
+            ProjectService.Instance.DeleteItemBiLinks(this);
+        }
+
         private MindMapItemModel _MindMapContent2;
 
         public MindMapItemModel MindMapContent2

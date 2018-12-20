@@ -154,8 +154,24 @@
                     MainViewModel._DialogService.OpenDialog(dialog);
                 };
 
+                MenuItem menuitem3 = new MenuItem() { Header = "Remove", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                menuitem3.Click += (o, a) => 
+                {
+                    if (ParentCanvas.Children.Contains(Line))
+                        ParentCanvas.Children.Remove(Line);
+
+                    if (this.MindMapContent1.Lines.Contains(this))
+                        this.MindMapContent1.Lines.Remove(this);
+
+                    if (this.MindMapContent2.Lines.Contains(this))
+                        this.MindMapContent2.Lines.Remove(this);
+
+                    this.LineModel.Remove();
+                };
+
                 menu.Items.Add(menuitem);
                 menu.Items.Add(menuitem2);
+                menu.Items.Add(menuitem3);
 
                 l.ContextMenu = menu;
 

@@ -39,7 +39,7 @@
         {
             get
             {
-                return MindMap.Content;
+                return MindMap.MapContent;
             }
         }
 
@@ -160,7 +160,7 @@
             {
                 return _AddMindMapStringCommand ?? (_AddMindMapStringCommand = new RelayCommand(() =>
                 {
-                    MindMap.Content.Add(new MindMapItemModel(new MindMapString("New label", "New label content.")));
+                    MindMap.MapContent.Add(new MindMapItemModel(new MindMapString("New label", "New label content.")));
 
                     ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(new MindMapString("New label", "New label content."))));
 
@@ -173,7 +173,7 @@
         {
             var items = new ObservableCollection<BaseItem>();
 
-            foreach (var item in MindMap.Content)
+            foreach (var item in MindMap.MapContent)
             {
                 if (items.Contains(item.MindMapItem))
                     items.Add(item.MindMapItem);

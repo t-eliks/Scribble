@@ -117,6 +117,10 @@
                                         if (canvas.Content.Contains(item))
                                         {
                                             canvas.Content.Remove(item);
+                                            canvas.Children.Remove(canvas.GetMindMapContent(item.MindMapItem));
+                                            item.Remove();
+
+                                            canvas.RefreshLines();
                                         }
                                     };
 
@@ -157,6 +161,14 @@
             menuitem.Click += (o, a) => { content.ChangeBackground(color); };
 
             return menuitem;
+        }
+
+        private void RefreshLines()
+        {
+            foreach (var item in Children.OfType<MindMapContent>().ToList())
+            {
+                item.RedrawLines();
+            }
         }
 
         public ObservableCollection<MindMapItemModel> Content
@@ -200,18 +212,15 @@
         {
             Collection<MindMapLineModel> linemodels = new Collection<MindMapLineModel>();
 
-            foreach (UIElement item in Children.OfType<UIElement>().ToList())
+            foreach (var item in Children.OfType<MindMapContent>().ToList())
             {
-                if (item is MindMapContent content)
+                foreach (var linemodel in item.LineModels.ToList())
                 {
-                    foreach (var linemodel in content.LineModels.ToList())
+                    if (!linemodels.Contains(linemodel))
                     {
-                        if (!linemodels.Contains(linemodel))
-                        {
-                            content.AddLine(GetMindMapContent(linemodel.GetOpposite(content.Item).MindMapItem), linemodel);
+                        item.AddLine(GetMindMapContent(linemodel.GetOpposite(item.Item).MindMapItem), linemodel);
 
-                            linemodels.Add(linemodel);
-                        }
+                        linemodels.Add(linemodel);
                     }
                 }
             }

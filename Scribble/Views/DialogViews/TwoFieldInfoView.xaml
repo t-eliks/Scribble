@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scribble.Views.DialogViews"
              mc:Ignorable="d" 
-              Height="250" Width="400">
+              Height="285" Width="480">
     <Grid Background="{StaticResource BackgroundColor2Brush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
 
@@ -18,7 +19,18 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Margin="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Height="35" Text="Name" Margin="5, 0, 0, 30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                <TextBlock Height="35" Margin="5, 0, 0, 30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                            <Setter Property="Text" Value="Name"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding NameOptional}" Value="True">
+                                    <Setter Property="Text" Value="Name (optional)"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
                 <TextBlock Height="35" Text="Content" Margin="5, 0, 0, 50" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -26,6 +38,18 @@
                 <TextBox Width="250" Height="110" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Text="{Binding Description, Mode=TwoWay}" TextWrapping="WrapWithOverflow" Margin="5"/>
             </StackPanel>
         </Grid>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Grid.Row="1" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        <TextBlock Text="If you don't need the Name field, you can leave it empty." Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding NameOptional}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Save" Grid.Row="2" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
     </Grid>
 </UserControl>

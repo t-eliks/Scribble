@@ -13,15 +13,7 @@
         public MindMapItemModel(BaseItem item)
         {
             MindMapItem = item;
-            item.MarkedForRemoval += (s, e) => {
-                foreach (var linemodel in Lines)
-                {
-                    ProjectService.Instance.DeleteItemBiLinks(linemodel);
-                }
-
-                ProjectService.Instance.DeleteItemBiLinks(this);
-                
-            };
+            item.MarkedForRemoval += (s, e) => { Remove(); };
         }
 
         private BaseItem _MindMapItem;
@@ -62,24 +54,15 @@
             }
         }
 
-        //private ObservableCollection<MindMapLineModel> _Lines;
+        public void Remove()
+        {
+            foreach (var linemodel in Lines)
+            {
+                linemodel.Remove();
+            }
 
-        //public ObservableCollection<MindMapLineModel> Lines
-        //{
-        //    get
-        //    {
-        //        return _Lines ?? (_Lines = new ObservableCollection<MindMapLineModel>());
-        //    }
-        //    set
-        //    {
-        //        if (_Lines != value)
-        //        {
-        //            _Lines = value;
-
-        //            RaisePropertyChanged(nameof(Lines));
-        //        }
-        //    }
-        //}
+            ProjectService.Instance.DeleteItemBiLinks(this);
+        }
 
         public ObservableCollection<MindMapLineModel> Lines
         {

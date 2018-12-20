@@ -17,7 +17,7 @@
 
         }
 
-        public ObservableCollection<MindMapItemModel> Content
+        public ObservableCollection<MindMapItemModel> MapContent
         {
             get
             {
