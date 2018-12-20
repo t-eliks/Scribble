@@ -99,6 +99,9 @@
                             case ItemTypes.Note:
                                 ProjectService.Instance.AddNote(folder);
                                 break;
+                            case ItemTypes.Mindmap:
+                                ProjectService.Instance.AddMindmap(folder);
+                                break;
                             default:
                                 break;
                         }
@@ -241,6 +244,9 @@
                             break;
                         case Note n:
                             vm = new NoteViewModel() { Note = n };
+                            break;
+                        case MindMapModel m:
+                            vm = new MindMapViewModel() { MindMap = m };
                             break;
                     }
 

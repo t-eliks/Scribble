@@ -168,6 +168,11 @@
                                                 <Image Source="/icons/note.png" Stretch="UniformToFill" Width="16" Height="16"/>
                                             </MenuItem.Icon>
                                         </MenuItem>
+                                        <MenuItem Header="Mindmap" Command="{Binding Data.AddFileCommand, Source={StaticResource proxy}}" CommandParameter="{x:Static Models:ItemTypes.Mindmap}" Template="{DynamicResource SubmenuItem}">
+                                            <MenuItem.Icon>
+                                                <Image Source="/icons/mindmapicon.png" Stretch="UniformToFill" Width="16" Height="16"/>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </MenuItem>
                                     <MenuItem Header="Rename" Command="{Binding Data.RenameCommand, Source={StaticResource proxy}}" Template="{DynamicResource SubmenuItem}">
                                         <MenuItem.Icon>

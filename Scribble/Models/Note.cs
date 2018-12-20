@@ -53,7 +53,7 @@
             {
                 return _EditCommand ?? (_EditCommand = new RelayCommand(() =>
                 {
-                    var dialog = new TwoFieldInfoViewModel() { Item = this };
+                    var dialog = new TwoFieldInfoViewModel(false) { Item = this };
 
                     MainViewModel._DialogService.OpenDialog(dialog);
                 }));

@@ -515,5 +515,8 @@
   <ItemGroup>
     <Resource Include="Icons\mindmap.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mindmapicon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

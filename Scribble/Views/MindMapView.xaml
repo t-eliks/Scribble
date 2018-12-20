@@ -45,7 +45,7 @@
                             <MenuItem Template="{StaticResource SubmenuItem}" Header="Scene" Command="{Binding AddSceneCommand}"/>
                             <MenuItem Template="{StaticResource SubmenuItem}" Header="Label" Command="{Binding AddMindMapStringCommand}"/>
                         </MenuItem>
-                        <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit info" Command="{Binding EditInfoCommand}"/>
+                        <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit Map" Command="{Binding EditInfoCommand}"/>
                     </ContextMenu>
                 </Controls:MindMapCanvas.ContextMenu>
             </Controls:MindMapCanvas>

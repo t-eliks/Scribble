@@ -90,7 +90,7 @@
 
                                     ContextMenu menu = new ContextMenu();
 
-                                    MenuItem menuitem = new MenuItem() { Header = "Change background", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
+                                    MenuItem menuitem = new MenuItem() { Header = "Change Color", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
 
                                     menuitem.Items.Add(canvas.GetColorMenuItem("Charcoal", MindMapItemColors.Charcoal, content));
                                     menuitem.Items.Add(canvas.GetColorMenuItem("Embers", MindMapItemColors.Embers, content));
@@ -127,7 +127,7 @@
                                     if (item.MindMapItem is MindMapString str)
                                     {
                                         MenuItem menuitem4 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
-                                        menuitem4.Click += (o, a) => { var dialog = new TwoFieldInfoViewModel() { Item = str }; MainViewModel._DialogService.OpenDialog(dialog); };
+                                        menuitem4.Click += (o, a) => { var dialog = new TwoFieldInfoViewModel(true) { Item = str }; MainViewModel._DialogService.OpenDialog(dialog); };
                                         menu.Items.Add(menuitem4);
                                     }
 
@@ -208,7 +208,7 @@
                     {
                         if (!linemodels.Contains(linemodel))
                         {
-                            content.AddLine(GetMindMapContent(linemodel.GetOpposite(content.Item).MindMapItem), linemodel.Header, linemodel.Description, linemodel.Color);
+                            content.AddLine(GetMindMapContent(linemodel.GetOpposite(content.Item).MindMapItem), linemodel);
 
                             linemodels.Add(linemodel);
                         }

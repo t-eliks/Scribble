@@ -3,14 +3,17 @@
     using Scribble.Interfaces;
     using Scribble.Logic;
     using Scribble.Views.DialogViewModels;
+    using System;
     using System.Windows.Input;
 
     public class TwoFieldInfoViewModel : DialogViewModelBase<ITwoField>
     {
-        public TwoFieldInfoViewModel()
+        public TwoFieldInfoViewModel(bool nameOptional)
         {
-
+            _NameOptional = nameOptional;
         }
+
+        private bool _NameOptional;
 
         private string _Name;
 
@@ -24,7 +27,11 @@
             {
                 if (_Name != value)
                 {
-                    _Name = value;
+                    if (_NameOptional && String.IsNullOrWhiteSpace(value))
+                        _Name = ""; //If field is equal to "", visibility is set to collapsed. For some reason, doesn't work
+                                    //when setting it to null and checking against that.
+                    else
+                        _Name = value;
 
                     RaisePropertyChanged(nameof(Name));
                 }

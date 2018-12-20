@@ -122,13 +122,22 @@
 
             <DataTemplate DataType="{x:Type Models:MindMapString}">
                 <StackPanel VerticalAlignment="Stretch" Margin="5" Background="Transparent">
-                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
+                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                     <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </DataTemplate>
 
-            
-            
             <DataTemplate DataType="{x:Type Models:MindMapModel}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
                     <Border.InputBindings>
@@ -415,6 +424,7 @@
             <BitmapImage UriSource="/icons/map.png" x:Key="Map"/>
             <BitmapImage UriSource="/icons/character.png" x:Key="Character"/>
             <BitmapImage UriSource="/icons/note.png" x:Key="Note"/>
+            <BitmapImage UriSource="/icons/mindmapicon.png" x:Key="Mindmap"/>
 
             <!-- Fonts -->
 

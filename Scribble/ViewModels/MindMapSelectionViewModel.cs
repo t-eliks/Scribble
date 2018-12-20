@@ -19,7 +19,7 @@
         {
             get
             {
-                return _AddMindMapCommand ?? (_AddMindMapCommand = new RelayCommand(() => { ProjectService.Instance.ActiveProject.MindMaps.Add(new MindMapModel()); }));
+                return _AddMindMapCommand ?? (_AddMindMapCommand = new RelayCommand(() => { ProjectService.Instance.ActiveProject.MindMaps.Add(new MindMapModel("New mindmap")); }));
             }
         }
 

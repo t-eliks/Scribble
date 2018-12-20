@@ -147,6 +147,15 @@
             SaveActiveProject();
         }
 
+        public void AddMindmap(ProjectFolder parentFolder)
+        {
+            var mindmap = new MindMapModel("New Mindmap");
+
+            parentFolder.AddItem(mindmap);
+
+            SaveActiveProject();
+        }
+
         public void RemoveItem(BaseItem projectItem)
         {
             projectItem.Delete();

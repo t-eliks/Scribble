@@ -179,4 +179,14 @@
         #endregion
 
     }
+
+    public enum ItemTypes
+    {
+        Folder,
+        Character,
+        Location,
+        Scene,
+        Note,
+        Mindmap
+    }
 }

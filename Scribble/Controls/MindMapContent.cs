@@ -107,6 +107,30 @@
             }
         }
 
+        public void AddLine(MindMapContent content2, MindMapLineModel linemodel)
+        {
+            bool linkexists = false;
+
+            foreach (var line in Lines)
+            {
+                if (line.IsLink(this, content2))
+                {
+                    linkexists = true;
+                    break;
+                }
+            }
+
+            if (!linkexists)
+            {
+                var l = new MindMapLine(this, content2, linemodel) { ParentCanvas = ParentCanvas };
+
+                this.Lines.Add(l);
+                content2.Lines.Add(l);
+
+                l.RedrawLine();
+            }
+        }
+
         public void RedrawLines()
         {
             foreach (var line in Lines)

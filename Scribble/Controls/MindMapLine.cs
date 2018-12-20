@@ -34,6 +34,28 @@
             Description = linemodel.Description;
         }
 
+        public MindMapLine(MindMapContent content1, MindMapContent content2, MindMapLineModel linemodel)
+        {
+            try
+            {
+                ToolTipService.InitialShowDelayProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(0));
+                ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
+            }
+            catch (ArgumentException ex)
+            {
+
+            }
+
+            MindMapContent1 = content1;
+            MindMapContent2 = content2;
+
+            LineModel = linemodel;
+
+            Name = linemodel.Header;
+            Description = linemodel.Description;
+            Color = linemodel.Color;
+        }
+
         public MindMapCanvas ParentCanvas { get; set; }
 
         private MindMapLineModel LineModel { get; set; }
@@ -41,9 +63,10 @@
         public static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name",
           typeof(string), typeof(MindMapLine), new FrameworkPropertyMetadata(null) { PropertyChangedCallback = (s, e) => {
               var snd = (MindMapLine)s;
-              snd.LineModel.Header = e.NewValue as string;
+                snd.LineModel.Header = e.NewValue as string;
               if (snd.Line != null && snd.Line.ToolTip != null)
-              ((MindMapLineToolTip)snd.Line.ToolTip).Header = (string)e.NewValue;
+                    ((MindMapLineToolTip)snd.Line.ToolTip).Header = (string)e.NewValue;
+              
           } });
 
         public string Name
@@ -112,7 +135,7 @@
 
                 ContextMenu menu = new ContextMenu();
 
-                MenuItem menuitem = new MenuItem() { Header = "Change color", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
+                MenuItem menuitem = new MenuItem() { Header = "Change Color", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
 
                 menuitem.Items.Add(GetColorMenuItem("Charcoal", MindMapItemColors.Charcoal));
                 menuitem.Items.Add(GetColorMenuItem("Embers", MindMapItemColors.Embers));
@@ -123,10 +146,10 @@
                 menuitem.Items.Add(GetColorMenuItem("Void", MindMapItemColors.Void));
                 menuitem.Items.Add(GetColorMenuItem("Watermelon", MindMapItemColors.Watermelon));
 
-                MenuItem menuitem2 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                MenuItem menuitem2 = new MenuItem() { Header = "Edit Line", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                 menuitem2.Click += (o, a) =>
                 {
-                    var dialog = new TwoFieldInfoViewModel() { Item = this };
+                    var dialog = new TwoFieldInfoViewModel(true) { Item = this };
 
                     MainViewModel._DialogService.OpenDialog(dialog);
                 };

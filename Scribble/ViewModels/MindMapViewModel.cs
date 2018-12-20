@@ -64,7 +64,7 @@
             {
                 return _EditInfoCommand ?? (_EditInfoCommand = new RelayCommand(() => 
                 {
-                    var dialog = new TwoFieldInfoViewModel() { Item = MindMap };
+                    var dialog = new TwoFieldInfoViewModel(false) { Item = MindMap };
 
                     MainViewModel._DialogService.OpenDialog(dialog);
                 }));
