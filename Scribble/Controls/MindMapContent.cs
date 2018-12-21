@@ -11,7 +11,7 @@
         public MindMapContent(MindMapItemModel item, MindMapCanvas parentCanvas)
         {
             Item = item;
-            this.Content = item.MindMapItem;
+            this.Content = item;
 
             ParentCanvas = parentCanvas;
             CanvasLeft = item.CanvasLeft;
@@ -72,18 +72,12 @@
                 }
             });
 
-        public void ChangeBackground(MindMapItemColors color)
-        {
-            Item.BackgroundColor = color;
-            this.Background = MindMapItemModel.GetBrush(color);
-        }
-
         public void AddLine(MindMapContent content2)
         {
-            AddLine(content2, "New line", "No description.", MindMapItemColors.Charcoal);
+            AddLine(content2, "New line", "No description.");
         }
 
-        public void AddLine(MindMapContent content2, string header, string description, MindMapItemColors color)
+        public void AddLine(MindMapContent content2, string header, string description)
         {
             bool linkexists = false;
 
@@ -98,7 +92,7 @@
 
             if (!linkexists)
             {
-                var l = new MindMapLine(this, content2) { ParentCanvas = ParentCanvas, Name = header, Description = description, Color = color};
+                var l = new MindMapLine(this, content2) { ParentCanvas = ParentCanvas, Name = header, Description = description};
 
                 this.Lines.Add(l);
                 content2.Lines.Add(l);

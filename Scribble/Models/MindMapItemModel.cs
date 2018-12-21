@@ -1,24 +1,24 @@
 ﻿namespace Scribble.Models
 {
+    using Scribble.Interfaces;
     using Scribble.Logic;
     using System;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Windows.Media;
 
     [Serializable]
     public class MindMapItemModel : BaseModel, ISerializable
     {
-        public MindMapItemModel(BaseItem item)
+        public MindMapItemModel(IMindMapItem item)
         {
             MindMapItem = item;
             item.MarkedForRemoval += (s, e) => { Remove(); };
         }
 
-        private BaseItem _MindMapItem;
+        private IMindMapItem _MindMapItem;
 
-        public BaseItem MindMapItem
+        public IMindMapItem MindMapItem
         {
             get
             {
@@ -35,9 +35,9 @@
             }
         }
 
-        private MindMapItemColors _BackgroundColor = MindMapItemColors.Charcoal;
+        private string _BackgroundColor = "#FF373737";
 
-        public MindMapItemColors BackgroundColor
+        public string BackgroundColor
         {
             get
             {
@@ -50,6 +50,63 @@
                     _BackgroundColor = value;
 
                     RaisePropertyChanged(nameof(BackgroundColor));
+                }
+            }
+        }
+
+        private string _ForegroundColor = "#FFF4F4F4";
+
+        public string ForegroundColor
+        {
+            get
+            {
+                return _ForegroundColor;
+            }
+            set
+            {
+                if (_ForegroundColor != value)
+                {
+                    _ForegroundColor = value;
+
+                    RaisePropertyChanged(nameof(ForegroundColor));
+                }
+            }
+        }
+
+        private bool _HeaderBold = false;
+
+        public bool HeaderBold
+        {
+            get
+            {
+                return _HeaderBold;
+            }
+            set
+            {
+                if (_HeaderBold != value)
+                {
+                    _HeaderBold = value;
+
+                    RaisePropertyChanged(nameof(HeaderBold));
+                }
+            }
+        }
+
+        private bool _ContentBold = false;
+
+        public bool ContentBold
+        {
+            get
+            {
+                return _ContentBold;
+            }
+            set
+            {
+                if (_ContentBold != value)
+                {
+                    _ContentBold = value;
+
+                    RaisePropertyChanged(nameof(ContentBold));
                 }
             }
         }
@@ -148,6 +205,44 @@
             }
         }
 
+        private int _HeaderFontSize = 16;
+
+        public int HeaderFontSize
+        {
+            get
+            {
+                return _HeaderFontSize;
+            }
+            set
+            {
+                if (_HeaderFontSize != value)
+                {
+                    _HeaderFontSize = value;
+
+                    RaisePropertyChanged(nameof(HeaderFontSize));
+                }
+            }
+        }
+
+        private int _ContentFontSize = 12;
+
+        public int ContentFontSize
+        {
+            get
+            {
+                return _ContentFontSize;
+            }
+            set
+            {
+                if (_ContentFontSize != value)
+                {
+                    _ContentFontSize = value;
+
+                    RaisePropertyChanged(nameof(ContentFontSize));
+                }
+            }
+        }
+
         public MindMapLineModel GetLine(MindMapItemModel model1, MindMapItemModel model2)
         {
             foreach (var line in Lines)
@@ -173,13 +268,15 @@
 
         protected MindMapItemModel(SerializationInfo info, StreamingContext context)
         {
-            MindMapItem = (BaseItem)info.GetValue("item", typeof(BaseItem));
-            //Lines = (ObservableCollection<MindMapLineModel>)info.GetValue("lines", typeof(ObservableCollection<MindMapLineModel>));
+            MindMapItem = (IMindMapItem)info.GetValue("item", typeof(IMindMapItem));
             CanvasLeft = info.GetDouble("canvasleft");
             CanvasTop = info.GetDouble("canvastop");
-            BackgroundColor = (MindMapItemColors)info.GetValue("backgroundcolor", typeof(MindMapItemColors));
+            BackgroundColor = info.GetString("backgroundcolor");
+            ForegroundColor = info.GetString("foregroundcolor");
             Height = info.GetDouble("height");
             Width = info.GetDouble("width");
+            HeaderFontSize = info.GetInt32("headerfontsize");
+            ContentFontSize = info.GetInt32("contentfontsize");
 
             MindMapItem.MarkedForRemoval += (s, e) => {
                 ProjectService.Instance.DeleteItemBiLinks(this);
@@ -196,58 +293,14 @@
         {
             info.AddValue("canvasleft", CanvasLeft);
             info.AddValue("canvastop", CanvasTop);
-            //info.AddValue("lines", Lines);
             info.AddValue("item", MindMapItem);
             info.AddValue("backgroundcolor", BackgroundColor);
+            info.AddValue("foregroundcolor", ForegroundColor);
             info.AddValue("height", Height);
             info.AddValue("width", Width);
+            info.AddValue("headerfontsize", HeaderFontSize);
+            info.AddValue("contentfontsize", ContentFontSize);
         }
 
-        public static SolidColorBrush GetBrush(MindMapItemColors color)
-        {
-            switch (color)
-            {
-                case MindMapItemColors.Vermillion:
-                    return new SolidColorBrush(Color.FromRgb(252, 74, 26));
-                case MindMapItemColors.Charcoal:
-                    return new SolidColorBrush(Color.FromRgb(55, 55, 55));
-                case MindMapItemColors.Paper:
-                    return new SolidColorBrush(Color.FromRgb(244, 244, 244));
-                case MindMapItemColors.PaleGold:
-                    return new SolidColorBrush(Color.FromRgb(192, 178, 131));
-                case MindMapItemColors.Teal:
-                    return new SolidColorBrush(Color.FromRgb(7, 136, 155));
-                case MindMapItemColors.Void:
-                    return new SolidColorBrush(Color.FromRgb(14, 11, 22));
-                case MindMapItemColors.Jewel:
-                    return new SolidColorBrush(Color.FromRgb(71, 23, 246));
-                case MindMapItemColors.Overcast:
-                    return new SolidColorBrush(Color.FromRgb(144, 153, 162));
-                case MindMapItemColors.Ink:
-                    return new SolidColorBrush(Color.FromRgb(6, 47, 79));
-                case MindMapItemColors.Embers:
-                    return new SolidColorBrush(Color.FromRgb(184, 38, 1));
-                case MindMapItemColors.Watermelon:
-                    return new SolidColorBrush(Color.FromRgb(255, 59, 63));
-            }
-
-            return null;
-        }
-
-    }
-
-    public enum MindMapItemColors
-    {
-        Vermillion,
-        Charcoal,
-        Paper,
-        PaleGold,
-        Teal,
-        Void,
-        Jewel,
-        Overcast,
-        Ink,
-        Embers,
-        Watermelon
     }
 }

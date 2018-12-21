@@ -7,6 +7,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
     using System.Windows.Shapes;
 
     public class MindMapLine : UIElement, ITwoField
@@ -53,7 +54,6 @@
 
             Name = linemodel.Header;
             Description = linemodel.Description;
-            Color = linemodel.Color;
         }
 
         public MindMapCanvas ParentCanvas { get; set; }
@@ -76,19 +76,19 @@
         }
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color",
-          typeof(MindMapItemColors), typeof(MindMapLine), new FrameworkPropertyMetadata(null)
+          typeof(SolidColorBrush), typeof(MindMapLine), new FrameworkPropertyMetadata(null)
           {
               PropertyChangedCallback = (s, e) => {
                   var snd = (MindMapLine)s;
                   if (snd.Line != null)
-                    snd.Line.Stroke = MindMapItemModel.GetBrush((MindMapItemColors)e.NewValue);
-                  snd.LineModel.Color = (MindMapItemColors)e.NewValue;
+                    snd.Line.Stroke = (SolidColorBrush)e.NewValue;
+                  snd.LineModel.Color = ((SolidColorBrush)e.NewValue).ToString();
               }
           });
 
-        public MindMapItemColors Color
+        public SolidColorBrush Color
         {
-            get { return (MindMapItemColors)GetValue(ColorProperty); }
+            get { return (SolidColorBrush)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
 
@@ -124,7 +124,7 @@
                 Point pt1 = new Point(relativePoint.X + MindMapContent1.ActualWidth / 2, relativePoint.Y + MindMapContent1.ActualHeight / 2);
                 Point pt2 = new Point(relativePoint2.X + MindMapContent2.ActualWidth / 2, relativePoint2.Y + MindMapContent2.ActualHeight / 2);
                 Line l = new Line();
-                l.Stroke = MindMapItemModel.GetBrush(LineModel.Color);
+                l.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(LineModel.Color));
                 l.StrokeThickness = 5.0;
                 l.X1 = pt1.X;
                 l.X2 = pt2.X;
@@ -137,14 +137,7 @@
 
                 MenuItem menuitem = new MenuItem() { Header = "Change Color", Template = App.Current.TryFindResource("SubmenuHeader") as ControlTemplate };
 
-                menuitem.Items.Add(GetColorMenuItem("Charcoal", MindMapItemColors.Charcoal));
-                menuitem.Items.Add(GetColorMenuItem("Embers", MindMapItemColors.Embers));
-                menuitem.Items.Add(GetColorMenuItem("Ink", MindMapItemColors.Ink));
-                menuitem.Items.Add(GetColorMenuItem("Jewel", MindMapItemColors.Jewel));
-                menuitem.Items.Add(GetColorMenuItem("Teal", MindMapItemColors.Teal));
-                menuitem.Items.Add(GetColorMenuItem("Vermillion", MindMapItemColors.Vermillion));
-                menuitem.Items.Add(GetColorMenuItem("Void", MindMapItemColors.Void));
-                menuitem.Items.Add(GetColorMenuItem("Watermelon", MindMapItemColors.Watermelon));
+                menuitem = PopulateColors(menuitem);
 
                 MenuItem menuitem2 = new MenuItem() { Header = "Edit Line", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                 menuitem2.Click += (o, a) =>
@@ -157,16 +150,19 @@
                 MenuItem menuitem3 = new MenuItem() { Header = "Remove", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                 menuitem3.Click += (o, a) => 
                 {
-                    if (ParentCanvas.Children.Contains(Line))
-                        ParentCanvas.Children.Remove(Line);
+                    if (MessageBox.Show("Are you sure? This cannot be undone.", "Delete?", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        if (ParentCanvas.Children.Contains(Line))
+                            ParentCanvas.Children.Remove(Line);
 
-                    if (this.MindMapContent1.Lines.Contains(this))
-                        this.MindMapContent1.Lines.Remove(this);
+                        if (this.MindMapContent1.Lines.Contains(this))
+                            this.MindMapContent1.Lines.Remove(this);
 
-                    if (this.MindMapContent2.Lines.Contains(this))
-                        this.MindMapContent2.Lines.Remove(this);
+                        if (this.MindMapContent2.Lines.Contains(this))
+                            this.MindMapContent2.Lines.Remove(this);
 
-                    this.LineModel.Remove();
+                        this.LineModel.Remove();
+                    }
                 };
 
                 menu.Items.Add(menuitem);
@@ -181,12 +177,17 @@
             }
         }
 
-        private MenuItem GetColorMenuItem(string header, MindMapItemColors color)
+        private MenuItem PopulateColors(MenuItem item)
         {
-            MenuItem menuitem = new MenuItem() { Header = header, Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
-            menuitem.Click += (o, a) => { Color = color; };
+            foreach (var color in App.Current.FindResource("MindMapColors") as HeaderColor[])
+            {
+                MenuItem menuitem = new MenuItem() { Header = color.Header, Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
+                menuitem.Click += (o, a) => { Color = color.Brush; };
 
-            return menuitem;
+                item.Items.Add(menuitem);
+            }
+
+            return item;
         }
 
         public bool IsLink(MindMapContent content1, MindMapContent content2)

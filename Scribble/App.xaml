@@ -120,24 +120,6 @@
                 </StackPanel>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Models:MindMapString}">
-                <StackPanel VerticalAlignment="Stretch" Margin="5" Background="Transparent">
-                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <Trigger Property="Text" Value="">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock Text="{Binding Content}" FontSize="12" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
-                </StackPanel>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type Models:MindMapModel}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
                     <Border.InputBindings>
@@ -438,6 +420,66 @@
                 <Models:Theme Name="Neon" File="pack://application:,,,/Scribble;component/Styles/NeonTheme.xaml"/>
                 <Models:Theme Name="Gold" File="pack://application:,,,/Scribble;component/Styles/GoldTheme.xaml"/>
                 <Models:Theme Name="Vibrant" File="pack://application:,,,/Scribble;component/Styles/VibrantTheme.xaml"/>
+            </x:Array>
+
+            <!-- MindMap Colors -->
+
+            <x:Array Type="{x:Type Controls:HeaderColor}" x:Key="MindMapColors">
+                <Controls:HeaderColor Header="Vermillion">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#FC4A1A"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Charcoal">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#373737"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Paper">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#F4F4F4"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="PaleGold">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#C0B283"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Teal">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#07889B"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Void">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#0E0B16"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Jewel">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#4717F6"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Overcast">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#9099A2"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Ink">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#062F4F"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Embers">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#B82601"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
+                <Controls:HeaderColor Header="Watermelon">
+                    <Controls:HeaderColor.Brush>
+                        <SolidColorBrush Color="#FF3B3F"/>
+                    </Controls:HeaderColor.Brush>
+                </Controls:HeaderColor>
             </x:Array>
 
             <ResourceDictionary.MergedDictionaries>

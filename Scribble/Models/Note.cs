@@ -98,9 +98,9 @@
             }
         }
 
-        public RoutedEventHandler OnOpened;
+        public event RoutedEventHandler OnOpened;
 
-        public RoutedEventHandler OnMarkedForRemoval;
+        public event RoutedEventHandler OnMarkedForRemoval;
 
         public TextFile TextFile { get; private set; }
 

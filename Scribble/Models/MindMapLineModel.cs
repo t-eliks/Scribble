@@ -61,9 +61,9 @@
             }
         }
 
-        private MindMapItemColors _Color = MindMapItemColors.Charcoal;
+        private string _Color = "#FF373737";
 
-        public MindMapItemColors Color
+        public string Color
         {
             get
             {
@@ -134,7 +134,7 @@
             MindMapContent2 = (MindMapItemModel)info.GetValue("content2", typeof(MindMapItemModel));
             Header = info.GetString("header");
             Description = info.GetString("description");
-            Color = (MindMapItemColors)info.GetValue("color", typeof(MindMapItemColors));
+            Color = info.GetString("color");
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]

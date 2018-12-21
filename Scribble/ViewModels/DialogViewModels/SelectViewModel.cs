@@ -15,13 +15,13 @@
 
         }
 
-        private ICommand _AddLocationCommand;
+        private ICommand _AddItemCommand;
 
-        public ICommand AddLocationCommand
+        public ICommand AddItemCommand
         {
             get
             {
-                return _AddLocationCommand ?? (_AddLocationCommand = new RelayCommand<IDialogWindow>((window) =>
+                return _AddItemCommand ?? (_AddItemCommand = new RelayCommand<IDialogWindow>((window) =>
                 {
                     if (SelectedItem != null && !SelectedItems.Contains(SelectedItem))
                         CloseDialogWithResult(window, SelectedItem);
@@ -117,13 +117,13 @@
             }
         }
 
-        private ObservableCollection<BaseItem> _SelectedItems;
+        private ObservableCollection<object> _SelectedItems;
 
-        public ObservableCollection<BaseItem> SelectedItems
+        public ObservableCollection<object> SelectedItems
         {
             get
             {
-                return _SelectedItems;
+                return _SelectedItems ?? (_SelectedItems = new ObservableCollection<object>());
             }
             set
             {

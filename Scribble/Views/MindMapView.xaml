@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scribble.Views"
              xmlns:Controls="clr-namespace:Scribble.Controls"
+             xmlns:Models="clr-namespace:Scribble.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
     <UserControl.Resources>
+        <Controls:StringSolidColorBrushConverter x:Key="StringSolidColorBrushConverter"/>
         <VisualBrush 
       x:Key="HatchBrush" 
       TileMode="Tile" Viewport="0,0,100,100" 
@@ -35,20 +37,125 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding ElementName=canvas, Path=Status}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Controls:PanScrollViewer Grid.Row="1" x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-            <Controls:MindMapCanvas HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding Content}">
-                <Controls:MindMapCanvas.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Template="{StaticResource SubmenuHeader}" Header="Add">
-                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Character" Command="{Binding AddCharacterCommand}"/>
-                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Location" Command="{Binding AddLocationCommand}"/>
-                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Scene" Command="{Binding AddSceneCommand}"/>
-                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Label" Command="{Binding AddMindMapStringCommand}"/>
-                        </MenuItem>
-                        <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit Map" Command="{Binding EditInfoCommand}"/>
-                    </ContextMenu>
-                </Controls:MindMapCanvas.ContextMenu>
-            </Controls:MindMapCanvas>
-        </Controls:PanScrollViewer>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Controls:PanScrollViewer x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                <Controls:MindMapCanvas SelectedItem="{Binding SelectedItem, Mode=TwoWay}" CustomizeMode="{Binding CustomizeMode, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding Content}">
+                    <Controls:MindMapCanvas.Resources>
+                        <DataTemplate DataType="{x:Type Models:MindMapItemModel}">
+                            <DockPanel Background="{Binding BackgroundColor, Converter={StaticResource StringSolidColorBrushConverter}}">
+                                <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
+                                <StackPanel DockPanel.Dock="Right" Background="Transparent">
+                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding MindMapItem.Name}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="{Binding HeaderFontSize}">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                                <Setter Property="FontWeight" Value="Normal"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding HeaderBold}" Value="True">
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding MindMapItem.Description}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" VerticalAlignment="Stretch" FontSize="{Binding ContentFontSize}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                                <Setter Property="FontWeight" Value="Normal"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ContentBold}" Value="True">
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </Controls:MindMapCanvas.Resources>
+                    <Controls:MindMapCanvas.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Template="{StaticResource SubmenuHeader}" Header="Add">
+                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Character" Command="{Binding AddCharacterCommand}"/>
+                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Location" Command="{Binding AddLocationCommand}"/>
+                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Scene" Command="{Binding AddSceneCommand}"/>
+                                <MenuItem Template="{StaticResource SubmenuItem}" Header="Label" Command="{Binding AddMindMapStringCommand}"/>
+                            </MenuItem>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit Map" Command="{Binding EditInfoCommand}"/>
+                        </ContextMenu>
+                    </Controls:MindMapCanvas.ContextMenu>
+                </Controls:MindMapCanvas>
+            </Controls:PanScrollViewer>
+            <Border Grid.Row="1" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="2">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CustomizeMode}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid VerticalAlignment="Stretch" Background="{StaticResource AccentColor2Brush}">
+                    <Grid>
+                        <Grid.Resources>
+                            <DataTemplate DataType="{x:Type Controls:HeaderColor}">
+                                <TextBlock Text="{Binding Header}"/>
+                            </DataTemplate>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="5">
+                            <DockPanel Margin="0, 3" VerticalAlignment="Top">
+                                <TextBlock MinWidth="120" Margin="3, 0" DockPanel.Dock="Left" Text="Background"/>
+                                <ComboBox ItemsSource="{StaticResource MindMapColors}" Width="Auto" Height="40" SelectedItem="{Binding SelectedBackgroundColor, Mode=TwoWay}">
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Top">
+                                <TextBlock MinWidth="120" Margin="3, 0" DockPanel.Dock="Left" Text="Foreground"/>
+                                <ComboBox ItemsSource="{StaticResource MindMapColors}" Width="Auto" Height="40" SelectedItem="{Binding SelectedForegroundColor, Mode=TwoWay}">
+                                </ComboBox>
+                            </DockPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="5">
+                            <DockPanel Margin="0, 3" VerticalAlignment="Top">
+                                <TextBlock MinWidth="150" Margin="3, 0" DockPanel.Dock="Left" Text="Header Font Size"/>
+                                <ComboBox ItemsSource="{Binding FontSizes}" Height="40" SelectedItem="{Binding HeaderFontSize, Mode=TwoWay}">
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Top">
+                                <TextBlock MinWidth="150" Margin="3, 0" DockPanel.Dock="Left" Text="Content Font Size"/>
+                                <ComboBox ItemsSource="{Binding FontSizes}" Height="40" SelectedItem="{Binding ContentFontSize, Mode=TwoWay}">
+                                </ComboBox>
+                            </DockPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <DockPanel Margin="0, 3" VerticalAlignment="Top">
+                                <TextBlock DockPanel.Dock="Left" Text="Bold Header"/>
+                                <CheckBox IsChecked="{Binding HeaderBold, Mode=TwoWay}"/>
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Top">
+                                <TextBlock DockPanel.Dock="Left" Text="Bold Content"/>
+                                <CheckBox IsChecked="{Binding ContentBold, Mode=TwoWay}"/>
+                            </DockPanel>
+                        </StackPanel>
+                        <Button Grid.Column="3" Width="25" Height="25" VerticalAlignment="Top" HorizontalAlignment="Center" Command="{Binding EndCustomizeCommand}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/icons/exit.png" Stretch="UniformToFill"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

@@ -12,7 +12,7 @@
         <ListBox Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" MinHeight="420" MaxHeight="420" ItemsSource="{Binding Collection}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource LocationsListBoxItemTemplate}" Margin="20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Controls:ImageButton Content="Close" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
-            <Controls:ImageButton Content="{Binding Button_Text}" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddLocationCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
+            <Controls:ImageButton Content="{Binding Button_Text}" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

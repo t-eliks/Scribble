@@ -7,7 +7,7 @@
     using System.Security.Permissions;
 
     [Serializable]
-    public class MindMapString : BaseItem, ISerializable, ITwoField
+    public class MindMapString : BaseItem, ISerializable, ITwoField, IMindMapItem
     {
         public MindMapString(string header, string content) : base(header, IconHelper.FindIconInResources("Note"))
         {
@@ -41,6 +41,7 @@
                     _Content = value;
 
                     RaisePropertyChanged(nameof(Content));
+                    RaisePropertyChanged(nameof(Description));
                 }
             }
         }

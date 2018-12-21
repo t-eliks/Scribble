@@ -43,7 +43,7 @@
                 {
                     var dialog = new SelectViewModel();
                     dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Character>().Cast<BaseItem>());
-                    dialog.SelectedItems = new ObservableCollection<BaseItem>(CharactersInScene.Cast<BaseItem>());
+                    dialog.SelectedItems = new ObservableCollection<object>(CharactersInScene.Cast<object>());
                     dialog.Title = "All characters in project";
                     dialog.Warning = "Character already in scene.";
                     dialog.Button_Text = "Add character";
@@ -88,7 +88,7 @@
                 {
                     var dialog = new SelectViewModel();
                     dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Location>().Cast<BaseItem>());
-                    dialog.SelectedItems = new ObservableCollection<BaseItem>(LocationsInScene.Cast<BaseItem>());
+                    dialog.SelectedItems = new ObservableCollection<object>(LocationsInScene.Cast<object>());
                     dialog.Title = "All locations in project";
                     dialog.Warning = "Location already in scene.";
                     dialog.Button_Text = "Add location";

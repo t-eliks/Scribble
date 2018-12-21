@@ -51,13 +51,9 @@
             {
                 return _AddSceneCommand ?? (_AddSceneCommand = new RelayCommand(() => 
                 {
-                    //var dialog = new SelectSceneViewModel();
-                    //dialog.Scenes = ProjectService.Instance.GetItemsOfType<Scene>();
-                    //dialog.SelectedScenes = new ObservableCollection<Scene>(Content);
-
                     var dialog = new SelectViewModel();
                     dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Scene>().Cast<BaseItem>());
-                    dialog.SelectedItems = new ObservableCollection<BaseItem>(Content.Cast<BaseItem>());
+                    dialog.SelectedItems = new ObservableCollection<object>(Content.Cast<object>());
                     dialog.Title = "All scenes in project";
                     dialog.Warning = "Scene already in timeline.";
                     dialog.Button_Text = "Add scene";

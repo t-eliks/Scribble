@@ -11,7 +11,7 @@
     using Scribble.Interfaces;
 
     [Serializable]
-    public class Item : BaseItem, ISerializable, ISearchable, IViewItem
+    public class Item : BaseItem, ISerializable, ISearchable, IViewItem, IMindMapItem
     {
         public Item() { }
 
