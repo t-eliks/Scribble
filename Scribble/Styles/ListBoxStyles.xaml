@@ -22,16 +22,6 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="LocationsListBoxItemTemplate">
-        <StackPanel Height="90">
-            <StackPanel.InputBindings>
-                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ToggleIsSelectedCommand}"/>
-            </StackPanel.InputBindings>
-            <TextBlock Text="{Binding Name}" Foreground="{StaticResource ForegroundColorBrush}" FontSize="26"/>
-            <TextBlock MaxWidth="750" MaxHeight="40" Text="{Binding Description}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Foreground="{StaticResource ForegroundColorBrush}" FontSize="16" Margin="10, 5"/>
-        </StackPanel>
-    </DataTemplate>
-
     <DataTemplate x:Key="ScenesListBoxItemTemplate">
         <StackPanel Height="90">
             <StackPanel.InputBindings>
@@ -42,7 +32,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <Style x:Key="PickProfileItemContainerTemplate" TargetType="{x:Type ListBoxItem}">
+    <Style x:Key="ListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>

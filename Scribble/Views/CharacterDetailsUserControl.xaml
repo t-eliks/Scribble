@@ -68,7 +68,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" Text="Character's scenes" HorizontalAlignment="Center"/>
-                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" ItemsSource="{Binding Scenes}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource ScenesListBoxItemTemplate}" Margin="20"/>
+                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" ItemsSource="{Binding Scenes}" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemTemplate="{StaticResource ItemList}" Margin="20"/>
             </Grid>
         </TabItem>
     </TabControl>

@@ -76,7 +76,7 @@
                     <ComboBox SelectedIndex="0" ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedCharacter}" Margin="5"/>
                     <ComboBox SelectedIndex="0" ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedLocation}" Margin="5"/>
                 </StackPanel>
-                <ListBox Grid.Row="2" Background="{StaticResource BackgroundColor2Brush}" ItemsSource="{Binding CurrentList}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource ScenesListBoxItemTemplate}" Margin="20"/>
+                <ListBox Grid.Row="2" Background="{StaticResource BackgroundColor2Brush}" ItemsSource="{Binding CurrentList}" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemTemplate="{StaticResource ItemList}" Margin="20"/>
             </Grid>
         </TabItem>
     </TabControl>

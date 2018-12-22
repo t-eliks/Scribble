@@ -8,14 +8,17 @@
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Character)
-                return App.Current.TryFindResource("CharactersListBoxItemTemplate") as DataTemplate;
+            //if (item is Character)
+            //    return App.Current.TryFindResource("CharactersListBoxItemTemplate") as DataTemplate;
 
-            if (item is Location)
-                return App.Current.TryFindResource("LocationsListBoxItemTemplate") as DataTemplate;
+            //if (item is Location)
+            //    return App.Current.TryFindResource("LocationsListBoxItemTemplate") as DataTemplate;
 
-            if (item is Scene)
-                return App.Current.TryFindResource("ScenesListBoxItemTemplate") as DataTemplate;
+            //if (item is Scene)
+            //    return App.Current.TryFindResource("ScenesListBoxItemTemplate") as DataTemplate;
+
+            if (item is Item)
+                return App.Current.TryFindResource("ItemList") as DataTemplate;
 
             return null;
         }

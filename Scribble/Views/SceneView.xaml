@@ -63,7 +63,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" Text="Characters in this scene" HorizontalAlignment="Center"/>
-                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding CharactersInScene}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource CharactersListBoxItemTemplate}" Margin="20"/>
+                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding CharactersInScene}" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemTemplate="{StaticResource ItemList}" Margin="20"/>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Controls:ImageButton Content="Remove character from scene" IsEnabled="{Binding ItemSelected}" Image="/icons/add.png" Command="{Binding RemoveCharacterCommand}" MaxHeight="55"/>
                     <Controls:ImageButton Content="Add character to scene" Image="/icons/add.png" Command="{Binding AddCharacterCommand}" MaxHeight="55"/>
@@ -78,7 +78,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" Text="Locations in this scene" HorizontalAlignment="Center"/>
-                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding LocationsInScene}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource LocationsListBoxItemTemplate}" Margin="20"/>
+                <ListBox Grid.Row="1" Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding LocationsInScene}" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemTemplate="{StaticResource ItemList}" Margin="20"/>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Controls:ImageButton Content="Remove location from scene" IsEnabled="{Binding ItemSelected}" Image="/icons/add.png" Command="{Binding RemoveLocationCommand}" MaxHeight="55"/>
                     <Controls:ImageButton Content="Add location to scene" Image="/icons/add.png" Command="{Binding AddLocationCommand}" MaxHeight="55"/>

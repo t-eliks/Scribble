@@ -117,6 +117,50 @@
             }
         }
 
+        private bool _ListView = true;
+
+        public bool ListView
+        {
+            get
+            {
+                return _ListView;
+            }
+            set
+            {
+                if (_ListView != value)
+                {
+                    _ListView = value;
+
+                    if (value && GridView)
+                        GridView = false;
+
+                    RaisePropertyChanged(nameof(ListView));
+                }
+            }
+        }
+
+        private bool _GridView;
+
+        public bool GridView
+        {
+            get
+            {
+                return _GridView;
+            }
+            set
+            {
+                if (_GridView != value)
+                {
+                    _GridView = value;
+
+                    if (value && ListView)
+                        ListView = false;
+
+                    RaisePropertyChanged(nameof(GridView));
+                }
+            }
+        }
+
         private ObservableCollection<object> _SelectedItems;
 
         public ObservableCollection<object> SelectedItems

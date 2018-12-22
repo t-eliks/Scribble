@@ -5,14 +5,183 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Scribble.Views.DialogViews"
              xmlns:Controls="clr-namespace:Scribble.Controls"
+             xmlns:Models="clr-namespace:Scribble.Models"
              mc:Ignorable="d" 
-             Height="600" Width="800">
-    <StackPanel Background="{StaticResource BackgroundColor2Brush}">
-        <TextBlock Style="{StaticResource GoldTitleStyle}" Foreground="{StaticResource ForegroundColorBrush}" Text="{Binding Title}" HorizontalAlignment="Center"/>
-        <ListBox Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" MinHeight="420" MaxHeight="420" ItemsSource="{Binding Collection}" ItemContainerStyle="{StaticResource PickProfileItemContainerTemplate}" ItemTemplate="{StaticResource LocationsListBoxItemTemplate}" Margin="20"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+             Height="700" Width="900">
+    <Grid Background="{StaticResource BackgroundColor2Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource GoldTitleStyle}" Foreground="{StaticResource ForegroundColorBrush}" Text="{Binding Title}" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <TextBlock Text="View: "/>
+            <ToggleButton IsChecked="{Binding ListView, Mode=TwoWay}" Width="30" Height="30" Foreground="{StaticResource ForegroundColorBrush}">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Canvas Background="{TemplateBinding Background}">
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="6" Height="6" Canvas.Left="4" Canvas.Top="4"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="14" Height="6" Canvas.Left="13" Canvas.Top="4"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="6" Height="6" Canvas.Left="4" Canvas.Top="12"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="14" Height="6" Canvas.Left="13" Canvas.Top="12"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="6" Height="6" Canvas.Left="4" Canvas.Top="20"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="14" Height="6" Canvas.Left="13" Canvas.Top="20"/>
+                                    </Canvas>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+            <Rectangle Width="2" Height="30" Fill="{StaticResource AccentColor1Brush}"/>
+            <ToggleButton IsChecked="{Binding GridView, Mode=TwoWay}" Width="30" Height="30" Foreground="{StaticResource ForegroundColorBrush}">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Canvas Background="{TemplateBinding Background}">
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="10" Height="10" Canvas.Left="4" Canvas.Top="4"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="10" Height="10" Canvas.Left="16" Canvas.Top="4"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="10" Height="10" Canvas.Left="4" Canvas.Top="16"/>
+                                        <Rectangle Fill="{TemplateBinding Foreground}" Width="10" Height="10" Canvas.Left="16" Canvas.Top="16"/>
+                                    </Canvas>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColor1Brush}"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+        </StackPanel>
+        <ListBox Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource BackgroundColor2Brush}" SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Collection}" Margin="20">
+            <ListBox.Resources>
+                <Controls:ListBoxDetailedDataTemplateSelector x:Key="ListBoxDetailedDataTemplateSelector"/>
+                <Controls:ListBoxListDataTemplateSelector x:Key="ListBoxListDataTemplateSelector"/>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="Padding" Value="4,1"/>
+                    <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                    <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                    <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource ForegroundColorBrush}"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Margin" Value="3"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border x:Name="bd" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="bd" To="3" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="bd" FillBehavior="Stop" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="bd" To="3" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="bd" FillBehavior="Stop" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="TextElement.Foreground" TargetName="bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.GridView}" Value="True">
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl x:Name="cc" Content="{Binding}" ContentTemplate="{DynamicResource ItemList}"/>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.GridView}" Value="True">
+                            <Setter Property="ContentTemplate" TargetName="cc" Value="{DynamicResource ItemDetailed}"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.Style>
+                <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+                    <Setter Property="ItemsPanel">
+                        <Setter.Value>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </Setter.Value>    
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.GridView}" Value="True">
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True"/>
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
+        </ListBox>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Controls:ImageButton Content="Close" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
             <Controls:ImageButton Content="{Binding Button_Text}" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>

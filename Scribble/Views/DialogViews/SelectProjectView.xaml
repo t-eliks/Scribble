@@ -17,7 +17,7 @@
             <TextBlock Text="Pick a project" FontSize="28" HorizontalAlignment="Center"/>
         </Grid>
 
-        <ListBox Background="{StaticResource BackgroundColor2Brush}" Grid.Row="1" Margin="10" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}" ItemTemplate="{StaticResource PickProfileListBoxItemTemplate}" ItemContainerStyle="{DynamicResource PickProfileItemContainerTemplate}"/>
+        <ListBox Background="{StaticResource BackgroundColor2Brush}" Grid.Row="1" Margin="10" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject}" ItemTemplate="{StaticResource PickProfileListBoxItemTemplate}" ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle}"/>
         <StackPanel HorizontalAlignment="Center" Grid.Row="2" Orientation="Horizontal" Margin="10, 0, 10, 0">
             <Controls:ImageButton Content="New project" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CreateCommand}"/>
             <Controls:ImageButton Content="Remove" Image="/icons/delete.png" Width="120" Height="50" IsEnabled="{Binding ProjectSelected}" Command="{Binding RemoveProjectCommand}"/>

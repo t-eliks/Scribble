@@ -88,6 +88,8 @@
     <Compile Include="Controls\DataTypeConverter.cs" />
     <Compile Include="Controls\DefaultDataTemplateSelector.cs" />
     <Compile Include="Controls\HeaderColor.cs" />
+    <Compile Include="Controls\ListBoxDetailedDataTemplateSelector.cs" />
+    <Compile Include="Controls\ListBoxListDataTemplateSelector.cs" />
     <Compile Include="Controls\MindMapCanvas.cs" />
     <Compile Include="Controls\MindMapContent.cs" />
     <Compile Include="Controls\MindMapDataTemplateSelector.cs" />
