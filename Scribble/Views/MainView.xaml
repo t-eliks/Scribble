@@ -107,7 +107,19 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="searchTextBox" Grid.Column="0" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TopSearchTextBox}" Margin="10"/>
+                            <TextBox x:Name="searchTextBox" Grid.Column="0" Margin="10">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                        <Setter Property="Text" Value="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <Setter Property="Background" Value="{StaticResource ForegroundColorBrush}"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsFocused" Value="False">
+                                                <Setter Property="Text" Value="Search..."/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
                             <Popup IsOpen="{Binding IsSearchOpen, Mode=TwoWay}" StaysOpen="False" x:Name="searchPopUp" Grid.Column="0">
                                 <ListBox Background="{StaticResource AccentColor1Brush}" Padding="3" ItemTemplateSelector="{StaticResource SearchDataTemplateSelector}" ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}" ItemsSource="{Binding SearchResults}"/>
                             </Popup>

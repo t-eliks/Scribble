@@ -16,6 +16,9 @@
 
             ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapItemModel, MindMapLineModel>(content1, this));
             ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapItemModel, MindMapLineModel>(content2, this));
+
+            //Description = "No description.";
+            //Header = "New line";
         }
 
         private MindMapItemModel _MindMapContent1;

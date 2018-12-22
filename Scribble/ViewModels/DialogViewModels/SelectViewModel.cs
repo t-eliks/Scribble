@@ -5,7 +5,10 @@
     using Scribble.Models;
     using Scribble.Views.DialogViewModels;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
     using System.Windows;
+    using System.Windows.Data;
     using System.Windows.Input;
 
     public class SelectViewModel : DialogViewModelBase<BaseItem>
@@ -201,5 +204,53 @@
         }
 
         public bool CanAdd { get { return SelectedItem != null; } }
+
+        private string _SearchQuery;
+
+        public string SearchQuery
+        {
+            get
+            {
+                return _SearchQuery;
+            }
+            set
+            {
+                if (_SearchQuery != value)
+                {
+                    _SearchQuery = value;
+
+                    var filtered = new ObservableCollection<BaseItem>();
+
+                    foreach (var item in Collection)
+                    {
+                        if (item is ISearchable s && s.CheckMatch(value))
+                            filtered.Add(item);
+                    }
+
+                    FilteredItems = filtered.OrderBy(x => x.Name);
+
+                    RaisePropertyChanged(nameof(SearchQuery));
+                }
+            }
+        }
+
+        private IOrderedEnumerable<BaseItem> _FilteredItems;
+
+        public IOrderedEnumerable<BaseItem> FilteredItems
+        {
+            get
+            {
+                return _FilteredItems ?? (_FilteredItems = Collection.OrderBy(x => x.Name));
+            }
+            set
+            {
+                if (_FilteredItems != value)
+                {
+                    _FilteredItems = value;
+
+                    RaisePropertyChanged(nameof(FilteredItems));
+                }
+            }
+        }
     }
 }

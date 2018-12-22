@@ -333,16 +333,16 @@
             return files;
         }
 
-        public ObservableCollection<Item> FindTags(string tag, int itemlimit)
+        public ObservableCollection<Item> Search(string query, int itemlimit)
         {
             var results = new ObservableCollection<Item>();
 
             foreach (ISearchable item in ProjectItems())
             {
-                if (item.CheckMatch(tag))
+                if (item.CheckMatch(query))
                     results.Add((Item)item);
 
-                if (results.Count >= itemlimit)
+                if (itemlimit > 0 && results.Count >= itemlimit)
                     break;
             }
 

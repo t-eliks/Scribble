@@ -358,7 +358,7 @@
                 {
                     _SearchQuery = value;
 
-                    SearchResults = ProjectService.Instance.FindTags(value, 5);
+                    SearchResults = ProjectService.Instance.Search(value, 5);
 
                     IsSearchOpen = true;
 

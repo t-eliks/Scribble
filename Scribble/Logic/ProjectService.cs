@@ -192,9 +192,9 @@
             ActiveProject?.DeleteItemLinks(parent, child);
         }
 
-        public ObservableCollection<Item> FindTags(string tag, int itemlimit)
+        public ObservableCollection<Item> Search(string query, int itemlimit)
         {
-            return ActiveProject?.FindTags(tag, itemlimit);
+            return ActiveProject?.Search(query, itemlimit);
         }
 
         public void DeleteItemBiLinks(object item)

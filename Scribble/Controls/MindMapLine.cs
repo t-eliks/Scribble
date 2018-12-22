@@ -52,8 +52,8 @@
 
             LineModel = linemodel;
 
-            Name = linemodel.Header;
-            Description = linemodel.Description;
+             Name = linemodel.Header;
+             Description = linemodel.Description;
         }
 
         public MindMapCanvas ParentCanvas { get; set; }
