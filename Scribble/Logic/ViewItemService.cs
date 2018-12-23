@@ -3,6 +3,7 @@
     using Scribble.Controls;
     using Scribble.Interfaces;
     using Scribble.Models;
+    using Scribble.ViewModels;
     using System.Collections.ObjectModel;
     using System.Linq;
 
@@ -39,6 +40,44 @@
             var viewitem = new TabControlViewItem(model, viewmodel);
 
             _AddViewItem(viewitem);
+        }
+
+        public void AddViewItem(IViewItem model)
+        {
+            IViewItemViewModel vm = null;
+
+            if (model is ProjectFolder f)
+            {
+                if (f.RootFolder)
+                    vm = new ProjectItemsOverViewModel();
+                else
+                    vm = new BulletinBoardViewModel() { Folder = f };
+            }
+            else
+                switch (model)
+                {
+                    case Character c:
+                        vm = new CharacterDetailsViewModel() { Item = c };
+                        break;
+                    case Location l:
+                        vm = new LocationDetailsViewModel() { Item = l };
+                        break;
+                    case Scene s:
+                        vm = new SceneViewModel() { Item = s };
+                        break;
+                    case Note n:
+                        vm = new NoteViewModel() { Note = n };
+                        break;
+                    case MindMapModel m:
+                        vm = new MindMapViewModel() { MindMap = m };
+                        break;
+                }
+
+            if (model != null)
+            {
+                var viewitem = new TabControlViewItem(model, vm);
+                _AddViewItem(viewitem);
+            }
         }
 
         public void AddViewItem(string header, IViewItemViewModel viewmodel)

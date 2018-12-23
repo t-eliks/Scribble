@@ -24,42 +24,6 @@
             IsSelected = true;
         }
 
-        public override ICommand ToggleIsSelectedCommand
-        {
-            get
-            {
-                return _ToggleIsSelectedCommand ?? (_ToggleIsSelectedCommand = new RelayCommand(() => { IsSelected = true; OnOpened?.Invoke(this, new RoutedEventArgs()); }));
-            }
-        }
-
-        private ICommand _MarkForRemovalCommand;
-
-        public ICommand MarkForRemovalCommand
-        {
-            get
-            {
-                return _MarkForRemovalCommand ?? (_MarkForRemovalCommand = new RelayCommand(() => 
-                {
-                    OnMarkedForRemoval?.Invoke(this, new RoutedEventArgs());
-                }));
-            }
-        }
-
-        private ICommand _EditCommand;
-
-        public ICommand EditCommand
-        {
-            get
-            {
-                return _EditCommand ?? (_EditCommand = new RelayCommand(() =>
-                {
-                    var dialog = new TwoFieldInfoViewModel(false) { Item = this };
-
-                    MainViewModel._DialogService.OpenDialog(dialog);
-                }));
-            }
-        }
-
         private Item _Parent;
 
         public Item Parent
@@ -97,8 +61,6 @@
                 }
             }
         }
-
-        public event RoutedEventHandler OnOpened;
 
         public event RoutedEventHandler OnMarkedForRemoval;
 

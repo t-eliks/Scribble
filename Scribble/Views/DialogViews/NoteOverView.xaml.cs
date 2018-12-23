@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Scribble.Views
+namespace Scribble.Views.DialogViews
 {
     /// <summary>
-    /// Interaction logic for OutlineSelectionView.xaml
+    /// Interaction logic for NoteOverView.xaml
     /// </summary>
-    public partial class MindMapSelectionView : UserControl
+    public partial class NoteOverView : UserControl
     {
-        public MindMapSelectionView()
+        public NoteOverView()
         {
             InitializeComponent();
         }

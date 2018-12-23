@@ -3,17 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Models="clr-namespace:Scribble.Models"
              xmlns:local="clr-namespace:Scribble.Views"
              xmlns:Controls="clr-namespace:Scribble.Controls"
              mc:Ignorable="d" 
              >
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundColor2Brush}">
-        <ItemsControl Padding="15" ItemTemplateSelector="{StaticResource BulletinDataTemplateSelector}" ItemsSource="{Binding Items}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+        <ItemsControl Padding="15" ItemsSource="{Binding Items}">
+            <ItemsControl.Resources>
+                <Controls:DataTypeConverter x:Key="DataTypeConverter"/>
+                <DataTemplate DataType="{x:Type Models:Item}" x:Key="BulletinItem">
+                    <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
+                        <Border.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.ToggleIsSelectedCommand}" CommandParameter="{Binding}"/>
+                        </Border.InputBindings>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" FillBehavior="Stop" Duration="0:0:.1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Top">
+                                <Image Source="{Binding Image}" Margin="3, 1" HorizontalAlignment="Right" Width="16" Height="16" Stretch="UniformToFill"/>
+                                <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" VerticalAlignment="Top" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
+                        </DockPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl x:Name="cc" Content="{Binding}" ContentTemplate="{DynamicResource BulletinItem}"/>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Converter={StaticResource DataTypeConverter}}" Value="{x:Type Models:Note}">
+                            <Setter Property="ContentTemplate" TargetName="cc" Value="{DynamicResource BulletinViewNoteTemplate}"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </ScrollViewer>
 </UserControl>

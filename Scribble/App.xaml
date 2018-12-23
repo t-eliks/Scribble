@@ -71,10 +71,6 @@
                 <Views:MindMapView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type ViewModels:MindMapSelectionViewModel}">
-                <Views:MindMapSelectionView/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type DialogViewModels:TwoFieldInfoViewModel}">
                 <DialogViews:TwoFieldInfoView/>
             </DataTemplate>
@@ -82,8 +78,8 @@
             <DataTemplate DataType="{x:Type DialogViewModels:DataFieldInfoViewModel}">
                 <DialogViews:DataFieldInfoView/>
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type Models:Scene}" x:Key="SceneOutlineDataTemplate">
+
+            <DataTemplate DataType="{x:Type Models:Item}" x:Key="ItemMindMapTemplate">
                 <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                     <StackPanel DockPanel.Dock="Right" Background="Transparent">
@@ -93,27 +89,7 @@
                 </DockPanel>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Models:Character}" x:Key="CharacterOutlineDataTemplate">
-                <DockPanel>
-                    <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
-                    <StackPanel DockPanel.Dock="Right" Background="Transparent">
-                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" VerticalAlignment="Stretch" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </DockPanel>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Location}" x:Key="LocationOutlineDataTemplate">
-                <DockPanel>
-                    <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
-                    <StackPanel DockPanel.Dock="Right" Background="Transparent">
-                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="16"/>
-                        <TextBlock Text="{Binding Description}" VerticalAlignment="Stretch" FontSize="12" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </DockPanel>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Character}">
+            <DataTemplate DataType="{x:Type Models:Item}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding Image}" Margin="5, 0, 0, 0" Width="16" Height="16" Stretch="UniformToFill"/>
                     <TextBlock Text="{Binding Name}"/>
@@ -157,28 +133,18 @@
                 </Border>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Models:Scene}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding Image}" Margin="5, 0, 0, 0" Width="16" Height="16" Stretch="UniformToFill"/>
-                    <TextBlock Text="{Binding Name}"/>
-                </StackPanel>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Location}">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding Image}" Margin="5, 0, 0, 0" Width="16" Height="16" Stretch="UniformToFill"/>
-                    <TextBlock Text="{Binding Name}"/>
-                </StackPanel>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Note}">
+            <DataTemplate DataType="{x:Type Models:Note}" x:Key="BulletinViewNoteTemplate">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
+                    <Border.Resources>
+                        <Logic:BindingProxy x:Key="proxy" Data="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext}"/>
+                    </Border.Resources>
                     <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding ToggleIsSelectedCommand}"/>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.OpenNoteCommand}" CommandParameter="{Binding}"/>
                     </Border.InputBindings>
                     <Border.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit" Command="{Binding EditCommand}"/>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit" Command="{Binding Source={StaticResource proxy}, Path=Data.EditNoteCommand}" CommandParameter="{Binding}"/>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Remove" Command="{Binding Source={StaticResource proxy}, Path=Data.RemoveNoteCommand}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </Border.ContextMenu>
                     <Border.Style>
@@ -214,87 +180,16 @@
                 </Border>
             </DataTemplate>
             
-            <DataTemplate DataType="{x:Type Models:Scene}" x:Key="BulletinScene">
+            <DataTemplate DataType="{x:Type Models:Note}">
                 <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
                     <Border.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding ToggleIsSelectedCommand}"/>
                     </Border.InputBindings>
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" FillBehavior="Stop" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
-                        <StackPanel DockPanel.Dock="Top">
-                            <Image Source="{Binding Image}" Margin="3, 1" HorizontalAlignment="Right" Width="16" Height="16" Stretch="UniformToFill"/>
-                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
-                        </StackPanel>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
-                    </DockPanel>
-                </Border>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Character}" x:Key="BulletinCharacter">
-                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
-                    <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding ToggleIsSelectedCommand}"/>
-                    </Border.InputBindings>
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" FillBehavior="Stop" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
-                        <StackPanel DockPanel.Dock="Top">
-                            <Image Source="{Binding Image}" Margin="3, 1" HorizontalAlignment="Right" Width="16" Height="16" Stretch="UniformToFill"/>
-                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
-                        </StackPanel>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
-                    </DockPanel>
-                </Border>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:Location}" x:Key="BulletinLocation">
-                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
-                    <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding ToggleIsSelectedCommand}"/>
-                    </Border.InputBindings>
+                    <Border.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Template="{StaticResource SubmenuItem}" Header="Edit" Command="{Binding EditCommand}"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>

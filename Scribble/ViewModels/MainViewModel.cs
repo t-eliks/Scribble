@@ -57,24 +57,6 @@
             }
         }
 
-        private ICommand _SwitchToOutlinesView;
-
-        public ICommand SwitchToOutlinesView
-        {
-            get
-            {
-                return _SwitchToOutlinesView ?? (_SwitchToOutlinesView = new RelayCommand(() =>
-                {
-                    if (SelectedProjectItem != null)
-                        SelectedProjectItem.IsSelected = false;
-
-                    ViewItemService.Instance.AddViewItem("Outlines", new MindMapSelectionViewModel());
-
-                    RaisePropertyChanged(nameof(IsTimelineView));
-                }));
-            }
-        }
-
         private ICommand _AddFileCommand;
 
         public ICommand AddFileCommand
@@ -221,37 +203,7 @@
         {
             if (SelectedProjectItem != null)
             {
-                IViewItemViewModel vm = null;
-
-                if (SelectedProjectItem is ProjectFolder f)
-                {
-                    if (f.RootFolder)
-                        vm = new ProjectItemsOverViewModel();
-                    else
-                        vm = new BulletinBoardViewModel() { Folder = f };
-                }
-                else
-                    switch (SelectedProjectItem)
-                    {
-                        case Character c:
-                            vm = new CharacterDetailsViewModel() { Item = c };
-                            break;
-                        case Location l:
-                            vm = new LocationDetailsViewModel() { Item = l };
-                            break;
-                        case Scene s:
-                            vm = new SceneViewModel() { Item = s };
-                            break;
-                        case Note n:
-                            vm = new NoteViewModel() { Note = n };
-                            break;
-                        case MindMapModel m:
-                            vm = new MindMapViewModel() { MindMap = m };
-                            break;
-                    }
-
-                if (vm != null)
-                    ViewItemService.Instance.AddViewItem(SelectedProjectItem, vm);
+                ViewItemService.Instance.AddViewItem(SelectedProjectItem);
 
                 RaisePropertyChanged(nameof(IsTimelineView));
             }

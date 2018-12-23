@@ -4,6 +4,7 @@
     using Scribble.Models;
     using Scribble.ViewModels.DialogViewModels;
     using System.Collections.ObjectModel;
+    using System.Windows;
     using System.Windows.Input;
 
     public class ItemDetailsViewModel<T> : BaseViewModel where T : Item
@@ -43,8 +44,6 @@
                     if (Item != null)
                     {
                         var note = new Note(Item, "New note", "No description.");
-                        note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-                        note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Item.Notes.Remove(note); note.Delete(); } };
                         Item.Notes.Add(note);
 
                         ProjectService.Instance.SaveActiveProject();
@@ -105,20 +104,44 @@
             }
         }
 
+        private ICommand _EditNoteCommand;
+
+        public ICommand EditNoteCommand
+        {
+            get
+            {
+                return _EditNoteCommand ?? (_EditNoteCommand = new RelayCommand<Note>((note) =>
+                {
+                    var dialog = new TwoFieldInfoViewModel(false) { Item = note };
+
+                    MainViewModel._DialogService.OpenDialog(dialog);
+                }));
+            }
+        }
+
+        private ICommand _RemoveNoteCommand;
+
+        public ICommand RemoveNoteCommand
+        {
+            get
+            {
+                return _RemoveNoteCommand ?? (_RemoveNoteCommand = new RelayCommand<Note>((note) =>
+                {
+                    if (MessageBox.Show("Are you sure? This cannot be undone.", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        if (Notes.Contains(note))
+                            Notes.Remove(note);
+
+                        note.Delete();
+                    }
+                }));
+            }
+        }
+
         public ObservableCollection<Note> Notes
         {
             get
             {
-                foreach (var note in Item.Notes)
-                {
-                    //Prevent multiple subscriptions
-                    note.OnOpened -= (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-                    note.OnOpened += (s, e) => { ViewItemService.Instance.AddViewItem(note, new NoteViewModel() { Note = note }); };
-
-                    note.OnMarkedForRemoval -= (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
-                    note.OnMarkedForRemoval += (o, a) => { if (Notes.Contains(note)) { Notes.Remove(note); note.Delete(); } };
-                }
-
                 return Item.Notes;
             }
         }
@@ -141,6 +164,15 @@
             }
         }
 
+        private ICommand _OpenNoteCommand;
+
+        public ICommand OpenNoteCommand
+        {
+            get
+            {
+                return _OpenNoteCommand ?? (_OpenNoteCommand = new RelayCommand<Note>((note) => { ViewItemService.Instance.AddViewItem(note); }));
+            }
+        }
 
         public ObservableCollection<DataField> DataFields
         {

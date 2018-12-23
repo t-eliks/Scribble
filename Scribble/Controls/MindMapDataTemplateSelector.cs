@@ -8,14 +8,8 @@
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Character c)
-                return App.Current.TryFindResource("CharacterOutlineDataTemplate") as DataTemplate;
-
-            if (item is Location l)
-                return App.Current.TryFindResource("LocationOutlineDataTemplate") as DataTemplate;
-
-            if (item is Scene s)
-                return App.Current.TryFindResource("SceneOutlineDataTemplate") as DataTemplate;
+            if (item is Character || item is Scene || item is Location)
+                return App.Current.TryFindResource("ItemMindMapTemplate") as DataTemplate;
 
             return null;
         }

@@ -33,7 +33,6 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Scribble" Style="{StaticResource TitleFont}"/>
@@ -62,8 +61,7 @@
                         </StackPanel>
                     </Border>
                     <Controls:ImageButton Image="/icons/timeline.png" HorizontalAlignment="Left" Command="{Binding SwitchToTimelineView}" Content="Timeline" Margin="10, 8" FontSize="18" Grid.Row="2"/>
-                    <Controls:ImageButton Image="/icons/mindmap.png" Command="{Binding SwitchToOutlinesView}" HorizontalAlignment="Left" Content="Mindmaps" FontSize="18" Margin="10, 8" Grid.Row="3"/>
-                    <Border Margin="0, 10, 0, 0" Grid.Row="4" BorderThickness="1">
+                    <Border Margin="0, 10, 0, 0" Grid.Row="3" BorderThickness="1">
                         <Controls:ExtendedTreeView BorderBrush="Transparent" ItemTemplate="{StaticResource TreeViewDataTemplate}" Background="Transparent" ItemsSource="{Binding TreeViewItems}" _SelectedItem="{Binding SelectedProjectItem, Mode=TwoWay}" ItemContainerStyle="{DynamicResource ExtendedTreeViewItemStyle}"/>
                     </Border>
                 </Grid>

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:Scribble.Controls"
              xmlns:local="clr-namespace:Scribble.Views"
+             xmlns:DialogViews="clr-namespace:Scribble.Views.DialogViews"
+             xmlns:Models="clr-namespace:Scribble.Models"
              mc:Ignorable="d" 
              >
 
@@ -48,13 +50,7 @@
         </TabItem>
         <TabItem Header="Notes">
             <DockPanel LastChildFill="False">
-                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Notes}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                <DialogViews:NoteOverView DockPanel.Dock="Top"/>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
                     <Button Content="Add note" Command="{Binding AddNoteCommand}"/>
                 </StackPanel>

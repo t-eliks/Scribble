@@ -8,15 +8,8 @@
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Character)
-                return App.Current.TryFindResource("BulletinCharacter") as DataTemplate;
-
-            if (item is Location)
-                return App.Current.TryFindResource("BulletinLocation") as DataTemplate;
-
-            if (item is Scene)
-                return App.Current.TryFindResource("BulletinScene") as DataTemplate;
-
+            //if (item is Character || item is Scene || item is Location)
+            //    return App.Current.TryFindResource("BulletinItem") as DataTemplate;
             if (item is ProjectFolder)
                 return App.Current.TryFindResource("BulletinFolder") as DataTemplate;
 

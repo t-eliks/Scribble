@@ -49,6 +49,12 @@
             }
         }
 
+        public void DeleteItem(BaseItem item)
+        {
+            ProjectService.Instance.DeleteItemLinks(this, item);
+            RaisePropertyChanged(nameof(Content));
+        }
+
         #region Serialization
 
         protected ProjectFolder(SerializationInfo info, StreamingContext context) : base(info, context)

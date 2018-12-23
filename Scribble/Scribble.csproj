@@ -128,7 +128,6 @@
     <Compile Include="ViewModels\DialogViewModels\TwoFieldInfoViewModel.cs" />
     <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
-    <Compile Include="ViewModels\MindMapSelectionViewModel.cs" />
     <Compile Include="ViewModels\MindMapViewModel.cs" />
     <Compile Include="ViewModels\ProjectItemsOverViewModel.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
@@ -143,6 +142,9 @@
     <Compile Include="Views\DialogViews\DataFieldInfoView.xaml.cs">
       <DependentUpon>DataFieldInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DialogViews\NoteOverView.xaml.cs">
+      <DependentUpon>NoteOverView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogViews\PreferencesView.xaml.cs">
       <DependentUpon>PreferencesView.xaml</DependentUpon>
     </Compile>
@@ -154,9 +156,6 @@
     </Compile>
     <Compile Include="Views\NoteView.xaml.cs">
       <DependentUpon>NoteView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MindMapSelectionView.xaml.cs">
-      <DependentUpon>MindMapSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MindMapView.xaml.cs">
       <DependentUpon>MindMapView.xaml</DependentUpon>
@@ -261,6 +260,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DialogViews\NoteOverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DialogViews\PreferencesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,10 +346,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\NoteView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MindMapSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

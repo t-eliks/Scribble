@@ -1,12 +1,10 @@
 ﻿namespace Scribble.Models
 {
     using Scribble.Interfaces;
-    using Scribble.Logic;
     using System;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Windows;
-    using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
@@ -48,8 +46,6 @@
         }
 
         public event RoutedEventHandler OnHeaderChanged;
-
-        //public string Name { get { return Name; } }
 
         private ImageSource _Image;
 
@@ -154,16 +150,6 @@
         public virtual void Delete()
         {
             MarkedForRemoval?.Invoke(this, new RoutedEventArgs());
-        }
-
-        protected ICommand _ToggleIsSelectedCommand;
-
-        public virtual ICommand ToggleIsSelectedCommand
-        {
-            get
-            {
-                return _ToggleIsSelectedCommand ?? (_ToggleIsSelectedCommand = new RelayCommand(() => { IsSelected = true; }));
-            }
         }
 
         public virtual void Collapse()
