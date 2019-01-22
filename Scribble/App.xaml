@@ -38,17 +38,9 @@
             <DataTemplate DataType="{x:Type DialogViewModels:SelectViewModel}">
                 <DialogViews:SelectView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type ViewModels:ProjectItemsOverViewModel}">
                 <Views:ProjectItemsOverView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type ViewModels:TimelineViewModel}">
-                <Views:TimelineView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:TimelineModel}">
-                <Views:TimelineUC/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ViewModels:BulletinBoardViewModel}">
@@ -79,6 +71,10 @@
                 <DialogViews:DataFieldInfoView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type ViewModels:TimelineMapViewModel}">
+                <Views:TimelineMapView/>
+            </DataTemplate>
+            
             <DataTemplate DataType="{x:Type Models:Item}" x:Key="ItemMindMapTemplate">
                 <DockPanel>
                     <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
@@ -94,43 +90,6 @@
                     <Image Source="{Binding Image}" Margin="5, 0, 0, 0" Width="16" Height="16" Stretch="UniformToFill"/>
                     <TextBlock Text="{Binding Name}"/>
                 </StackPanel>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type Models:MindMapModel}">
-                <Border Background="Transparent" CornerRadius="8" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="0.8" Margin="5">
-                    <Border.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding OpenCommand}"/>
-                    </Border.InputBindings>
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="3" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" FillBehavior="Stop" Duration="0:0:.1"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <DockPanel MinWidth="170" MinHeight="100" MaxHeight="200" Margin="5" LastChildFill="True">
-                        <StackPanel DockPanel.Dock="Top">
-                            <TextBlock x:Name="name" Text="{Binding Name}" Style="{StaticResource GoldTitleStyle}" FontSize="20" FontWeight="DemiBold" Foreground="{StaticResource ForegroundColorBrush}" HorizontalAlignment="Center" />
-                        </StackPanel>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="WordEllipsis" MinWidth="170" Width="{Binding ElementName=name, Path=ActualWidth}"/>
-                    </DockPanel>
-                </Border>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Models:Note}" x:Key="BulletinViewNoteTemplate">
@@ -319,6 +278,7 @@
             <BitmapImage UriSource="/icons/character.png" x:Key="Character"/>
             <BitmapImage UriSource="/icons/note.png" x:Key="Note"/>
             <BitmapImage UriSource="/icons/mindmapicon.png" x:Key="Mindmap"/>
+            <BitmapImage UriSource="/icons/timeline.png" x:Key="Timeline"/>
 
             <!-- Fonts -->
 

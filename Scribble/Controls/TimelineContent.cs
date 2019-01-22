@@ -4,75 +4,31 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Media;
 
     public class TimelineContent : ContentControl
     {
-        public TimelineContent(Scene scene)
+        public TimelineContent()
         {
-            Scene = scene;
-            this.Content = scene;
+            this.MouseLeave += delegate { Mouse.OverrideCursor = null; };
         }
 
-        public TimelineContent() { }
+        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register("Model",
+            typeof(CanvasItemModel), typeof(TimelineContent), new FrameworkPropertyMetadata(null));
 
-        public static readonly DependencyProperty SceneProperty = DependencyProperty.Register("Scene",
-            typeof(Scene), typeof(TimelineContent), new FrameworkPropertyMetadata(null)
-            {
-                PropertyChangedCallback = (s, e) =>
-                {
-                    if (e.NewValue != null)
-                    {
-                        var scene = e.NewValue as Scene;
-                        var content = s as TimelineContent;
-
-                        content.CanvasLeft = scene.CanvasLeft;
-                        content.CanvasTop = scene.CanvasTop;
-                    }
-                }
-            });
-
-        public Scene Scene
+        public CanvasItemModel Model
         {
-            get { return (Scene)GetValue(SceneProperty); }
-            set { SetValue(SceneProperty, value); }
+            get { return (CanvasItemModel)GetValue(ModelProperty); }
+            set { SetValue(ModelProperty, value); }
         }
 
-        public static readonly DependencyProperty CanvasLeftProperty = DependencyProperty.Register("CanvasLeft",
-            typeof(double), typeof(TimelineContent), new FrameworkPropertyMetadata(0.0) {
-                PropertyChangedCallback = (s, e) => 
-            {
-                if ((double)e.NewValue >= 0)
-                {
-                    Canvas.SetLeft((TimelineContent)s, (double)e.NewValue);
-                    ((TimelineContent)s).Scene.CanvasLeft = (double)e.NewValue;
-                }
+        public static readonly DependencyProperty TimelineCanvasProperty = DependencyProperty.Register("TimelineCanvas",
+            typeof(TimelineCanvas), typeof(TimelineContent), new FrameworkPropertyMetadata(null));
 
-            }
-            });
-
-        public double CanvasLeft
+        public TimelineCanvas TimelineCanvas
         {
-            get { return (double)GetValue(CanvasLeftProperty); }
-            set { SetValue(CanvasLeftProperty, value); }
-        }
-
-        public static readonly DependencyProperty CanvasTopProperty = DependencyProperty.Register("CanvasTop",
-            typeof(double), typeof(TimelineContent), new FrameworkPropertyMetadata(0.0)
-            {
-                PropertyChangedCallback = (s, e) =>
-                {
-                    if ((double)e.NewValue >= 0)
-                    {
-                        Canvas.SetTop((TimelineContent)s, (double)e.NewValue);
-                        ((TimelineContent)s).Scene.CanvasTop = (double)e.NewValue;
-                    }
-                }
-            });
-
-        public double CanvasTop
-        {
-            get { return (double)GetValue(CanvasTopProperty); }
-            set { SetValue(CanvasTopProperty, value); }
+            get { return (TimelineCanvas)GetValue(TimelineCanvasProperty); }
+            set { SetValue(TimelineCanvasProperty, value); }
         }
 
         Point point;
@@ -81,6 +37,9 @@
         double newX = 0;
         double newY = 0;
 
+        bool WidthResizeMode = false;
+        double previousWidth = 0;
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -88,7 +47,16 @@
             point = e.GetPosition(this);
 
             if (!this.IsMouseCaptured)
+            {
+                if (point.X >= (this.ActualWidth - 5))
+                {
+                    WidthResizeMode = true;
+                    previousWidth = this.ActualWidth;
+                }
+
                 this.CaptureMouse();
+            }
+                
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -97,26 +65,42 @@
 
             if (this.IsMouseCaptured)
             {
-                secondpoint = e.GetPosition(this);
-                TimelineCanvas c = this.Parent as TimelineCanvas;
+                if (!WidthResizeMode)
+                {
+                    secondpoint = e.GetPosition(this);
 
-                newX = CanvasLeft + (secondpoint.X - point.X);
+                    newX = Model.CanvasLeft + (secondpoint.X - point.X);
 
-                if (newX < 0)
-                    newX = 0;
-                else if (newX >= c.ActualWidth - this.ActualWidth)
-                    c.Width += 50;
+                    if (newX < 0)
+                        newX = 0;
 
-                this.CanvasLeft = newX;
+                    Model.CanvasLeft = newX;
 
-                newY = CanvasTop + (secondpoint.Y - point.Y);
+                    newY = Model.CanvasTop + (secondpoint.Y - point.Y);
 
-                if (newY < 0)
-                    newY = 0;
-                else if (newY >= c.ActualHeight - this.ActualHeight)
-                    newY = c.ActualHeight - this.ActualHeight;
+                    if (newY < 0)
+                        newY = 0;
+                    else if (newY >= TimelineCanvas.ActualHeight - TimelineCanvas.RowHeight)
+                        newY = TimelineCanvas.ActualHeight - TimelineCanvas.RowHeight;
 
-                this.CanvasTop = newY;
+                    Model.CanvasTop = newY;
+                }
+                else
+                {
+                    secondpoint = e.GetPosition(this);
+
+                    if (previousWidth + secondpoint.X - point.X >= 10)
+                        this.Model.Width = previousWidth + secondpoint.X - point.X;
+                }
+            }
+            else
+            {
+                var position = e.GetPosition(this);
+
+                if (position.X >= (this.ActualWidth - 5))
+                    Mouse.OverrideCursor = Cursors.SizeWE;
+                else
+                    Mouse.OverrideCursor = Cursors.Arrow;
             }
         }
 
@@ -124,16 +108,14 @@
         {
             base.OnMouseLeftButtonUp(e);
 
-            var r = (int)(newY / this.ActualHeight) * this.ActualHeight;
+            var r = (int)((Model.CanvasTop+this.ActualHeight/2) / TimelineCanvas.RowHeight) * TimelineCanvas.RowHeight;
 
-            if (r < 0)
-                r = 0;
-            if (r >= ((TimelineCanvas)this.Parent).ActualHeight)
-                r = ((TimelineCanvas)this.Parent).ActualHeight - this.ActualHeight;
+            Point pt = e.GetPosition(TimelineCanvas);
 
-            this.CanvasTop = r;
+            Model.CanvasTop = r;
 
-            ((TimelineCanvas)this.Parent).Resize();
+            if (WidthResizeMode)
+                WidthResizeMode = false;
 
             this.ReleaseMouseCapture();
         }

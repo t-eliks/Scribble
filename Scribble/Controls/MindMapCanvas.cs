@@ -92,7 +92,7 @@
                         {
                             foreach (var item in newContent)
                             {
-                                if (!canvas.Children.Contains(canvas.GetMindMapContent(item.MindMapItem)))
+                                if (!canvas.Children.Contains(canvas.GetMindMapContent(item.CanvasItem)))
                                 {
                                     MindMapContent content = new MindMapContent(item, canvas);
 
@@ -127,7 +127,7 @@
                                             if (canvas.Content.Contains(item))
                                             {
                                                 canvas.Content.Remove(item);
-                                                canvas.Children.Remove(canvas.GetMindMapContent(item.MindMapItem));
+                                                canvas.Children.Remove(canvas.GetMindMapContent(item.CanvasItem));
                                                 item.Remove();
 
                                                 canvas.CustomizeMode = false;
@@ -140,7 +140,7 @@
                                     menu.Items.Add(menuitem2);
                                     menu.Items.Add(menuitem3);
 
-                                    if (item.MindMapItem is MindMapString str)
+                                    if (item.CanvasItem is MindMapString str)
                                     {
                                         MenuItem menuitem4 = new MenuItem() { Header = "Edit", Template = App.Current.TryFindResource("SubmenuItem") as ControlTemplate };
                                         menuitem4.Click += (o, a) => { var dialog = new TwoFieldInfoViewModel(true) { Item = str }; MainViewModel._DialogService.OpenDialog(dialog); };
@@ -193,18 +193,18 @@
         {
             foreach (var child in Children)
             {
-                if (child is MindMapContent content && content.Content == item.MindMapItem)
+                if (child is MindMapContent content && content.Content == item.CanvasItem)
                     return true;
             }
 
             return false;
         }
 
-        public MindMapContent GetMindMapContent(IMindMapItem item)
+        public MindMapContent GetMindMapContent(ICanvasItem item)
         {
             foreach (var child in Children)
             {
-                if (child is MindMapContent mc && mc.Item.MindMapItem == item)
+                if (child is MindMapContent mc && mc.Item.CanvasItem == item)
                     return mc;
             }
 
@@ -230,7 +230,7 @@
                 {
                     if (!linemodels.Contains(linemodel))
                     {
-                        item.AddLine(GetMindMapContent(linemodel.GetOpposite(item.Item).MindMapItem), linemodel);
+                        item.AddLine(GetMindMapContent(linemodel.GetOpposite(item.Item).CanvasItem), linemodel);
 
                         linemodels.Add(linemodel);
                     }

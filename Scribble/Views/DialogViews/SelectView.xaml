@@ -198,7 +198,7 @@
         </ListBox>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Controls:ImageButton Content="Close" Image="/icons/add.png" Width="150" Height="50" Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
-            <Controls:ImageButton Content="{Binding Button_Text}" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
+            <Controls:ImageButton Content="Add" IsEnabled="{Binding CanAdd}" Image="/icons/add.png" Width="150" Height="50" Command="{Binding AddItemCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </UserControl>

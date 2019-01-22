@@ -1,27 +1,24 @@
 ﻿namespace Scribble.Models
 {
-    using Scribble.Interfaces;
     using Scribble.Logic;
-    using Scribble.ViewModels;
     using System;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Windows.Input;
 
     [Serializable]
-    public class MindMapModel : BaseItem, ISerializable, IViewItem, ITwoField
+    public class TimelineMapModel : BaseItem, ISerializable
     {
-        public MindMapModel(string name) : base(name, IconHelper.FindIconInResources("Mindmap"))
+        public TimelineMapModel(string name) : base(name, IconHelper.FindIconInResources("Timeline"))
         {
 
         }
 
-        public ObservableCollection<MindMapItemModel> MapContent
+        public ObservableCollection<TimelineModel> MapContent
         {
             get
             {
-                return ProjectService.Instance.FindLinks<MindMapItemModel>(this);
+                return ProjectService.Instance.FindLinks<TimelineModel>(this);
             }
         }
 
@@ -44,7 +41,7 @@
             }
         }
 
-        protected MindMapModel(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected TimelineMapModel(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             Description = info.GetString("description");
         }
@@ -57,6 +54,5 @@
 
             info.AddValue("description", Description);
         }
-
     }
 }

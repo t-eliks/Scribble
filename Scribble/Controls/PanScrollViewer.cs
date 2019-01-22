@@ -1,5 +1,6 @@
 ﻿namespace Scribble.Controls
 {
+    using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -11,20 +12,27 @@
 
         }
 
+        public Type SourceType { get; set; }
+        public Type OriginalSourceType { get; set; }
+
         Point point;
         Point offset;
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            point = e.GetPosition(this);
-            offset.X = HorizontalOffset;
-            offset.Y = VerticalOffset;
-            
+            if (SourceType != null && e.Source.GetType() == SourceType && 
+                OriginalSourceType != null && e.OriginalSource.GetType() == OriginalSourceType)
+            {
+                point = e.GetPosition(this);
+                offset.X = HorizontalOffset;
+                offset.Y = VerticalOffset;
 
-            if (!this.IsMouseCaptured)
-                this.CaptureMouse();
 
-            base.OnPreviewMouseLeftButtonDown(e);
+                if (!this.IsMouseCaptured)
+                    this.CaptureMouse();
+            }
+            else
+                base.OnPreviewMouseLeftButtonDown(e);
         }
 
         protected override void OnPreviewMouseMove(MouseEventArgs e)

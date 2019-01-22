@@ -39,24 +39,6 @@
             }
         }
 
-        private ICommand _SwitchToTimelineView;
-
-        public ICommand SwitchToTimelineView
-        {
-            get
-            {
-                return _SwitchToTimelineView ?? (_SwitchToTimelineView = new RelayCommand(() => 
-                {
-                    if (SelectedProjectItem != null)
-                        SelectedProjectItem.IsSelected = false;
-
-                    ViewItemService.Instance.AddViewItem("Timeline", new TimelineViewModel() { Timelines = ProjectService.Instance.ActiveProject.Timelines });
-
-                    RaisePropertyChanged(nameof(IsTimelineView));
-                }));
-            }
-        }
-
         private ICommand _AddFileCommand;
 
         public ICommand AddFileCommand
@@ -83,6 +65,9 @@
                                 break;
                             case ItemTypes.Mindmap:
                                 ProjectService.Instance.AddMindmap(folder);
+                                break;
+                            case ItemTypes.Timeline:
+                                ProjectService.Instance.AddTimeline(folder);
                                 break;
                             default:
                                 break;

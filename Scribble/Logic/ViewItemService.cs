@@ -4,6 +4,7 @@
     using Scribble.Interfaces;
     using Scribble.Models;
     using Scribble.ViewModels;
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
 
@@ -71,7 +72,13 @@
                     case MindMapModel m:
                         vm = new MindMapViewModel() { MindMap = m };
                         break;
+                    case TimelineMapModel t:
+                        vm = new TimelineMapViewModel() { Timeline = t };
+                        break;
                 }
+
+            if (vm == null)
+                throw new NullReferenceException();
 
             if (model != null)
             {

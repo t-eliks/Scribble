@@ -42,14 +42,14 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Controls:PanScrollViewer x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <Controls:PanScrollViewer SourceType="{x:Type Controls:MindMapCanvas}" OriginalSourceType="{x:Type Controls:MindMapCanvas}" x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
                 <Controls:MindMapCanvas SelectedItem="{Binding SelectedItem, Mode=TwoWay}" CustomizeMode="{Binding CustomizeMode, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource HatchBrush}" x:Name="canvas" Content="{Binding Content}">
                     <Controls:MindMapCanvas.Resources>
                         <DataTemplate DataType="{x:Type Models:MindMapItemModel}">
                             <DockPanel Background="{Binding BackgroundColor, Converter={StaticResource StringSolidColorBrushConverter}}">
                                 <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
                                 <StackPanel DockPanel.Dock="Right" Background="Transparent">
-                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding MindMapItem.Name}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="{Binding HeaderFontSize}">
+                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding CanvasItem.Name}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" TextTrimming="CharacterEllipsis" Margin="0, 4" FontSize="{Binding HeaderFontSize}">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                                 <Setter Property="FontWeight" Value="Normal"/>
@@ -61,7 +61,7 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
-                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding MindMapItem.Description}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" VerticalAlignment="Stretch" FontSize="{Binding ContentFontSize}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                                    <TextBlock SnapsToDevicePixels="True" Text="{Binding CanvasItem.Description}" Foreground="{Binding ForegroundColor, Converter={StaticResource StringSolidColorBrushConverter}}" VerticalAlignment="Stretch" FontSize="{Binding ContentFontSize}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                                                 <Setter Property="FontWeight" Value="Normal"/>

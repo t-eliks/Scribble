@@ -62,8 +62,6 @@
             }
         }
 
-        public event RoutedEventHandler OnMarkedForRemoval;
-
         public TextFile TextFile { get; private set; }
 
         public override void Delete()

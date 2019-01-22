@@ -93,18 +93,11 @@
             {
                 return _AddCharacterCommand ?? (_AddCharacterCommand = new RelayCommand(() =>
                 {
-                    var dialog = new SelectViewModel();
-                    dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Character>().Cast<BaseItem>());
-                    dialog.SelectedItems = GetSelectedItems();
-                    dialog.Title = "All characters in project";
-                    dialog.Warning = "Character already in mindmap.";
-                    dialog.Button_Text = "Add character";
-
-                    var result = MainViewModel._DialogService.OpenDialog(dialog);
+                    var result = SelectionService.SelectItems(GetSelectedItems<Character>(), "All characters in project", "Character already in mindmap.");
 
                     if (result != null)
                     {
-                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel((IMindMapItem)result)));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
 
                         RaisePropertyChanged(nameof(Content));
                     }
@@ -120,18 +113,11 @@
             {
                 return _AddLocationCommand ?? (_AddLocationCommand = new RelayCommand(() =>
                 {
-                    var dialog = new SelectViewModel();
-                    dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Location>().Cast<BaseItem>());
-                    dialog.SelectedItems = GetSelectedItems();
-                    dialog.Title = "All locations in project";
-                    dialog.Warning = "Location already in mindmap.";
-                    dialog.Button_Text = "Add location";
-
-                    var result = MainViewModel._DialogService.OpenDialog(dialog);
+                    var result = SelectionService.SelectItems(GetSelectedItems<Location>(), "All locations in project", "Location already in mindmap.");
 
                     if (result != null)
                     {
-                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel((IMindMapItem)result)));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
 
                         RaisePropertyChanged(nameof(Content));
                     }
@@ -147,18 +133,11 @@
             {
                 return _AddSceneCommand ?? (_AddSceneCommand = new RelayCommand(() =>
                 {
-                    var dialog = new SelectViewModel();
-                    dialog.Collection = new ObservableCollection<BaseItem>(ProjectService.Instance.GetItemsOfType<Scene>().Cast<BaseItem>());
-                    dialog.SelectedItems = GetSelectedItems();
-                    dialog.Title = "All scenes in project";
-                    dialog.Warning = "Scene already in mindmap.";
-                    dialog.Button_Text = "Add scene";
-
-                    var result = MainViewModel._DialogService.OpenDialog(dialog);
+                    var result = SelectionService.SelectItems(GetSelectedItems<Scene>(), "All scenes in project", "Scene already in mindmap."); ;
 
                     if (result != null)
                     {
-                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel((IMindMapItem)result)));
+                        ProjectService.Instance.AddSymbioticLink(new SymbioticLink<MindMapModel, MindMapItemModel>(MindMap, new MindMapItemModel(result)));
 
                         RaisePropertyChanged(nameof(Content));
                     }
@@ -369,14 +348,14 @@
             }
         }
 
-        private ObservableCollection<object> GetSelectedItems()
+        private ObservableCollection<T> GetSelectedItems<T>() where T : BaseItem
         {
-            var items = new ObservableCollection<object>();
+            var items = new ObservableCollection<T>();
 
             foreach (var item in MindMap.MapContent)
             {
-                if (!items.Contains(item.MindMapItem))
-                    items.Add(item.MindMapItem);
+                if (item.CanvasItem is T t && !items.Contains(t))
+                    items.Add(t);
             }
 
             return items;

@@ -8,69 +8,12 @@
     using System.Security.Permissions;
 
     [Serializable]
-    public class MindMapItemModel : BaseModel, ISerializable
+    public class MindMapItemModel : CanvasItemModel, ISerializable
     {
-        public MindMapItemModel(IMindMapItem item)
+        public MindMapItemModel(ICanvasItem item) : base(item)
         {
-            MindMapItem = item;
+            CanvasItem = item;
             item.MarkedForRemoval += (s, e) => { Remove(); };
-        }
-
-        private IMindMapItem _MindMapItem;
-
-        public IMindMapItem MindMapItem
-        {
-            get
-            {
-                return _MindMapItem;
-            }
-            set
-            {
-                if (_MindMapItem != value)
-                {
-                    _MindMapItem = value;
-
-                    RaisePropertyChanged(nameof(MindMapItem));
-                }
-            }
-        }
-
-        private string _BackgroundColor = "#FF373737";
-
-        public string BackgroundColor
-        {
-            get
-            {
-                return _BackgroundColor;
-            }
-            set
-            {
-                if (_BackgroundColor != value)
-                {
-                    _BackgroundColor = value;
-
-                    RaisePropertyChanged(nameof(BackgroundColor));
-                }
-            }
-        }
-
-        private string _ForegroundColor = "#FFF4F4F4";
-
-        public string ForegroundColor
-        {
-            get
-            {
-                return _ForegroundColor;
-            }
-            set
-            {
-                if (_ForegroundColor != value)
-                {
-                    _ForegroundColor = value;
-
-                    RaisePropertyChanged(nameof(ForegroundColor));
-                }
-            }
         }
 
         private bool _HeaderBold = false;
@@ -111,7 +54,7 @@
             }
         }
 
-        public void Remove()
+        public override void Remove()
         {
             foreach (var linemodel in Lines)
             {
@@ -126,63 +69,6 @@
             get
             {
                 return ProjectService.Instance.FindLinks<MindMapLineModel>(this);
-            }
-        }
-
-        private double _CanvasLeft = 0;
-
-        public double CanvasLeft
-        {
-            get
-            {
-                return _CanvasLeft;
-            }
-            set
-            {
-                if (_CanvasLeft != value)
-                {
-                    _CanvasLeft = value;
-
-                    RaisePropertyChanged(nameof(CanvasLeft));
-                }
-            }
-        }
-
-        private double _CanvasTop = 0;
-
-        public double CanvasTop
-        {
-            get
-            {
-                return _CanvasTop;
-            }
-            set
-            {
-                if (_CanvasTop != value)
-                {
-                    _CanvasTop = value;
-
-                    RaisePropertyChanged(nameof(CanvasTop));
-                }
-            }
-        }
-
-        private double _Width = 200.0;
-
-        public double Width
-        {
-            get
-            {
-                return _Width;
-            }
-            set
-            {
-                if (_Width != value)
-                {
-                    _Width = value;
-
-                    RaisePropertyChanged(nameof(Width));
-                }
             }
         }
 
@@ -266,38 +152,20 @@
             return false;
         }
 
-        protected MindMapItemModel(SerializationInfo info, StreamingContext context)
+        protected MindMapItemModel(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            MindMapItem = (IMindMapItem)info.GetValue("item", typeof(IMindMapItem));
-            CanvasLeft = info.GetDouble("canvasleft");
-            CanvasTop = info.GetDouble("canvastop");
-            BackgroundColor = info.GetString("backgroundcolor");
-            ForegroundColor = info.GetString("foregroundcolor");
             Height = info.GetDouble("height");
-            Width = info.GetDouble("width");
             HeaderFontSize = info.GetInt32("headerfontsize");
             ContentFontSize = info.GetInt32("contentfontsize");
-
-            MindMapItem.MarkedForRemoval += (s, e) => {
-                ProjectService.Instance.DeleteItemBiLinks(this);
-                foreach (var linemodel in Lines)
-                {
-                    ProjectService.Instance.DeleteItemBiLinks(linemodel);
-                }
-            };
         }
 
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("canvasleft", CanvasLeft);
-            info.AddValue("canvastop", CanvasTop);
-            info.AddValue("item", MindMapItem);
-            info.AddValue("backgroundcolor", BackgroundColor);
-            info.AddValue("foregroundcolor", ForegroundColor);
+            base.GetObjectData(info, context);
+
             info.AddValue("height", Height);
-            info.AddValue("width", Width);
             info.AddValue("headerfontsize", HeaderFontSize);
             info.AddValue("contentfontsize", ContentFontSize);
         }

@@ -2,7 +2,7 @@
 {
     using System.Windows;
 
-    public interface IMindMapItem
+    public interface ICanvasItem
     {
         string Name { get; set; }
 

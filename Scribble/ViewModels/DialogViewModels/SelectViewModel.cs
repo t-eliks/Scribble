@@ -4,11 +4,11 @@
     using Scribble.Logic;
     using Scribble.Models;
     using Scribble.Views.DialogViewModels;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Data;
     using System.Windows.Input;
 
     public class SelectViewModel : DialogViewModelBase<BaseItem>
@@ -72,25 +72,6 @@
             }
         }
 
-        private string _Button_Text;
-
-        public string Button_Text
-        {
-            get
-            {
-                return _Button_Text;
-            }
-            set
-            {
-                if (_Button_Text != value)
-                {
-                    _Button_Text = value;
-
-                    RaisePropertyChanged(nameof(Button_Text));
-                }
-            }
-        }
-
         private ICommand _CloseCommand;
 
         public ICommand CloseCommand
@@ -101,13 +82,13 @@
             }
         }
 
-        private ObservableCollection<BaseItem> _Collection;
+        private IEnumerable<BaseItem> _Collection;
 
-        public ObservableCollection<BaseItem> Collection
+        public IEnumerable<BaseItem> Collection
         {
             get
             {
-                return _Collection ?? (_Collection = new ObservableCollection<BaseItem>());
+                return _Collection ?? (_Collection = new Collection<BaseItem>());
             }
             set
             {
@@ -164,13 +145,13 @@
             }
         }
 
-        private ObservableCollection<object> _SelectedItems;
+        private ICollection<BaseItem> _SelectedItems;
 
-        public ObservableCollection<object> SelectedItems
+        public ICollection<BaseItem> SelectedItems
         {
             get
             {
-                return _SelectedItems ?? (_SelectedItems = new ObservableCollection<object>());
+                return _SelectedItems ?? (_SelectedItems = new Collection<BaseItem>());
             }
             set
             {
@@ -224,7 +205,7 @@
                     foreach (var item in Collection)
                     {
                         if (item is ISearchable s && s.CheckMatch(value))
-                            filtered.Add(item);
+                            filtered.Add(item as BaseItem);
                     }
 
                     FilteredItems = filtered.OrderBy(x => x.Name);

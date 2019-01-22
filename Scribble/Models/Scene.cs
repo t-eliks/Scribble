@@ -18,46 +18,6 @@
             TextFile = new TextFile(ProjectService.Instance.ActiveProject?.FileDirectory);
         }
 
-        private double _CanvasLeft = 0;
-
-        public double CanvasLeft
-        {
-            get
-            {
-                return _CanvasLeft;
-            }
-            set
-            {
-                if (_CanvasLeft != value)
-                {
-                    _CanvasLeft = value;
-
-                    RaisePropertyChanged(nameof(CanvasLeft));
-                }
-            }
-        }
-
-        private double _CanvasTop = 0;
-
-        public double CanvasTop
-        {
-            get
-            {
-                return _CanvasTop;
-            }
-            set
-            {
-                if (_CanvasTop != value)
-                {
-                    _CanvasTop = value;
-
-                    RaisePropertyChanged(nameof(CanvasTop));
-                }
-            }
-        }
-
-        public bool IsInTimeline { get; set; }
-
         public TextFile TextFile { get; private set; }
 
         public override void Delete()
@@ -83,9 +43,6 @@
 
         protected Scene(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            CanvasLeft = info.GetDouble("canvasleft");
-            CanvasTop = info.GetDouble("canvastop");
-            IsInTimeline = info.GetBoolean("isintimeline");
             TextFile = (TextFile)info.GetValue("textfile", typeof(TextFile));
         }
 
@@ -95,9 +52,6 @@
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("canvasleft", CanvasLeft);
-            info.AddValue("canvastop", CanvasTop);
-            info.AddValue("isintimeline", IsInTimeline);
             info.AddValue("textfile", TextFile);
         }
 

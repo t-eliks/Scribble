@@ -7,7 +7,7 @@
     using System.Security.Permissions;
 
     [Serializable]
-    public class MindMapString : BaseItem, ISerializable, ITwoField, IMindMapItem
+    public class MindMapString : BaseItem, ISerializable, ITwoField, ICanvasItem
     {
         public MindMapString(string header, string content) : base(header, IconHelper.FindIconInResources("Note"))
         {

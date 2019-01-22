@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="Scribble.Views.TimelineMapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scribble.Views"
+             xmlns:Logic="clr-namespace:Scribble.Logic"
+             xmlns:Controls="clr-namespace:Scribble.Controls"
+             xmlns:Models="clr-namespace:Scribble.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Controls:PanScrollViewer SourceType="{x:Type ItemsControl}" OriginalSourceType="{x:Type Controls:TimelineCanvas}" x:Name="pan" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl x:Name="itm" ItemsSource="{Binding Content}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type Models:TimelineModel}">
+                        <Border BorderBrush="{StaticResource TrimGradientHorizontal}" BorderThickness="1">
+                            <DockPanel>
+                                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding Content}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type Models:CanvasItemModel}">
+                                            <Controls:TimelineContent Model="{Binding}" Content="{Binding}" TimelineCanvas="{Binding RelativeSource={RelativeSource AncestorType=Controls:TimelineCanvas, Mode=FindAncestor}}">
+                                                <Controls:TimelineContent.Style>
+                                                    <Style TargetType="Controls:TimelineContent">
+                                                        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+                                                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate DataType="{x:Type Models:CanvasItemModel}">
+                                                                    <DockPanel Width="{Binding Width}" Height="78" Background="{StaticResource AccentColor2Brush}">
+                                                                        <Grid Width="10" Margin="0, 0, 5, 0" DockPanel.Dock="Left" Background="{StaticResource ForegroundColorBrush}"></Grid>
+                                                                        <StackPanel DockPanel.Dock="Right" Background="Transparent">
+                                                                            <TextBlock SnapsToDevicePixels="True" Text="{Binding CanvasItem.Name}" Foreground="{StaticResource ForegroundColorBrush}" TextTrimming="CharacterEllipsis" Margin="0, 4">
+                                                                            </TextBlock>
+                                                                            <TextBlock SnapsToDevicePixels="True" Text="{Binding CanvasItem.Description}" Foreground="{StaticResource ForegroundColorBrush}" VerticalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                                                                            </TextBlock>
+                                                                        </StackPanel>
+                                                                    </DockPanel>
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="Controls:TimelineContent">
+                                                                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding ContentControl.Content}"/>
+                                                                    </Border>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                                            <Trigger.EnterActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" To="3" Duration="0:0:.1"/>
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </Trigger.EnterActions>
+                                                                            <Trigger.ExitActions>
+                                                                                <BeginStoryboard>
+                                                                                    <Storyboard>
+                                                                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" FillBehavior="Stop" Duration="0:0:.1"/>
+                                                                                    </Storyboard>
+                                                                                </BeginStoryboard>
+                                                                            </Trigger.ExitActions>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Controls:TimelineContent.Style>
+                                            </Controls:TimelineContent>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="ContentPresenter">
+                                            <Setter Property="Canvas.Left" Value="{Binding CanvasLeft}"/>
+                                            <Setter Property="Canvas.Top" Value="{Binding CanvasTop}"/>
+                                            <Setter Property="Width" Value="{Binding Width}"/>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <Controls:TimelineCanvas IsItemsHost="True" x:Name="canvas" Rows="{Binding Rows, Mode=TwoWay}" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                                                <Controls:TimelineCanvas.Background>
+                                                    <VisualBrush
+                                                             TileMode="Tile" Viewport="0,0,80,160" 
+                                                             ViewportUnits="Absolute" Viewbox="0,0,80,160" 
+                                                             ViewboxUnits="Absolute">
+                                                        <VisualBrush.Visual>
+                                                            <Canvas>
+                                                                <Rectangle Name="r" Width="80" Height="160">
+                                                                    <Rectangle.Fill>
+                                                                        <LinearGradientBrush EndPoint="1, 1" StartPoint="1, 0">
+                                                                            <GradientStop Color="#6d7993" Offset="0.5"/>
+                                                                            <GradientStop Color="#9099A2" Offset="0.5"/>
+                                                                        </LinearGradientBrush>
+                                                                    </Rectangle.Fill>
+                                                                </Rectangle>
+                                                                <!--<Path StrokeThickness="6" Data="M 0 40 l 80 0 z">
+                                                                <Path.Stroke>
+                                                                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                                                        <GradientStop Color="#45dba2" Offset="0.0"/>
+                                                                        <GradientStop Color="#409c8e" Offset="1.1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Path.Stroke>
+                                                            </Path>-->
+                                                            </Canvas>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Controls:TimelineCanvas.Background>
+                                            </Controls:TimelineCanvas>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                                    <TextBox Text="{Binding Name, Mode=TwoWay}" Style="{StaticResource TimelineTextBoxStyle}" HorizontalAlignment="Center" FontFamily="{StaticResource Ubuntu}" BorderThickness="0" FontSize="18" Margin="5, 2"/>
+                                    <Button Content="Subtract row" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.SubtractRowCommand}" CommandParameter="{Binding}"/>
+                                    <Button Content="Add row" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.AddRowCommand}" CommandParameter="{Binding}"/>
+                                    <Button Content="Add scene" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.AddSceneCommand}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Controls:PanScrollViewer>
+        <Button Grid.Row="1" Content="Add timeline" Command="{Binding AddTimelineCommand}"/>
+    </Grid>
+</UserControl>

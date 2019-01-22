@@ -156,6 +156,15 @@
             SaveActiveProject();
         }
 
+        public void AddTimeline(ProjectFolder parentFolder)
+        {
+            var timeline = new TimelineMapModel("New timeline");
+
+            parentFolder.AddItem(timeline);
+
+            SaveActiveProject();
+        }
+
         public void RemoveItem(BaseItem projectItem)
         {
             projectItem.Delete();

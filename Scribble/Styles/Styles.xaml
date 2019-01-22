@@ -33,38 +33,6 @@
         <Setter Property="FontSize" Value="14"/>
     </Style>
 
-    <Style TargetType="Controls:TimelineContent">
-        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Controls:TimelineContent">
-                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="200" Height="80">
-                        <ContentPresenter x:Name="cc" Content="{TemplateBinding ContentControl.Content}"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" To="3" Duration="0:0:.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" FillBehavior="Stop" Duration="0:0:.1"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="Controls:MindMapContent">
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -97,6 +65,39 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--<Style TargetType="Controls:TimelineContent">
+        <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:TimelineContent">
+                    <Border x:Name="mainBorder" Background="{TemplateBinding Background}" BorderBrush="{StaticResource ForegroundColorBrush}" BorderThickness="1" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" To="3" Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="mainBorder" FillBehavior="Stop" Duration="0:0:.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
 
     <Style TargetType="ToolTip">
         <Setter Property="Background" Value="{StaticResource BackgroundColor2Brush}"/>

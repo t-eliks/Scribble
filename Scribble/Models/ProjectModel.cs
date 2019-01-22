@@ -38,8 +38,6 @@
             }
 
             SymbioticLinks = new ObservableCollection<SymbioticLink>();
-
-            Timelines = new ObservableCollection<TimelineModel>();
         }
 
         #region Properties and Fields
@@ -231,25 +229,6 @@
 
         public string FormString { get { return Enum.GetName(typeof(Forms), Form); } }
 
-        private ObservableCollection<TimelineModel> _Timelines;
-
-        public ObservableCollection<TimelineModel> Timelines
-        {
-            get
-            {
-                return _Timelines;
-            }
-            set
-            {
-                if (_Timelines != value)
-                {
-                    _Timelines = value;
-
-                    RaisePropertyChanged(nameof(Timelines));
-                }
-            }
-        }
-
         private ObservableCollection<MindMapModel> _MindMaps;
 
         public ObservableCollection<MindMapModel> MindMaps
@@ -402,7 +381,6 @@
             CustomItemCount = info.GetInt32("customitemcount");
             ProjectDirectory = info.GetString("projectdirectory");
             SymbioticLinks = (ObservableCollection<SymbioticLink>)info.GetValue("symbioticlinks", typeof(ObservableCollection<SymbioticLink>));
-            Timelines = (ObservableCollection<TimelineModel>)info.GetValue("timelines", typeof(ObservableCollection<TimelineModel>));
             MindMaps = (ObservableCollection<MindMapModel>)info.GetValue("outlines", typeof(ObservableCollection<MindMapModel>));
         }
 
@@ -419,7 +397,6 @@
             info.AddValue("customitemcount", CustomItemCount);
             info.AddValue("projectdirectory", ProjectDirectory);
             info.AddValue("symbioticlinks", SymbioticLinks);
-            info.AddValue("timelines", Timelines);
             info.AddValue("outlines", MindMaps);
         }
 

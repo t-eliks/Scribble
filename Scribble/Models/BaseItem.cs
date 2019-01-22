@@ -173,6 +173,7 @@
         Location,
         Scene,
         Note,
-        Mindmap
+        Mindmap,
+        Timeline
     }
 }
